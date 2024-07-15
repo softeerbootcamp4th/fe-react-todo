@@ -32,3 +32,6 @@ dist-ssr
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# vite cache
+.vite
