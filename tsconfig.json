@@ -1,0 +1,19 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "compilerOptions": {
+    "baseUrl": "./src", // 프로젝트의 기본 경로
+    "paths": {
+      "@/*": [
+        "*"
+      ] // @ 기호가 src 디렉토리를 참조하도록 설정
+    }
+  }
+}
