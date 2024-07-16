@@ -1,8 +1,8 @@
 import React from 'react';
-import Todo from './pages/Todo';
+import Home from './pages/Home';
 
 const App: React.FC = () => {
-  return <Todo />;
+  return <Home />;
 };
 
 export default App;
