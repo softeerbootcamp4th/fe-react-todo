@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { getData, pushData, popData, modifyData } from "/utils/db";
+import Todo from "../components/todo";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [formString, setFormString] = useState("");
+  const [isLongPress, setIsLongPress] = useState(false);
+  const timerRef = useRef(null);
 
   useEffect(() => {
     getData().then((data) => {
@@ -37,6 +40,17 @@ function App() {
     modifyData(id, { completed: !todoList.find((todo) => todo.id === id).completed });
   }
 
+  function startPress(id) {
+    timerRef.current = setTimeout(() => {
+      //setIsLongPress(true);
+      console.log("2초", id);
+    }, 2000);
+  }
+
+  function endPress() {
+    clearTimeout(timerRef.current);
+  }
+
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="w-96 p-5 flex flex-col items-center border border-gray-500">
@@ -51,10 +65,23 @@ function App() {
 
         {todoList.map((todo) => (
           <div key={todo.id} className="w-full flex justify-between">
-            <span className={`${todo.completed ? "line-through" : ""}`} onClick={() => { onClickCompleted(todo.id); }}>
+            <span
+              onMouseDown={() => { startPress(todo.id); }}
+              onMouseUp={endPress}
+              onMouseLeave={endPress}
+              onClick={() => { onClickCompleted(todo.id); }}
+              className={`cursor-pointer ${todo.completed ? "line-through" : ""}`} >
               {todo.title}
             </span>
-            <button onClick={(e) => { onClickPop(todo.id, e); }} className="bg-blue-700 text-white">
+
+            <input
+              type="text"
+              placeholder="수정하기"
+              className="border border-gray-500" />
+
+            <button
+              onClick={(e) => { onClickPop(todo.id, e); }}
+              className="bg-blue-700 text-white">
               삭제
             </button>
           </div>
