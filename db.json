@@ -1,16 +1,12 @@
 {
   "todo": [
     {
-      "id": 1,
-      "description": "자바스크립트 공부하기"
+      "id": "2451",
+      "description": "두번째 양치하기"
     },
     {
-      "id": 2,
-      "description": "버튼 컴포넌트 개발하기"
-    },
-    {
-      "id": "227e",
-      "description": "가알아라알ㅇ"
+      "id": "a804",
+      "description": "와아아아앙"
     }
   ]
 }

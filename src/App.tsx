@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Input from "./components/Input";
+import TodoList from "./components/TodoList";
 
 function App() {
     return (
@@ -7,6 +8,7 @@ function App() {
             <div className="w-[500px] h-[600px] flex flex-col gap-10">
                 <Header />
                 <Input />
+                <TodoList />
             </div>
         </div>
     );
