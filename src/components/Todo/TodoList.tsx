@@ -1,24 +1,16 @@
 import { useState, useEffect } from "react";
-import { BASE_URL } from "../../apis/fetch";
 import Todo from "../../types/todoType";
 import { fetchToDoList } from "../../apis/fetch";
+import { handleDelete } from "../../apis/fetch";
 
 function TodoList() {
 
   const [todoItemList, setTodoItemList] = useState<Todo[]>([]);
 
-  const handleDeleteTodoItem = async (id: number) => {
-    try {
-      await fetch(`${BASE_URL}/todos/${id}`, {
-        method: 'DELETE',
-      });
-  
-      setTodoItemList(prevTodoList => prevTodoList.filter(todo => todo.id !== id));
-  
-      console.log('삭제 완료');
-    } catch (error) {
-      console.error('오류 발생', error);
-    }
+  const handleDeleteTodoItem = (id: number) => {
+    //콜백으로 설정?
+    handleDelete(id);  
+    setTodoItemList(prevTodoList => prevTodoList.filter(todo => todo.id !== id));
   }
 
   const handleCompletedItem = (id : number) => {
