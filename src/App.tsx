@@ -1,21 +1,13 @@
-import { useEffect } from "react";
+import Header from "./components/Header";
 
 function App() {
-    useEffect(() => {
-        getData();
-    }, []);
-
-    const getData = async () => {
-        await fetch("http://localhost:3000/todo")
-            .then(data => {
-                return data.json();
-            })
-            .then(data => {
-                console.log(data);
-            });
-    };
-
-    return <div className="text-red-100">hello</div>;
+    return (
+        <div className="flex w-screen h-screen justify-center items-center">
+            <div className="w-[500px] h-[600px]">
+                <Header />
+            </div>
+        </div>
+    );
 }
 
 export default App;
