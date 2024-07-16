@@ -17,7 +17,7 @@ export class TodoAPI {
             });
     }
     // POST 요청
-    public static post(data) {
+    public static post(data: any) {
         return fetch(`${this.baseURL}/todo`, {
             method: "POST",
             headers: this.headers,
@@ -42,7 +42,7 @@ export class TodoAPI {
             });
     }
     // PATCH 요청
-    public static patch(data) {
+    public static patch(data: any) {
         return fetch(`${this.baseURL}/todo`, {
             method: "PATCH",
             headers: this.headers,
