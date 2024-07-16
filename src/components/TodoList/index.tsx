@@ -1,23 +1,17 @@
-import { useEffect, useState } from "react";
-import { TodoAPI } from "../../apis/todoAPI";
+import { useEffect } from "react";
 import TodoItem from "../TodoItem";
-import { TodoItemType } from "../../types/todo";
+import { useTodoList } from "../../hooks/useTodoList";
 
 function TodoList() {
-    const [todoList, setTodoList] = useState<TodoItemType[]>([]);
+    const { todoList, getTodoList } = useTodoList();
 
     useEffect(() => {
         getTodoList();
     }, []);
 
-    const getTodoList = async () => {
-        const data = await TodoAPI.get();
-        setTodoList(data);
-    };
-
     return (
         <ul className="grow overflow-auto">
-            {todoList.map(todo => (
+            {todoList.map((todo: any) => (
                 <TodoItem key={todo.id} todo={todo} />
             ))}
         </ul>

@@ -1,17 +1,23 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { TodoAPI } from "../../apis/todoAPI";
+import { useTodoList } from "../../hooks/useTodoList";
 
 function Input() {
     const [inputValue, setInputValue] = useState("");
+    const { getTodoList } = useTodoList();
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
     };
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        TodoAPI.post({ description: inputValue });
-        console.log("Success!");
+        try {
+            await TodoAPI.post({ description: inputValue });
+            getTodoList();
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
