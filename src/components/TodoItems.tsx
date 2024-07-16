@@ -1,9 +1,10 @@
 import { css } from "@emotion/react";
 import { useTodosContext } from "../hooks/useTodosContext";
 import { TodoItem } from "./TodoItem";
+import { EditingTodoItem } from "./EditingTodoItem";
 
 export const TodoItems = () => {
-  const { todos } = useTodosContext();
+  const { todos, currentEditingId } = useTodosContext();
 
   return (
     <ul
@@ -14,9 +15,13 @@ export const TodoItems = () => {
         width: 100%;
       `}
     >
-      {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
-      ))}
+      {todos.map((todo) => {
+        const isEditing = todo.id === currentEditingId;
+        if (isEditing) {
+          return <EditingTodoItem key={`${todo.id}-edit`} todo={todo} />;
+        }
+        return <TodoItem key={todo.id} todo={todo} />;
+      })}
     </ul>
   );
 };
