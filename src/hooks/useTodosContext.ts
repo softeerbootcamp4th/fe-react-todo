@@ -5,8 +5,10 @@ import { Todo } from "../models/Todo";
 interface TodosContextValue {
   todos: Todo[];
   addTodo: (title: string) => void;
+
   removeTodo: (id: number) => void;
-  setEditingTodoId: (id: number) => void;
+  setEditingTodoId: (id: number | null) => void;
+
   editTodo: (id: number, title: string) => void;
   updateTodoStatus: (id: number, status: "active" | "completed") => void;
   currentEditingId: number | null;
