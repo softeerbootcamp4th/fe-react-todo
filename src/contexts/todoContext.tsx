@@ -6,6 +6,7 @@ export const TodoContext = createContext<any>({} as any);
 
 export const TodoProvider = ({ children }: { children: ReactNode }) => {
     const [todoList, setTodoList] = useState<TodoItemType[]>([]);
+    const [isEditing, setIsEditing] = useState<boolean>(false);
 
     const getTodoList = async () => {
         const data = await TodoAPI.get();
@@ -13,6 +14,8 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return (
-        <TodoContext.Provider value={{ todoList, getTodoList }}>{children}</TodoContext.Provider>
+        <TodoContext.Provider value={{ todoList, getTodoList, isEditing, setIsEditing }}>
+            {children}
+        </TodoContext.Provider>
     );
 };
