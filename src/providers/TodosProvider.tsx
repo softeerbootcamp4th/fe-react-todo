@@ -19,7 +19,7 @@ export const TodosProvider = ({ children }: PropsWithChildren) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   }, []);
 
-  const editStatusTodo = useCallback((id: number) => {
+  const setEditingTodoId = useCallback((id: number) => {
     setCurrentEditingId(id);
   }, []);
 
@@ -36,13 +36,14 @@ export const TodosProvider = ({ children }: PropsWithChildren) => {
     );
     setCurrentEditingId(null);
   }, []);
+
   return (
     <TodosContext.Provider
       value={{
         todos,
         addTodo,
         removeTodo,
-        editStatusTodo,
+        setEditingTodoId: setEditingTodoId,
         editTodo,
         currentEditingId,
       }}
