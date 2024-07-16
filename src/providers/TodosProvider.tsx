@@ -18,7 +18,21 @@ export const TodosProvider = ({ children }: PropsWithChildren) => {
   const removeTodo = useCallback((id: number) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   }, []);
-
+  const updateTodoStatus = useCallback(
+    (id: number, status: "active" | "completed") => {
+      setTodos((prev) =>
+        prev.map((todo) =>
+          todo.id === id
+            ? {
+                ...todo,
+                status,
+              }
+            : todo,
+        ),
+      );
+    },
+    [],
+  );
   const setEditingTodoId = useCallback((id: number) => {
     setCurrentEditingId(id);
   }, []);
@@ -43,7 +57,8 @@ export const TodosProvider = ({ children }: PropsWithChildren) => {
         todos,
         addTodo,
         removeTodo,
-        setEditingTodoId: setEditingTodoId,
+        updateTodoStatus,
+        setEditingTodoId,
         editTodo,
         currentEditingId,
       }}
