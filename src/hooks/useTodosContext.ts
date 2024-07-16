@@ -6,6 +6,9 @@ interface TodosContextValue {
   todos: Todo[];
   addTodo: (title: string) => void;
   removeTodo: (id: number) => void;
+  editStatusTodo: (id: number) => void;
+  editTodo: (id: number, title: string) => void;
+  currentEditingId: number | null;
 }
 
 export const TodosContext = createContext<TodosContextValue | null>(null);

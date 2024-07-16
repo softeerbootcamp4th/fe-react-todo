@@ -6,6 +6,7 @@ interface TodoItemProps {
 }
 
 export const TodoItem = ({ todo }: TodoItemProps) => {
+  const isNotCompleted = todo.status === "active";
   return (
     <div
       css={css`
@@ -17,7 +18,10 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
       `}
     >
       <h3>{todo.title}</h3>
-      <button>삭제</button>
+      <span>
+        {isNotCompleted && <button>완료</button>}
+        <button>삭제</button>
+      </span>
     </div>
   );
 };
