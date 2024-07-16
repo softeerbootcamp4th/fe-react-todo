@@ -1,5 +1,5 @@
 import { PropsWithChildren, useMemo, useReducer } from 'react';
-import { initialUser, UserContext } from 'src/store/context/userContext';
+import { initialUser, UserContext } from 'src/store/context/UserContext';
 import { LoginUserProps, USER_ACTION } from 'src/store/types/userTypes';
 import userReducer from 'src/store/reducer/userReducer';
 
