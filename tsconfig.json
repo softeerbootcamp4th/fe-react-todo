@@ -23,6 +23,11 @@
     /* alias */
     "baseUrl": "."
   },
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
