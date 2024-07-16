@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { BASE_URL } from "../../apis/fetch";
 import Todo from "../../types/todoType";
+import { fetchToDoList } from "../../apis/fetch";
 
 function TodoList() {
 
@@ -30,18 +31,13 @@ function TodoList() {
     setTodoItemList(updatedTodoList);
   }
 
-  const fetchToDoList = async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/todos`);
-      const data = await response.json();
-      setTodoItemList(data);
-    } catch (error) {
-      console.error('오류 발생', error);
-    }
-  };
+  const getTodoList = async () => {
+    const data = await fetchToDoList();
+    setTodoItemList(data);
+};
 
   useEffect(() => {
-    fetchToDoList();
+    getTodoList();
   },[]);
 
   return (
