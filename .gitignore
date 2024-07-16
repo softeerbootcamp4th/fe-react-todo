@@ -34,4 +34,7 @@ dist-ssr
 !.yarn/versions
 
 # vite cache
-.vite
+.yarn/.vite
+
+# storybook
+*storybook.log
