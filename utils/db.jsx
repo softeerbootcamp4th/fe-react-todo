@@ -19,3 +19,11 @@ export async function popData(id) {
     method: "DELETE",
   })
 }
+
+export function modifyData(id, field) {
+  fetch(`http://localhost:3000/todo/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(field),
+  })
+}
