@@ -6,7 +6,15 @@ export const TodosProvider = ({ children }: PropsWithChildren) => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const addTodo = useCallback((title: string) => {
-    setTodos((prev) => [...prev, { id: prev.length + 1, title }]);
+    setTodos((prev) => [
+      ...prev,
+      {
+        id: prev.length + 1,
+        title,
+        status: "active",
+        isEditing: false,
+      },
+    ]);
   }, []);
   const removeTodo = useCallback((id: number) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
