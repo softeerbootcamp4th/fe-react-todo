@@ -99,13 +99,23 @@ const FlexDiv = styled.div`
 `
 
 interface ToDoItemProps extends ButtonProps {
-  id?: number;
-  title: ReactNode;
+  id: number;
+  title: string;
+  children?: ReactNode;
+  onDragStart: (id: number) => void;
+  onDragOver: (id: number) => void;
+  onDrop: () => void;
 }
 
-function ToDoItem({title, children, onClick}: ToDoItemProps) {
+function ToDoItem({id, title, children, onClick, onDragStart, onDragOver, onDrop}: ToDoItemProps) {
   return (
-    <FlexDiv>
+    <FlexDiv
+      draggable
+      onDragStart={() => onDragStart(id)}
+      onDragOver={(e) => { e.preventDefault(); onDragOver(id); }}
+      onDrop={onDrop}
+      borderBottom
+    >
       <p>{title}</p>
       <Button variant="delete" onClick={onClick}>삭제</Button>
     </FlexDiv>
@@ -145,14 +155,40 @@ function App() {
   function onClickRegister() {
     setTodoData((datas) => [...datas, {
       id: todoDatas.length,
-      title:value
+      title: value
     }])
     setValue("");
   }
 
-  function onClickDelete(id) {
-    setTodoData((data) => data.filter(item => item.id != id))
+  function onClickDelete(id: number) {
+    setTodoData((data) => data.filter((item) => item.id !== id));
   }
+
+  function handleDragStart(id: number) {
+    setDraggedId(id);
+  }
+
+  function handleDrop() {
+    if (draggedId !== droppedId) {
+      // set이 바로 반영되지 않아서 useEffect로 변화 감지 후 서버에 전송
+      setTodoData((data) => {
+        const newData = [...data]
+        const draggedIndex = newData.findIndex((item) => item.id === draggedId);
+        const droppedIndex = newData.findIndex((item) => item.id === droppedId);
+        [newData[draggedIndex], newData[droppedIndex]] = [newData[droppedIndex], newData[draggedIndex]]
+        return newData;
+      });
+      setDraggedId(null);
+      setDroppedId(null);
+    }
+  }
+
+  function handleDragOver(id: number) {
+    setDroppedId(id);
+  }
+  
+  const [draggedId, setDraggedId] = useState<number | null>(null);
+  const [droppedId, setDroppedId] = useState<number | null>(null);
 
   return (
     <>
@@ -163,7 +199,15 @@ function App() {
         <div>
           {
             todoDatas.map((item: TodoData) => (
-              <ToDoItem key={item.id} title={item.title} onClick={() => onClickDelete(item.id)}></ToDoItem>
+              <ToDoItem
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                onClick={() => onClickDelete(item.id)} 
+                onDragStart={handleDragStart}
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
+              />
             ))
           }
         </div>
