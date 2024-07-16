@@ -15,6 +15,7 @@ function Input() {
         try {
             await TodoAPI.post({ description: inputValue });
             getTodoList();
+            setInputValue("");
         } catch (error) {
             console.error(error);
         }
