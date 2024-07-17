@@ -9,8 +9,8 @@ interface TodosContextValue {
   removeTodo: (id: number) => void;
   setEditingTodoId: (id: number | null) => void;
 
-  editTodo: (id: number, title: string) => void;
-  updateTodoStatus: (id: number, status: "active" | "completed") => void;
+  editTodo: (todo: Todo) => void;
+  updateTodoStatus: (todo: Todo) => void;
   currentEditingId: number | null;
 }
 
