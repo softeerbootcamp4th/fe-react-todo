@@ -1,4 +1,4 @@
-export class TodoAPI {
+export class LogAPI {
     private static baseURL = "http://localhost:3000/log";
     private static headers = {
         "Content-Type": "application/json",

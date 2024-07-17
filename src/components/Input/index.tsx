@@ -1,12 +1,13 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { TodoAPI } from "../../apis/todoAPI";
 import { useTodoList } from "../../hooks/useTodoList";
+import { LOG_STATUS } from "../../constants/log";
 
 function Input() {
     const [inputValue, setInputValue] = useState("");
     const [recentSearches, setRecentSearches] = useState<string[]>([]);
     const [showRecentSearches, setShowRecentSearches] = useState<boolean>(false);
-    const { getTodoList } = useTodoList();
+    const { getTodoList, setLogListItem, getLogList } = useTodoList();
 
     useEffect(() => {
         const storedSearches = localStorage.getItem("recentSearches");
@@ -23,7 +24,10 @@ function Input() {
         e.preventDefault();
         try {
             await TodoAPI.post({ description: inputValue, isChecked: false });
-            getTodoList();
+            await getTodoList();
+            await setLogListItem({ status: LOG_STATUS.add, description: inputValue });
+            await getLogList();
+
             const updatedSearches = [inputValue, ...recentSearches];
             const limitedSearches = updatedSearches.slice(0, 5);
             localStorage.setItem("recentSearches", JSON.stringify(limitedSearches));
