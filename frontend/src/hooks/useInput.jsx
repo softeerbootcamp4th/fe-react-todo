@@ -11,7 +11,7 @@ const useInput = () => {
     setContent("");
   };
 
-  return { content, onChange, reset };
+  return { content, onChange, reset, setContent };
 };
 
 export default useInput;

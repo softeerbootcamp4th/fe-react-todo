@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { TodoStore } from "../Provider/todoContext";
 import { postToDoList } from "../api/todo";
 import { CLICK_THRESHOLD } from "../constants/magicNumber";
+import useInput from "../hooks/useInput";
 
 const TodoList = () => {
   const { todoList, setTodoList } = useContext(TodoStore);
@@ -26,12 +27,24 @@ const TodoList = () => {
 const TodoListItem = ({ title, index, isLast, isDone }) => {
   const { todoList, setTodoList } = useContext(TodoStore);
   const [isLongPressed, setIsLongPressed] = useState(false);
+  const { content, onChange, reset, setContent } = useInput();
   const timerRef = useRef(null);
   const startTimeRef = useRef(0);
 
   useEffect(() => {
     console.log(todoList);
   }, [todoList]);
+
+  const onModifyHandler = (newTitle, target) => {
+    const newTodoList = [...todoList];
+    newTodoList[target] = {
+      ...todoList[target],
+      title: newTitle,
+    };
+    setTodoList(newTodoList);
+    reset();
+    setIsLongPressed(false);
+  };
 
   const onDeleteHandler = async (target) => {
     const newTodoList = await postToDoList(
@@ -40,25 +53,27 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
     setTodoList(newTodoList);
   };
 
-  const onMouseDownHandler = () => {
+  const onMouseDownHandler = (target) => {
     startTimeRef.current = Date.now();
 
-    timerRef.current = setTimeout((target) => {
+    timerRef.current = setTimeout(() => {
       setIsLongPressed(true);
+      console.log(target);
+      setContent(todoList[target].title);
     }, CLICK_THRESHOLD);
   };
 
   const onMouseUpHandler = (target) => {
     if (Date.now() - startTimeRef.current < CLICK_THRESHOLD) {
       clearTimeout(timerRef.current);
-      let front = todoList.slice(0, target);
-      let back = todoList.slice(target + 1);
-      let middle = todoList[target];
-      console.log(middle);
-      console.log("target", target);
-      middle.isDone = !middle.isDone;
 
-      setTodoList([...front, middle, ...back]);
+      const newTodoList = [...todoList];
+      newTodoList[target] = {
+        ...todoList[target],
+        isDone: !todoList[target].isDone,
+      };
+
+      setTodoList(newTodoList);
     }
   };
 
@@ -68,10 +83,21 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
       onMouseDown={() => onMouseDownHandler(index)}
       onMouseUp={() => onMouseUpHandler(index)}
     >
-      <ItemContent $isDone={isDone}>{title}</ItemContent>
-      <ItemDeleteButton onClick={() => onDeleteHandler(index)}>
-        삭제
-      </ItemDeleteButton>
+      {isLongPressed ? (
+        <>
+          <StyledInput onChange={onChange} value={content}></StyledInput>
+          <ItemDeleteButton onClick={() => onModifyHandler(content, index)}>
+            수정
+          </ItemDeleteButton>
+        </>
+      ) : (
+        <>
+          <ItemContent $isDone={isDone}>{title}</ItemContent>
+          <ItemDeleteButton onClick={() => onDeleteHandler(index)}>
+            삭제
+          </ItemDeleteButton>
+        </>
+      )}
     </ItemContainer>
   );
 };
@@ -106,6 +132,13 @@ const ItemDeleteButton = styled.button`
   border-radius: 8px;
   background-color: #53a0e0;
   color: white;
+`;
+
+const StyledInput = styled.input`
+  width: 100%;
+  height: 90%;
+  padding-left: 1rem;
+  font-size: 18px;
 `;
 
 export default TodoList;
