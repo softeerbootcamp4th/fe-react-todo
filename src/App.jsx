@@ -6,10 +6,10 @@ import DropLocation from "../components/dropLocation";
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [formString, setFormString] = useState("");
+  const [isDragged, setIsDragged] = useState(false);
   const [editTodoId, setEditTodoId] = useState("");
-  // const [isLongPress, setIsLongPress] = useState(false);
   const timerRef = useRef(null);
-  const dragStartTodo = useRef("");
+  const draggedTodoId = useRef("");
 
   useEffect(() => {
     getData().then((data) => {
@@ -25,8 +25,8 @@ function App() {
   function onClickPush(e) {
     e.preventDefault();
     if (formString) {
-      pushData({ title: formString, completed: false, }).then((newId) => {
-        setTodoList([...todoList, { id: newId, title: formString }]);
+      pushData({ title: formString, completed: false }).then((newId) => {
+        setTodoList([...todoList, { id: newId, title: formString, completed: false }]);
       });
     }
     setFormString("");
@@ -52,13 +52,31 @@ function App() {
         </form>
 
         <div className="w-full flex flex-col gap-4">
-          <DropLocation dragStartTodo={dragStartTodo} frontId="" todoList={todoList} setTodoList={setTodoList} />
+          <DropLocation
+            draggedTodoId={draggedTodoId}
+            frontId=""
+            todoList={todoList}
+            setTodoList={setTodoList}
+            isDragged={isDragged} />
 
           {todoList.map((todo) => (
             <Fragment key={todo.id}>
-              <Todo todo={todo} todoList={todoList} setTodoList={setTodoList} timerRef={timerRef} editTodoId={editTodoId} setEditTodoId={setEditTodoId} dragStartTodo={dragStartTodo} />
+              <Todo todo={todo}
+                todoList={todoList}
+                setTodoList={setTodoList}
+                timerRef={timerRef}
+                isDragged={isDragged}
+                setIsDragged={setIsDragged}
+                editTodoId={editTodoId}
+                setEditTodoId={setEditTodoId}
+                draggedTodoId={draggedTodoId} />
 
-              <DropLocation dragStartTodo={dragStartTodo} frontId={todo.id} todoList={todoList} setTodoList={setTodoList} />
+              <DropLocation
+                draggedTodoId={draggedTodoId}
+                frontId={todo.id}
+                todoList={todoList}
+                setTodoList={setTodoList}
+                isDragged={isDragged} />
             </Fragment>
           ))}
         </div>

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { popData, modifyData } from "/utils/db";
 
-export default function Todo({ todo, todoList, setTodoList, timerRef, editTodoId, setEditTodoId, dragStartTodo }) {
+export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTodoId, isDragged, setIsDragged, editTodoId, setEditTodoId }) {
   const [editString, setEditString] = useState("");
-  const [isDragged, setIsDragged] = useState(false);
   //const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   function onClickPop() {
@@ -42,7 +41,7 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, editTodoId
 
   function onDragStartTodo() {
     setIsDragged(true);
-    dragStartTodo.current = todo.id;
+    draggedTodoId.current = todo.id;
   }
 
   function onDragEndTodo() {
@@ -59,7 +58,7 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, editTodoId
       onDragStart={onDragStartTodo}
       onDrag={onDragTodo}
       onDragEnd={onDragEndTodo}
-      className={`w-full p-2 flex justify-between border border-gray-400 ${isDragged ? "" : ""}`}>
+      className={`p-5 flex justify-between rounded-2xl border border-gray-300 ${isDragged ? "" : ""}`}>
       <span
         onMouseDown={startPress}
         onMouseUp={endPress}
@@ -92,7 +91,7 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, editTodoId
 
       <button
         onClick={onClickPop}
-        className="bg-blue-700 text-white">
+        className="rounded-lg px-2 py-1 bg-indigo-500 text-white">
         삭제
       </button>
     </div>
