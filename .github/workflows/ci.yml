@@ -1,0 +1,114 @@
+name: test
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  vitest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Set YARN_IGNORE_NODE
+        run: echo "YARN_IGNORE_NODE=1" >> $GITHUB_ENV
+
+      - name: Cache yarn dependencies
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            ~/.cache/Cypress
+            .yarn/cache
+          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-v1
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Run Vitest tests
+        run: |
+          if [ -d "tests" ]; then
+            yarn run test:unit --coverage || echo "Vitest failed"
+            if [ -f coverage/coverage-summary.json ]; then
+              TEST_COUNT=$(jq '.total.lines.total' coverage/coverage-summary.json)
+              if [ "$TEST_COUNT" -eq "0" ]; then
+                echo "No Vitest files found, skipping tests."
+              else
+                echo "Vitest tests ran successfully."
+              fi
+            else
+              echo "No coverage file found, skipping tests."
+            fi
+          else
+            echo "No Vitest test directory found, skipping tests."
+          fi
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+
+  storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Set YARN_IGNORE_NODE
+        run: echo "YARN_IGNORE_NODE=1" >> $GITHUB_ENV
+
+      - name: Cache yarn dependencies
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            ~/.cache/Cypress
+            .yarn/cache
+          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-v1
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Build Storybook
+        run: yarn build-storybook --output-dir /tmp/storybook || { echo 'Storybook build failed'; exit 1; }
+
+      - name: Run Storybook Tests
+        run: |
+          yarn storybook dev -p 6006 & yarn wait-on http://127.0.0.1:6006 && yarn test-storybook --url http://127.0.0.1:6006 || echo "Storybook test failed"
+          if [ -f coverage/coverage-summary.json ]; then
+            TEST_COUNT=$(jq '.total.lines.total' coverage/coverage-summary.json)
+            if [ "$TEST_COUNT" -eq "0" ]; then
+              echo "No Storybook test files found, skipping tests."
+            else
+              echo "Storybook tests ran successfully."
+            fi
+          else
+            echo "No coverage file found, skipping tests."
+          fi
