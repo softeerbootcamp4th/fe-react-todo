@@ -1,3 +1,5 @@
+import { LogType } from "../types/log";
+
 export class LogAPI {
     private static baseURL = "http://localhost:3000/log";
     private static headers = {
@@ -17,7 +19,7 @@ export class LogAPI {
             });
     }
     // POST 요청
-    public static post(data: any) {
+    public static post(data: LogType) {
         return fetch(`${this.baseURL}`, {
             method: "POST",
             headers: this.headers,

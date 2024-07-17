@@ -1,3 +1,5 @@
+import { BaseTodoId, BaseTodoItem, TodoItemType } from "../types/todo";
+
 export class TodoAPI {
     private static baseURL = "http://localhost:3000/todo";
     private static headers = {
@@ -17,7 +19,7 @@ export class TodoAPI {
             });
     }
     // POST 요청
-    public static post(data: any) {
+    public static post(data: BaseTodoItem) {
         return fetch(`${this.baseURL}`, {
             method: "POST",
             headers: this.headers,
@@ -30,8 +32,8 @@ export class TodoAPI {
             });
     }
     // DELETE 요청
-    public static delete(data: string) {
-        return fetch(`${this.baseURL}/${data}`, {
+    public static delete(data: BaseTodoId) {
+        return fetch(`${this.baseURL}/${data.id}`, {
             method: "DELETE",
             headers: this.headers,
         })
@@ -42,7 +44,7 @@ export class TodoAPI {
             });
     }
     // PATCH 요청
-    public static patch(data: any) {
+    public static patch(data: TodoItemType) {
         return fetch(`${this.baseURL}/${data.id}`, {
             method: "PATCH",
             headers: this.headers,

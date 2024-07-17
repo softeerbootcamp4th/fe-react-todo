@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useTodoList } from "../../hooks/useTodoList";
 import { LOG_STATUS, STATUS_TO_COLOR } from "../../constants/log";
+import { LogType } from "../../types/log";
 
 function Log() {
     const { logList, getLogList } = useTodoList();
@@ -17,7 +18,7 @@ function Log() {
                     .slice()
                     .reverse()
                     .slice(0, 100)
-                    .map((log: any) => (
+                    .map((log: LogType) => (
                         <li key={log.id} className="flex gap-2 items-center">
                             <span
                                 className={`w-10 bg-${STATUS_TO_COLOR[log.status]}-100 text-${STATUS_TO_COLOR[log.status]}-800 text-xs font-medium px-2.5 py-1 rounded-full flex items-center justify-center`}

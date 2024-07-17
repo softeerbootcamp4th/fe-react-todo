@@ -32,7 +32,7 @@ function TodoItem({ todo }: TodoItemProps) {
 
     const handleDelete = async () => {
         try {
-            await TodoAPI.delete(todo.id);
+            await TodoAPI.delete({ id: todo.id });
             await getTodoList();
             await setLogListItem({ status: LOG_STATUS.delete, description: inputValue });
             await getLogList();
