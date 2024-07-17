@@ -33,7 +33,7 @@ export const TodosProvider = ({ children }: PropsWithChildren) => {
     },
     [],
   );
-  const setEditingTodoId = useCallback((id: number) => {
+  const setEditingTodoId = useCallback((id: number | null) => {
     setCurrentEditingId(id);
   }, []);
 

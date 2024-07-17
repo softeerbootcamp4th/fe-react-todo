@@ -16,7 +16,7 @@ export const db = {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
   },
 
-  removeTodo: async (id: number) => {
+  deleteTodo: async (id: number) => {
     const currentTodos = await db.readTodos();
     const updatedTodos = currentTodos.filter((t) => t.id !== id);
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
