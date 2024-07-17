@@ -6,8 +6,14 @@ function Input() {
     const [inputValue, setInputValue] = useState("");
     const [recentSearches, setRecentSearches] = useState<string[]>([]);
     const [showRecentSearches, setShowRecentSearches] = useState<boolean>(false);
-
     const { getTodoList } = useTodoList();
+
+    useEffect(() => {
+        const storedSearches = localStorage.getItem("recentSearches");
+        if (storedSearches) {
+            setRecentSearches(JSON.parse(storedSearches));
+        }
+    }, []);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
@@ -23,18 +29,10 @@ function Input() {
             localStorage.setItem("recentSearches", JSON.stringify(limitedSearches));
             setRecentSearches(limitedSearches);
             setInputValue("");
-            // setShowRecentSearches(false);
         } catch (error) {
             console.error(error);
         }
     };
-
-    useEffect(() => {
-        const storedSearches = localStorage.getItem("recentSearches");
-        if (storedSearches) {
-            setRecentSearches(JSON.parse(storedSearches));
-        }
-    }, []);
 
     const handleInputFocus = () => {
         setShowRecentSearches(true);

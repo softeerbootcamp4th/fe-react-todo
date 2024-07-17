@@ -81,7 +81,7 @@ function TodoItem({ todo }: TodoItemProps) {
                     <>
                         <input
                             ref={inputRef}
-                            className="block w-80 text-gray-900 border-b focus:border-indigo-400 text-xl"
+                            className="block w-60 text-gray-900 border-b focus:border-indigo-400 text-xl"
                             placeholder="할 일을 입력하세요"
                             value={inputValue}
                             onChange={handleInputChange}
@@ -99,7 +99,7 @@ function TodoItem({ todo }: TodoItemProps) {
                     <>
                         <label
                             htmlFor={`${todo.id}-checkbox`}
-                            className={`${isChecked ? "line-through text-gray-400" : ""}`}
+                            className={`truncate w-60 ${isChecked && "line-through text-gray-400"}`}
                             onMouseDown={handleMouseDown}
                             onMouseUp={handleMouseUp}
                         >
