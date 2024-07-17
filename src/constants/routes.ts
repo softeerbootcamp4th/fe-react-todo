@@ -1,4 +1,5 @@
 const enum ROUTES {
+  TODO = '/',
   HOME = '/Home',
   LOGIN = '/Login',
 }
