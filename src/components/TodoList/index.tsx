@@ -18,7 +18,7 @@ function TodoList() {
     }, [todoList]);
 
     return (
-        <ul ref={scrollRef} className="grow overflow-auto">
+        <ul ref={scrollRef} className="w-full grow overflow-auto">
             {todoList.map((todo: any) => (
                 <TodoItem key={todo.id} todo={todo} />
             ))}

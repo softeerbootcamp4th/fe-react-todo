@@ -66,7 +66,7 @@ function TodoItem({ todo }: TodoItemProps) {
     };
 
     return (
-        <li className="border-b border-gray-300 py-4 px-6 text-xl flex items-center gap-3">
+        <li className="w-full border-b border-gray-300 py-4 text-xl flex items-center gap-3">
             <input
                 id={`${todo.id}-checkbox`}
                 type="checkbox"
