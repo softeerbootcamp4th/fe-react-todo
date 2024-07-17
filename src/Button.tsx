@@ -5,7 +5,8 @@ interface ButtonProps {
     height: number;
     backgroundColor: string;
     title: string;
-    cb: () => void;
+    value: string;
+    cb: (param: string) => undefined;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -13,9 +14,10 @@ const Button: React.FC<ButtonProps> = ({
     height,
     backgroundColor,
     title,
+    value,
     cb
 }: ButtonProps) => {
-
+    console.log(value)
     const buttonStyle: React.CSSProperties = {
         backgroundColor: `#${backgroundColor}ff`,
         width: `${width}px`,
@@ -27,9 +29,13 @@ const Button: React.FC<ButtonProps> = ({
         fontWeight: 600,
         color: "white"
     }
+    const temp = () => {
+        console.log(value)
+        cb(value)
+    }
 
     return (
-        <div className="rounded-lg flex justify-center place-items-center" style={buttonStyle} onClick={cb}>
+        <div className="rounded-lg flex justify-center place-items-center" style={buttonStyle} onClick={temp}>
             <p style={titleStyle}>{title}</p>
         </div>
     )
