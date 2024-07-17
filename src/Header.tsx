@@ -2,9 +2,7 @@ import './App.css';
 
 const Header = () => {
   return (
-    <>
-      <span className="text-3xl bg-blue-500"> My Todo List</span>
-    </>
+      <h1 className="px-20"> My Todo App</h1>
   )
 }
 

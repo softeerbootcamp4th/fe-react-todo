@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Header from './Header.tsx'
+import ToDoApp from './ToDoApp.tsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Header />
+    <ToDoApp />
   </React.StrictMode>,
 )
