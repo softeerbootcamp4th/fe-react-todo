@@ -16,6 +16,7 @@ function Log() {
                 {logList
                     .slice()
                     .reverse()
+                    .slice(0, 100)
                     .map((log: any) => (
                         <li key={log.id} className="flex gap-2 items-center">
                             <span
