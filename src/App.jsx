@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react"
+import { Fragment, useEffect, useRef, useState } from "react"
 import { getData, pushData } from "/utils/db";
 import Todo from "/components/todo";
+import DropLocation from "../components/dropLocation";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -8,6 +9,7 @@ function App() {
   const [editTodoId, setEditTodoId] = useState("");
   // const [isLongPress, setIsLongPress] = useState(false);
   const timerRef = useRef(null);
+  const dragStartTodo = useRef("");
 
   useEffect(() => {
     getData().then((data) => {
@@ -32,7 +34,7 @@ function App() {
 
   return (
     <div className="h-screen flex justify-center items-center">
-      <div className="w-96 p-5 gap-3 flex flex-col items-center border border-gray-500">
+      <div className="relative w-96 p-5 gap-3 flex flex-col items-center border border-gray-500">
         <span>My Todo App</span>
 
         <form>
@@ -49,9 +51,17 @@ function App() {
           </button>
         </form>
 
-        {todoList.map((todo) => (
-          <Todo key={todo.id} todo={todo} todoList={todoList} setTodoList={setTodoList} timerRef={timerRef} editTodoId={editTodoId} setEditTodoId={setEditTodoId} />
-        ))}
+        <div className="w-full flex flex-col gap-4">
+          <DropLocation dragStartTodo={dragStartTodo} frontId="" todoList={todoList} setTodoList={setTodoList} />
+
+          {todoList.map((todo) => (
+            <Fragment key={todo.id}>
+              <Todo todo={todo} todoList={todoList} setTodoList={setTodoList} timerRef={timerRef} editTodoId={editTodoId} setEditTodoId={setEditTodoId} dragStartTodo={dragStartTodo} />
+
+              <DropLocation dragStartTodo={dragStartTodo} frontId={todo.id} todoList={todoList} setTodoList={setTodoList} />
+            </Fragment>
+          ))}
+        </div>
       </div>
     </div>
   )

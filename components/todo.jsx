@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { popData, modifyData } from "/utils/db";
 
-export default function Todo({ todo, todoList, setTodoList, timerRef, editTodoId, setEditTodoId }) {
+export default function Todo({ todo, todoList, setTodoList, timerRef, editTodoId, setEditTodoId, dragStartTodo }) {
   const [editString, setEditString] = useState("");
+  const [isDragged, setIsDragged] = useState(false);
+  //const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  function onClickPop(id, e) {
-    e.preventDefault();
-    setTodoList(todoList.filter((todo) => todo.id !== id));
-    popData(id);
+  function onClickPop() {
+    setTodoList(todoList.filter((_todo) => _todo.id !== todo.id));
+    popData(todo.id);
   }
 
   function onClickCompleted() {
@@ -17,7 +18,6 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, editTodoId
 
   function startPress() {
     timerRef.current = setTimeout(() => {
-      //setIsLongPress(true);
       setEditTodoId(todo.id);
       setEditString(todo.title);
     }, 2000);
@@ -40,8 +40,26 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, editTodoId
     }
   }
 
+  function onDragStartTodo() {
+    setIsDragged(true);
+    dragStartTodo.current = todo.id;
+  }
+
+  function onDragEndTodo() {
+    setIsDragged(false);
+  }
+
+  function onDragTodo() {
+    // setMousePosition({ x: e.clientX, y: e.clienY });
+  }
+
   return (
-    <div className="w-full p-2 flex justify-between border border-gray-400">
+    <div
+      draggable="true"
+      onDragStart={onDragStartTodo}
+      onDrag={onDragTodo}
+      onDragEnd={onDragEndTodo}
+      className={`w-full p-2 flex justify-between border border-gray-400 ${isDragged ? "" : ""}`}>
       <span
         onMouseDown={startPress}
         onMouseUp={endPress}
@@ -73,7 +91,7 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, editTodoId
       </div>
 
       <button
-        onClick={(e) => { onClickPop(todo.id, e); }}
+        onClick={onClickPop}
         className="bg-blue-700 text-white">
         삭제
       </button>
