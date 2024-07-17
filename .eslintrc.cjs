@@ -13,13 +13,12 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh"],
   rules: {
-    "react/jsx-filename-extension":["warn",{"extensions":[".tsx"]} ],
+    "react/jsx-filename-extension": ["warn", { extensions: [".tsx"] }],
     "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "react/react-in-jsx-scope": "off",
     "import/no-unresolved": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
   },
-  
 };

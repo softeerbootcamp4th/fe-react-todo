@@ -6,7 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-yarn.lock
 
 node_modules
 dist
@@ -38,3 +37,4 @@ dist-ssr
 
 # storybook
 *storybook.log
+storybook-static
