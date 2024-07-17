@@ -10,12 +10,14 @@ const Input = () => {
   const { todoList, setTodoList } = useContext(TodoStore);
 
   const onSubmitHandler = async () => {
-    const newTodoList = await postToDoList([
-      ...todoList,
-      { title: content, isDone: false },
-    ]);
-    setTodoList(newTodoList);
-    reset();
+    if (content) {
+      const newTodoList = await postToDoList([
+        ...todoList,
+        { title: content, isDone: false },
+      ]);
+      setTodoList(newTodoList);
+      reset();
+    }
   };
 
   return (
