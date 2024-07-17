@@ -34,6 +34,7 @@ function App() {
 }
 
 const Title = styled.h1`
+  margin-top: 10rem;
   background-color: orange;
   font-size: 2em;
   text-align: center;

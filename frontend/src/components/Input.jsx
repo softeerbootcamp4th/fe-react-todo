@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { MESSAGE } from "../constants/message";
 import useInput from "../hooks/useInput";
@@ -20,12 +20,19 @@ const Input = () => {
     }
   };
 
+  const onEnterDown = ({ key }) => {
+    if (key === "Enter") {
+      onSubmitHandler();
+    }
+  };
+
   return (
     <Container>
       <StyledInput
         placeholder={MESSAGE.placeHolder}
         value={content}
         onChange={onChange}
+        onKeyDown={onEnterDown}
       />
       <AddButton onClick={onSubmitHandler}>등록</AddButton>
     </Container>
@@ -33,18 +40,29 @@ const Input = () => {
 };
 
 const Container = styled.div`
+  width: 100%;
+  height: 2.5rem;
   display: ${(props) => props.theme.layout.alignCenter.display};
   justify-content: ${(props) => props.theme.layout.alignCenter.justifyContent};
   align-items: ${(props) => props.theme.layout.alignCenter.alignItems};
-  background-color: red;
-  height: 100%;
+  gap: 1rem;
 `;
 
-const StyledInput = styled.input``;
+const StyledInput = styled.input`
+  width: 100%;
+  height: 90%;
+  padding-left: 1rem;
+  font-size: 18px;
+`;
 
 const AddButton = styled.button`
-  width: 3rem;
+  width: 4rem;
   height: 100%;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(35, 143, 35);
+  color: white;
+  font-size: 18px;
 `;
 
 export default Input;
