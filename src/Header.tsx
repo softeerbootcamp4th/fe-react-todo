@@ -1,10 +1,8 @@
-import './App.css';
+import React from 'react';
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
-    <>
-      <span className="text-3xl bg-blue-500"> My Todo List</span>
-    </>
+    <span className="font-bold text-6xl mt-16"> My Todo List</span>
   )
 }
 
