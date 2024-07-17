@@ -31,7 +31,8 @@ const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo }: ToDoListEleme
         }
     }
 
-    const toggleEditingMode = () => {
+    const toggleEditingMode = (noUse: string): undefined => {
+        if (noUse) return;
         setIsEditingMode(!isEditingMode)
     }
 
@@ -42,7 +43,7 @@ const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo }: ToDoListEleme
     let content = (
         <>
             <p>{toDo}</p>
-            <Button width={50} height={30} backgroundColor="6c90bb" title={"삭제"} cb={toggleEditingMode} />
+            <Button width={50} height={30} backgroundColor="6c90bb" title={"삭제"} cb={toggleEditingMode} value="z" />
         </>
     )
     if (isEditingMode) {
@@ -55,7 +56,7 @@ const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo }: ToDoListEleme
                     placeholder={toDo}
                     className="w-full mr-10"
                 />
-                <Button width={50} height={30} backgroundColor="6c90bb" title={"완료"} cb={toggleEditingMode} />
+                <Button width={50} height={30} backgroundColor="6c90bb" title={"완료"} cb={toggleEditingMode} value="z" />
             </>
         )
     }
