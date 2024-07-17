@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    @apply font-KyoboHand;
+}
+
+input:focus {
+    outline: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+@font-face {
+    font-family: "KyoboHand";
+    src: url("/fonts/KyoboHandwriting2019.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Cafe24Meongi";
+    src: url("/fonts/Cafe24Meongi.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
