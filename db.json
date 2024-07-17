@@ -58,7 +58,7 @@
     {
       "id": "4657",
       "description": "dfdfdfㅇㄴㅁㄴㅇㄹㅇㄴㅇㄴㅇㄴㅇㄹㅁㅇㅇㄹㅁㄴㅇㅇㅁㄹㄴㅇㅁㅇㅁㄹㅇㄹㄴㅇㅇㄹ",
-      "isChecked": false
+      "isChecked": true
     },
     {
       "id": "0cea",
@@ -185,6 +185,12 @@
       "id": "1997",
       "status": "수정",
       "prevDescription": "dfdfdf",
+      "description": "dfdfdfㅇㄴㅁㄴㅇㄹㅇㄴㅇㄴㅇㄴㅇㄹㅁㅇㅇㄹㅁㄴㅇㅇㅁㄹㄴㅇㅁㅇㅁㄹㅇㄹㄴㅇㅇㄹ"
+    },
+    {
+      "id": "43b3",
+      "status": "수정",
+      "prevDescription": "dfdfdfㅇㄴㅁㄴㅇㄹㅇㄴㅇㄴㅇㄴㅇㄹㅁㅇㅇㄹㅁㄴㅇㅇㅁㄹㄴㅇㅁㅇㅁㄹㅇㄹㄴㅇㅇㄹ",
       "description": "dfdfdfㅇㄴㅁㄴㅇㄹㅇㄴㅇㄴㅇㄴㅇㄹㅁㅇㅇㄹㅁㄴㅇㅇㅁㄹㄴㅇㅁㅇㅁㄹㅇㄹㄴㅇㅇㄹ"
     }
   ]

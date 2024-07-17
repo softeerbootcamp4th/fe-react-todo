@@ -25,13 +25,17 @@ function Log() {
                                 {log.status}
                             </span>
                             <span className="w-80 flex gap-2">
-                                {log.status === LOG_STATUS.edit && (
+                                {log.status === LOG_STATUS.edit ? (
                                     <>
-                                        <p className="line-through">{log.prevDescription}</p>
+                                        <p className="w-40 truncate line-through">
+                                            {log.prevDescription}
+                                        </p>
                                         <p> → </p>
+                                        <p className="w-40 truncate">{log.description}</p>
                                     </>
+                                ) : (
+                                    <p className="truncate">{log.description}</p>
                                 )}
-                                <p className="max-w-80 truncate">{log.description}</p>
                             </span>
                         </li>
                     ))}
