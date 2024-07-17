@@ -13,7 +13,7 @@ function Input() {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await TodoAPI.post({ description: inputValue });
+            await TodoAPI.post({ description: inputValue, isChecked: false });
             getTodoList();
             setInputValue("");
         } catch (error) {

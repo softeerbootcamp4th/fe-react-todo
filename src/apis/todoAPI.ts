@@ -43,7 +43,7 @@ export class TodoAPI {
     }
     // PATCH 요청
     public static patch(data: any) {
-        return fetch(`${this.baseURL}/todo`, {
+        return fetch(`${this.baseURL}/todo/${data.id}`, {
             method: "PATCH",
             headers: this.headers,
             body: JSON.stringify(data),

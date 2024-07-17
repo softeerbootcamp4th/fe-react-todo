@@ -1,32 +1,9 @@
 {
-    "todo": [
-        {
-            "id": "bcf0",
-            "description": "양치하기"
-        },
-        {
-            "id": "7f50",
-            "description": "밥먹기"
-        },
-        {
-            "id": "4185",
-            "description": "빨래하기"
-        },
-        {
-            "id": "9123",
-            "description": "잠자기"
-        },
-        {
-            "id": "5db5",
-            "description": "세수하기"
-        },
-        {
-            "id": "6f50",
-            "description": "샤워하기"
-        },
-        {
-            "id": "0b7c",
-            "description": "과자먹기"
-        }
-    ]
+  "todo": [
+    {
+      "id": "c6ec",
+      "description": "ㅇㄹㅇㄴㄹ",
+      "isChecked": true
+    }
+  ]
 }
