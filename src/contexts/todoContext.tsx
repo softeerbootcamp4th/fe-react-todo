@@ -14,7 +14,9 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return (
-        <TodoContext.Provider value={{ todoList, getTodoList, isEditing, setIsEditing }}>
+        <TodoContext.Provider
+            value={{ todoList, setTodoList, getTodoList, isEditing, setIsEditing }}
+        >
             {children}
         </TodoContext.Provider>
     );

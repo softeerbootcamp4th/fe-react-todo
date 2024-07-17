@@ -30,8 +30,8 @@ export class TodoAPI {
             });
     }
     // DELETE 요청
-    public static delete() {
-        return fetch(`${this.baseURL}/todo`, {
+    public static delete(data: string) {
+        return fetch(`${this.baseURL}/todo/${data}`, {
             method: "DELETE",
             headers: this.headers,
         })

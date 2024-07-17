@@ -1,8 +1,11 @@
 import { ChangeEvent, useState } from "react";
 import { TodoItemProps } from "../../types/todo";
 import { TodoAPI } from "../../apis/todoAPI";
+import { useTodoList } from "../../hooks/useTodoList";
 
 function TodoItem({ todo }: TodoItemProps) {
+    const { getTodoList } = useTodoList();
+
     const [isChecked, setIsChecked] = useState(todo.isChecked);
     const [inputValue, setInputValue] = useState(todo.description);
 
@@ -11,8 +14,13 @@ function TodoItem({ todo }: TodoItemProps) {
         await TodoAPI.patch({ ...todo, isChecked: e.target.checked });
     };
 
-    const handleDelete = () => {
-        // TODO: delete 요청
+    const handleDelete = async () => {
+        try {
+            await TodoAPI.delete(todo.id);
+            getTodoList();
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
 
     const handleDescriptionClick = () => {
