@@ -5,6 +5,7 @@ import Todo from "/components/todo";
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [formString, setFormString] = useState("");
+  const [editTodoId, setEditTodoId] = useState("");
   // const [isLongPress, setIsLongPress] = useState(false);
   const timerRef = useRef(null);
 
@@ -31,18 +32,25 @@ function App() {
 
   return (
     <div className="h-screen flex justify-center items-center">
-      <div className="w-96 p-5 flex flex-col items-center border border-gray-500">
+      <div className="w-96 p-5 gap-3 flex flex-col items-center border border-gray-500">
         <span>My Todo App</span>
 
         <form>
-          <input value={formString} placeholder="할일을 입력하세요" onChange={onChangeForm} type="text" className="border border-black" />
-          <button onClick={onClickPush} className="bg-green-700 text-white">
+          <input
+            value={formString}
+            placeholder="할일을 입력하세요"
+            onChange={onChangeForm}
+            type="text"
+            className="border border-black" />
+          <button
+            onClick={onClickPush}
+            className="bg-green-700 text-white">
             등록
           </button>
         </form>
 
         {todoList.map((todo) => (
-          <Todo key={todo.id} todo={todo} todoList={todoList} setTodoList={setTodoList} timerRef={timerRef} />
+          <Todo key={todo.id} todo={todo} todoList={todoList} setTodoList={setTodoList} timerRef={timerRef} editTodoId={editTodoId} setEditTodoId={setEditTodoId} />
         ))}
       </div>
     </div>
