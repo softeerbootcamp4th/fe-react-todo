@@ -2,9 +2,10 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { TodoItemProps } from "../../types/todo";
 import { TodoAPI } from "../../apis/todoAPI";
 import { useTodoList } from "../../hooks/useTodoList";
+import { LOG_STATUS } from "../../constants/log";
 
 function TodoItem({ todo }: TodoItemProps) {
-    const { getTodoList } = useTodoList();
+    const { getTodoList, setLogListItem, getLogList } = useTodoList();
 
     const [isChecked, setIsChecked] = useState<boolean>(todo.isChecked);
     const [inputValue, setInputValue] = useState<string>(todo.description);
@@ -32,7 +33,9 @@ function TodoItem({ todo }: TodoItemProps) {
     const handleDelete = async () => {
         try {
             await TodoAPI.delete(todo.id);
-            getTodoList();
+            await getTodoList();
+            await setLogListItem({ status: LOG_STATUS.delete, description: inputValue });
+            await getLogList();
         } catch (error) {
             console.error("Error:", error);
         }

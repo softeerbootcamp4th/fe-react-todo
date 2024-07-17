@@ -56,16 +56,6 @@
       "isChecked": false
     },
     {
-      "id": "b93e",
-      "description": "x",
-      "isChecked": false
-    },
-    {
-      "id": "0acb",
-      "description": "gdfdsfsdfs",
-      "isChecked": false
-    },
-    {
       "id": "7983",
       "description": "ewrrerer",
       "isChecked": false
@@ -136,6 +126,16 @@
       "id": "209f",
       "status": "등록",
       "description": "dfdfdf"
+    },
+    {
+      "id": "2557",
+      "status": "삭제",
+      "description": "x"
+    },
+    {
+      "id": "2542",
+      "status": "삭제",
+      "description": "gdfdsfsdfs"
     }
   ]
 }
