@@ -16,3 +16,5 @@ interface EditLog extends BaseLog {
 }
 
 export type Log = AddLog | DeleteLog | EditLog;
+
+export type LogStatus = "등록" | "삭제" | "수정";

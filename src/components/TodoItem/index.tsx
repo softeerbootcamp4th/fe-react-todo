@@ -43,9 +43,15 @@ function TodoItem({ todo }: TodoItemProps) {
 
     const handleEdit = async () => {
         try {
+            await setLogListItem({
+                status: LOG_STATUS.edit,
+                prevDescription: todo.description,
+                description: inputValue,
+            });
+            await getLogList();
             await TodoAPI.patch({ ...todo, description: inputValue });
             setIsEditing(false);
-            getTodoList();
+            await getTodoList();
         } catch (error) {
             console.error("Error:", error);
         }
@@ -84,7 +90,7 @@ function TodoItem({ todo }: TodoItemProps) {
                     <>
                         <input
                             ref={inputRef}
-                            className="block w-60 text-gray-900 border-b focus:border-indigo-400 text-xl"
+                            className="block w-72 text-gray-900 border-b focus:border-indigo-400 text-xl"
                             placeholder="할 일을 입력하세요"
                             value={inputValue}
                             onChange={handleInputChange}
@@ -102,7 +108,7 @@ function TodoItem({ todo }: TodoItemProps) {
                     <>
                         <label
                             htmlFor={`${todo.id}-checkbox`}
-                            className={`truncate w-60 ${isChecked && "line-through text-gray-400"}`}
+                            className={`truncate w-72 ${isChecked && "line-through text-gray-400"}`}
                             onMouseDown={handleMouseDown}
                             onMouseUp={handleMouseUp}
                         >

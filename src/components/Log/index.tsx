@@ -1,23 +1,18 @@
 import { useEffect } from "react";
 import { useTodoList } from "../../hooks/useTodoList";
+import { LOG_STATUS, STATUS_TO_COLOR } from "../../constants/log";
 
 function Log() {
     const { logList, getLogList } = useTodoList();
-
-    const STATUS_TO_COLOR: any = {
-        등록: "blue",
-        수정: "purple",
-        삭제: "pink",
-    };
 
     useEffect(() => {
         getLogList();
     }, []);
 
     return (
-        <div className="w-[350px] h-[600px] py-12 px-10 rounded-3xl shadow-lg flex flex-col items-center gap-10">
+        <div className="w-[500px] h-[600px] py-12 px-10 rounded-3xl shadow-lg flex flex-col items-center gap-10">
             <header className="text-5xl font-bold font-Cafe24Meongi">Log</header>
-            <ul className="w-64 flex flex-col gap-4 overflow-auto">
+            <ul className="w-96 flex flex-col gap-4 overflow-auto">
                 {logList
                     .slice()
                     .reverse()
@@ -28,7 +23,10 @@ function Log() {
                             >
                                 {log.status}
                             </span>
-                            <p className="max-w-52 truncate">{log.description}</p>
+                            <p className="max-w-80 truncate">
+                                {log.status === LOG_STATUS.edit && <>{log.prevDescription} → </>}
+                                {log.description}
+                            </p>
                         </li>
                     ))}
             </ul>
