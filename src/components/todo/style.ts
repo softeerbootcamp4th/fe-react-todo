@@ -1,7 +1,6 @@
-import React from 'react';
 import { css } from '@emotion/react';
 
-const todoStyle = css`
+export const todoStyle = css`
   width: 30%;
   min-width: 600px;
   max-width: 1200px;
@@ -11,10 +10,10 @@ const todoStyle = css`
   border-radius: 10px;
   box-shadow: 0 0 20px 10px gainsboro;
   z-index: 999;
+  padding: 48px;
+
+  .title {
+    font-size: 1.4rem;
+    font-weight: 900;
+  }
 `;
-
-const Todo: React.FC = () => {
-  return <div css={todoStyle}></div>;
-};
-
-export default Todo;
