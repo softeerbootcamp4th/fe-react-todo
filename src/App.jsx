@@ -6,10 +6,9 @@ import DropLocation from "../components/dropLocation";
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [formString, setFormString] = useState("");
-  const [isDragged, setIsDragged] = useState(false);
   const [editTodoId, setEditTodoId] = useState("");
   const timerRef = useRef(null);
-  const draggedTodoId = useRef("");
+  const [draggedTodoId, setDraggedTodoId] = useState("");
 
   useEffect(() => {
     getData().then((data) => {
@@ -33,31 +32,33 @@ function App() {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center">
-      <div className="relative w-96 p-5 gap-3 flex flex-col items-center border border-gray-500">
-        <span>My Todo App</span>
+    <div className="h-screen flex justify-center bg-green-100">
+      <div className="mt-16 max-w-xl w-full h-fit p-7 flex flex-col items-center border border-slate-300 rounded-2xl bg-slate-50">
+        <span
+          className="font-bold text-3xl mb-5">My Todo App
+        </span>
 
-        <form>
+        <form
+          className="mb-4">
           <input
             value={formString}
             placeholder="할일을 입력하세요"
             onChange={onChangeForm}
             type="text"
-            className="border border-black" />
+            className="border border-slate-400 bg-slate-50 focus:bg-white px-3 py-1 rounded-xl mr-5" />
           <button
             onClick={onClickPush}
-            className="bg-green-700 text-white">
+            className="bg-green-700 text-white px-3 py-1 rounded-xl hover:bg-green-900 transition">
             등록
           </button>
         </form>
 
-        <div className="w-full flex flex-col gap-4">
+        <div className="w-full flex flex-col">
           <DropLocation
             draggedTodoId={draggedTodoId}
             frontId=""
             todoList={todoList}
-            setTodoList={setTodoList}
-            isDragged={isDragged} />
+            setTodoList={setTodoList} />
 
           {todoList.map((todo) => (
             <Fragment key={todo.id}>
@@ -65,18 +66,16 @@ function App() {
                 todoList={todoList}
                 setTodoList={setTodoList}
                 timerRef={timerRef}
-                isDragged={isDragged}
-                setIsDragged={setIsDragged}
                 editTodoId={editTodoId}
                 setEditTodoId={setEditTodoId}
-                draggedTodoId={draggedTodoId} />
+                draggedTodoId={draggedTodoId}
+                setDraggedTodoId={setDraggedTodoId} />
 
               <DropLocation
                 draggedTodoId={draggedTodoId}
                 frontId={todo.id}
                 todoList={todoList}
-                setTodoList={setTodoList}
-                isDragged={isDragged} />
+                setTodoList={setTodoList} />
             </Fragment>
           ))}
         </div>

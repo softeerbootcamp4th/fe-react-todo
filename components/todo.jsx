@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { popData, modifyData } from "/utils/db";
 
-export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTodoId, isDragged, setIsDragged, editTodoId, setEditTodoId }) {
+export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTodoId, setDraggedTodoId, editTodoId, setEditTodoId }) {
   const [editString, setEditString] = useState("");
   //const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -27,7 +27,7 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
     setEditString(string);
   }
 
-  function endPress() {
+  function endLongPress() {
     clearTimeout(timerRef.current);
   }
 
@@ -40,12 +40,7 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
   }
 
   function onDragStartTodo() {
-    setIsDragged(true);
-    draggedTodoId.current = todo.id;
-  }
-
-  function onDragEndTodo() {
-    setIsDragged(false);
+    setDraggedTodoId(todo.id);
   }
 
   function onDragTodo() {
@@ -57,41 +52,42 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
       draggable="true"
       onDragStart={onDragStartTodo}
       onDrag={onDragTodo}
-      onDragEnd={onDragEndTodo}
-      className={`p-5 flex justify-between rounded-2xl border border-gray-300 ${isDragged ? "" : ""}`}>
+      onDragEnd={() => setDraggedTodoId("")}
+      onDragLeave={endLongPress}
+      className={`transition flex items-center justify-between ${draggedTodoId === todo.id ? "" : ""}`}>
       <span
         onMouseDown={startPress}
-        onMouseUp={endPress}
-        onMouseLeave={endPress}
+        onMouseUp={endLongPress}
+        onMouseLeave={endLongPress}
         onClick={onClickCompleted}
-        className={`cursor-pointer ${todo.completed ? "line-through" : ""} ${editTodoId === todo.id ? "hidden" : ""}`} >
+        className={`cursor-pointer text-xl ${todo.completed ? "line-through" : ""} ${editTodoId === todo.id ? "hidden" : ""}`} >
         {todo.title}
       </span>
 
-      <div className={`${editTodoId !== todo.id ? "hidden" : ""}`}>
+      <div className={`flex items-center ${editTodoId !== todo.id ? "hidden" : ""}`}>
         <input
           type="text"
           placeholder="수정하기"
           value={editString}
           onChange={onChangeEdit}
-          className="border border-gray-500" />
+          className="px-2 py-1 text-xl rounded-xl mr-1 border border-gray-300" />
 
         <button
           onClick={onClickEditConfirm}
-        >
+          className="px-2 py-1 mr-1 rounded-xl bg-cyan-700 hover:bg-cyan-900 transition text-white">
           확인
         </button>
 
         <button
           onClick={() => setEditTodoId("")}
-          className="">
+          className="px-2 py-1 mr-1 rounded-xl bg-orange-600 hover:bg-red-600 transition text-white">
           취소
         </button>
       </div>
 
       <button
         onClick={onClickPop}
-        className="rounded-lg px-2 py-1 bg-indigo-500 text-white">
+        className="rounded-lg px-2 py-1 bg-sky-600 text-white hover:bg-sky-800 transition">
         삭제
       </button>
     </div>
