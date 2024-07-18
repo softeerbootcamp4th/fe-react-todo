@@ -1,10 +1,10 @@
 import { useState, ChangeEvent } from "react";
-import { handleSubmit } from "@/apis/fetch";
+import { postTodo } from "@/apis/todoList";
 import { useTodoContext } from "@/hooks/useTodoContext";
 
 function SearchInput() {
   const [newItem, setNewItem] = useState<string>("");
-  const { getTodoList } = useTodoContext();
+  const { updateTodoList } = useTodoContext();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -13,8 +13,8 @@ function SearchInput() {
 
   const handleNewItem = async () => {
     try {
-      handleSubmit(newItem);
-      await getTodoList();
+      await postTodo({ text: newItem, completed: false });
+      updateTodoList();
       setNewItem("");
     } catch (error) {
       console.error(error);
