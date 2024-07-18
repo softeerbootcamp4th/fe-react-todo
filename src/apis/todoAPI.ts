@@ -94,7 +94,6 @@ export const TodoAPI = {
             console.error("Error:", error);
             throw error;
         }
-
         return results;
     },
 };

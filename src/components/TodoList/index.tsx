@@ -35,7 +35,11 @@ function TodoList() {
 
         const remainingItems = todoList.filter(todo => todo.id !== draggingItem);
 
-        const dropIndex = remainingItems.findIndex(todo => todo.id === id);
+        const rect = e.currentTarget.getBoundingClientRect();
+        const offset = e.clientY - rect.top;
+
+        const offsetIdx = offset >= rect.height / 2 ? 1 : 0;
+        const dropIndex = remainingItems.findIndex(todo => todo.id === id) + offsetIdx;
 
         const updatedItems = [
             ...remainingItems.slice(0, dropIndex),
