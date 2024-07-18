@@ -1,10 +1,25 @@
 import { useEffect } from "react";
 import { useTodoList } from "../../hooks/useTodoList";
-import { LOG_STATUS, STATUS_TO_COLOR } from "../../constants/log";
+import { LOG_STATUS } from "../../constants/log";
 import { LogType } from "../../types/log";
 
 function Log() {
     const { logList, getLogList } = useTodoList();
+
+    const badgeColor = (log: LogType) => {
+        const textColors = {
+            등록: "text-blue-800",
+            수정: "text-purple-800",
+            삭제: "text-pink-800",
+        };
+        const backgroundColors = {
+            등록: "bg-blue-100",
+            수정: "bg-purple-100",
+            삭제: "bg-pink-100",
+        };
+
+        return `${textColors[log.status]} ${backgroundColors[log.status]}`;
+    };
 
     useEffect(() => {
         getLogList();
@@ -20,7 +35,7 @@ function Log() {
                     .map((log: LogType) => (
                         <li key={log.id} className="flex gap-2 items-center">
                             <span
-                                className={`w-10 bg-${STATUS_TO_COLOR[log.status]}-100 text-${STATUS_TO_COLOR[log.status]}-800 text-xs font-medium px-2.5 py-1 rounded-full flex items-center justify-center`}
+                                className={`w-10 ${badgeColor(log)} text-xs font-medium px-2.5 py-1 rounded-full flex items-center justify-center`}
                             >
                                 {log.status}
                             </span>
