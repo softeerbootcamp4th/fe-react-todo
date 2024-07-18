@@ -6,15 +6,14 @@ import ToDoList from './ToDoList.tsx';
 import "./index.css"
 
 const App: React.FC = () => {
-    const [toDo, setToDo] = useState<string>("a");
+    const [toDo, setToDo] = useState<string>("");
     const [toDos, setToDos] = useState<string[]>([]);
 
     const addToDo = (todo: string): undefined => {
-
         setToDos(currentArray => [todo, ...currentArray]);
     };
 
-    const changCurrentToDo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const changeCurrentToDo = (event: React.ChangeEvent<HTMLInputElement>) => {
         setToDo(event.target.value)
     }
     return (
@@ -22,7 +21,7 @@ const App: React.FC = () => {
             <div className="min-h-screen flex">
                 <div className="flex flex-col items-center w-full">
                     <Header />
-                    <TextField toDo={toDo} setToDo={changCurrentToDo} addToDo={addToDo} />
+                    <TextField toDo={toDo} setToDo={changeCurrentToDo} addToDo={addToDo} />
                     <ToDoList toDos={toDos} />
                 </div>
                 <div className="absolute right-10 top-10 z-10">
