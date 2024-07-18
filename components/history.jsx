@@ -1,4 +1,6 @@
-export default function History({ historyList }) {
+import { clearAllHistory } from "../utils/db";
+
+export default function History({ historyList, setHistoryList }) {
 
   function calculateDate(oldDate) {
     const oldTime = new Date(oldDate).getTime() / 1000;
@@ -22,13 +24,27 @@ export default function History({ historyList }) {
     }
   }
 
+  function clearHistory() {
+    clearAllHistory();
+    setHistoryList([]);
+  }
+
   return (
     <div
-      className="flex flex-col items-center p-3 border border-slate-300 bg-slate-50 h-fit w-60 rounded-xl">
-      <span
-        className="text-xl mb-3">
-        History
-      </span>
+      className="flex flex-col p-3 border border-slate-300 bg-slate-50 h-fit w-60 rounded-xl">
+      <div className="flex justify-between mb-3">
+        <span
+          className="text-xl">
+          History
+        </span>
+
+        <button
+          onClick={clearHistory}
+          title="히스토리 삭제"
+          className="bg-red-700 p-1 rounded-lg hover:bg-red-900 transition ease-out">
+          <img className="h-5" src="broom.png" />
+        </button>
+      </div>
 
       <div
         className="w-full flex flex-col divide-y list-none">

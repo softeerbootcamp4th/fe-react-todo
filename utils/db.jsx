@@ -30,7 +30,7 @@ export function modifyData(id, field) {
 
 export async function replaceAllData(data) {
   const oldData = await getData();
-  oldData.forEach(async (todo) => popData(todo.id));
+  oldData.forEach((todo) => popData(todo.id));
   data.forEach(async (todo) => await pushData(todo));
 }
 
@@ -45,5 +45,14 @@ export function pushHistory(newHistory) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newHistory)
+  })
+}
+
+export async function clearAllHistory() {
+  const oldData = await getHistory();
+  oldData.forEach((history) => {
+    fetch(`http://localhost:3000/history/${history.id}`, {
+      method: "DELETE"
+    })
   })
 }
