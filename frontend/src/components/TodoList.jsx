@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { TodoStore } from "../Provider/todoContext";
-import { postToDoList } from "../api/todo";
+import { postLogList, postToDoList } from "../api/todo";
 import { CLICK_THRESHOLD } from "../constants/magicNumber";
 import useInput from "../hooks/useInput";
+import { LogStore } from "../Provider/logContext";
+import useLogList from "../hooks/useLogList";
 
 const TodoList = () => {
   const { todoList, setTodoList } = useContext(TodoStore);
@@ -26,6 +28,7 @@ const TodoList = () => {
 
 const TodoListItem = ({ title, index, isLast, isDone }) => {
   const { todoList, setTodoList } = useContext(TodoStore);
+  const { logList, setLogList } = useContext(LogStore);
   const [isLongPressed, setIsLongPressed] = useState(false);
   const { content, onChange, reset, setContent } = useInput();
   const timerRef = useRef(null);
@@ -39,9 +42,24 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
       ...todoList[target],
       title: newTitle,
     };
+
+    //수정
+    const newLogList = [
+      ...logList,
+      {
+        id: Date.now(),
+        type: "수정",
+        before: todoList[target],
+        after: newTodoList[target],
+      },
+    ];
+
     setTodoList(newTodoList);
+    setLogList(newLogList);
     reset();
-    await postToDoList(newTodoList);
+
+    await postToDoList(todoList);
+    await postLogList(logList);
     setIsLongPressed(false);
   };
 
@@ -50,7 +68,17 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
     const newTodoList = await postToDoList(
       todoList.filter((todo, index) => index !== target)
     );
+
+    //삭제
+    const newLogList = [
+      ...logList,
+      { id: Date.now(), type: "삭제", before: todoList[target], after: null },
+    ];
+
     setTodoList(newTodoList);
+    setLogList(newLogList);
+
+    postLogList(newLogList);
   };
 
   const onMouseDownHandler = (target) => {
@@ -74,8 +102,33 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
         isDone: !todoList[target].isDone,
       };
 
+      let newLogList;
+      if (newTodoList[target].isDone) {
+        newLogList = [
+          ...logList,
+          {
+            id: Date.now(),
+            type: "완료",
+            before: todoList[target],
+            after: newTodoList[target],
+          },
+        ];
+      } else {
+        newLogList = [
+          ...logList,
+          {
+            id: Date.now(),
+            type: "완료취소",
+            before: todoList[target],
+            after: newTodoList[target],
+          },
+        ];
+      }
+
       setTodoList(newTodoList);
-      await postToDoList(newTodoList);
+      setLogList(newLogList);
+      postToDoList(newTodoList);
+      postLogList(newLogList);
     }
   };
 

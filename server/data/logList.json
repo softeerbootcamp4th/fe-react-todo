@@ -1,59 +1,108 @@
 [
   {
-    "type": "수정",
+    "id": 1721279380229,
+    "type": "완료",
     "before": {
-      "id": 1,
-      "isDone": true,
-      "title": "sfdsfsd"
+      "title": "asdf",
+      "isDone": false,
+      "id": 1721279291703
     },
     "after": {
-      "id": 1,
+      "title": "asdf",
       "isDone": true,
-      "title": "asdfasdfasdfasdf"
+      "id": 1721279291703
     }
   },
   {
+    "id": 1721279381245,
+    "type": "완료취소",
+    "before": {
+      "title": "asdf",
+      "isDone": true,
+      "id": 1721279291703
+    },
+    "after": {
+      "title": "asdf",
+      "isDone": false,
+      "id": 1721279291703
+    }
+  },
+  {
+    "id": 1721279382449,
+    "type": "완료",
+    "before": {
+      "title": "asdf",
+      "isDone": false,
+      "id": 1721279291995
+    },
+    "after": {
+      "title": "asdf",
+      "isDone": true,
+      "id": 1721279291995
+    }
+  },
+  {
+    "id": 1721279382998,
+    "type": "완료취소",
+    "before": {
+      "title": "asdf",
+      "isDone": true,
+      "id": 1721279291995
+    },
+    "after": {
+      "title": "asdf",
+      "isDone": false,
+      "id": 1721279291995
+    }
+  },
+  {
+    "id": 1721279387701,
     "type": "삭제",
     "before": {
-      "id": 2,
-      "isDone": true,
-      "title": "sfdsfasdsd"
+      "title": "asdf",
+      "isDone": false,
+      "id": 1721279291703
     },
     "after": null
   },
   {
+    "id": 1721279388006,
+    "type": "삭제",
+    "before": {
+      "title": "asdf",
+      "isDone": false,
+      "id": 1721279291995
+    },
+    "after": null
+  },
+  {
+    "id": 1721279388279,
+    "type": "삭제",
+    "before": {
+      "title": "asdf",
+      "isDone": false,
+      "id": 1721279292233
+    },
+    "after": null
+  },
+  {
+    "id": 1721279388610,
+    "type": "삭제",
+    "before": {
+      "title": "asfd",
+      "isDone": false,
+      "id": 1721279292587
+    },
+    "after": null
+  },
+  {
+    "id": 1721279393552,
     "type": "추가",
-    "before": null,
+    "before": {},
     "after": {
-      "id": 3,
-      "isDone": true,
-      "title": "asddfdfdfdffasdfasdfasdf"
-    }
-  },
-  {
-    "type": "완료",
-    "before": {
-      "id": 0,
+      "title": "드래그 앤 드롭",
       "isDone": false,
-      "title": "sfdsfsd"
-    },
-    "after": {
-      "id": 0,
-      "isDone": true,
-      "title": "sfdsfsd"
-    }
-  },
-  {
-    "type": "완료취소",
-    "before": {
-      "id": 10,
-      "isDone": true,
-      "title": "sfdsfsd"
-    },
-    "after": {
-      "id": 10,
-      "isDone": false,
-      "title": "sfdsfsd"
+      "id": 1721279393539
     }
   }
 ]

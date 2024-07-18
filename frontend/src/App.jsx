@@ -6,19 +6,24 @@ import ActivityLog from "./components/ActivityLog";
 import Input from "./components/Input";
 import TodoList from "./components/TodoList";
 import { TodoStore } from "./Provider/todoContext";
-import { getTodoList } from "./api/todo";
+import { getLogList, getTodoList } from "./api/todo";
 import { LogStore, example } from "./Provider/logContext";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
-  const [logList, setLogList] = useState(example);
+  const [logList, setLogList] = useState([]);
 
   useEffect(() => {
     const fetchTodos = async () => {
       const todos = await getTodoList();
       setTodoList(todos);
     };
+    const fetchLogs = async () => {
+      const logs = await getLogList();
+      setLogList(logs);
+    };
     fetchTodos();
+    fetchLogs();
   }, []);
 
   return (

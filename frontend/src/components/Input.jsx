@@ -2,12 +2,14 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { MESSAGE } from "../constants/message";
 import useInput from "../hooks/useInput";
-import { postToDoList } from "../api/todo";
+import { postLogList, postToDoList } from "../api/todo";
 import { TodoStore } from "../Provider/todoContext";
+import { LogStore } from "../Provider/logContext";
 
 const Input = () => {
   const { content, onChange, reset } = useInput();
   const { todoList, setTodoList } = useContext(TodoStore);
+  const { logList, setLogList } = useContext(LogStore);
 
   const onSubmitHandler = async () => {
     if (content) {
@@ -16,7 +18,19 @@ const Input = () => {
         { title: content, isDone: false, id: Date.now() },
       ]);
 
+      const newLogList = [
+        ...logList,
+        {
+          id: Date.now(),
+          type: "추가",
+          before: {},
+          after: newTodoList[newTodoList.length - 1],
+        },
+      ];
+
       setTodoList(newTodoList);
+      setLogList(newLogList);
+      postLogList(logList);
       reset();
     }
   };
