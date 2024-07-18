@@ -1,7 +1,7 @@
 import { Todo, PostTodoRequestBody, PatchTodoSpliceRequestBody, PatchTodoRequestBody } from "../types/todoType";
 import { http } from "./http";
 
-export const getToList = () => {
+export const getTodoList = () => {
   return http.get<Todo[]>(`/todos`);
 };
 
