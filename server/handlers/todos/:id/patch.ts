@@ -1,6 +1,6 @@
 import { HttpResponse, PathParams, StrictRequest } from "msw";
-import { db } from "../../db";
-import { Todo } from "../../../src/models/Todo";
+import { db } from "../../../db";
+import { Todo } from "../../../../src/models/Todo";
 
 export const patchTodo = async ({
   request,

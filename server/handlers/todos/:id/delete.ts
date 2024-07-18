@@ -1,5 +1,5 @@
 import { HttpResponse, PathParams } from "msw";
-import { db } from "../../db";
+import { db } from "../../../db";
 
 export const deleteTodo = async ({ params }: { params: PathParams<"id"> }) => {
   const { id } = params;

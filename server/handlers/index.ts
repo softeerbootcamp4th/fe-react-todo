@@ -1,8 +1,8 @@
 import { http } from "msw";
 import { postTodo } from "./todos/post";
 import { getTodos } from "./todos/get";
-import { deleteTodo } from "./todos/delete";
-import { patchTodo } from "./todos/patch";
+import { deleteTodo } from "./todos/:id/delete";
+import { patchTodo } from "./todos/:id/patch";
 import { readLogs } from "./logs/get";
 import { getRecentTodos } from "./todos/recent/get";
 
