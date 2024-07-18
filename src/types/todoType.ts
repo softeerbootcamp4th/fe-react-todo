@@ -18,3 +18,16 @@ export interface PatchTodoRequestBody {
   text?: string;
   completed?: boolean;
 }
+
+export interface TodoMutate {
+  updateTodoItem: (id: number, data: PatchTodoRequestBody) => void;
+  spliceTodoItem: (data: PatchTodoSpliceRequestBody) => void;
+  deleteTodoItem: (id: number) => void;
+}
+
+export type Logs = "등록" | "수정" | "삭제";
+
+export interface LogMsg {
+  log: Logs;
+  todoItem: string;
+}
