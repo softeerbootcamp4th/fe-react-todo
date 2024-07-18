@@ -13,7 +13,7 @@ const TodoList = () => {
       {todoList &&
         todoList.map((todo, index) => (
           <TodoListItem
-            key={index}
+            key={todo.id}
             index={index}
             title={todo.title}
             isLast={index === todoList.length - 1}
@@ -31,11 +31,9 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
   const timerRef = useRef(null);
   const startTimeRef = useRef(0);
 
-  useEffect(() => {
-    console.log(todoList);
-  }, [todoList]);
+  useEffect(() => {}, [todoList]);
 
-  const onModifyHandler = (newTitle, target) => {
+  const onModifyHandler = async (newTitle, target) => {
     const newTodoList = [...todoList];
     newTodoList[target] = {
       ...todoList[target],
@@ -43,10 +41,12 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
     };
     setTodoList(newTodoList);
     reset();
+    await postToDoList(newTodoList);
     setIsLongPressed(false);
   };
 
-  const onDeleteHandler = async (target) => {
+  const onDeleteHandler = async (event, target) => {
+    event.stopPropagation(); // 이벤트 버블링 방지
     const newTodoList = await postToDoList(
       todoList.filter((todo, index) => index !== target)
     );
@@ -54,17 +54,18 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
   };
 
   const onMouseDownHandler = (target) => {
-    startTimeRef.current = Date.now();
+    if (!isLongPressed) {
+      startTimeRef.current = Date.now();
 
-    timerRef.current = setTimeout(() => {
-      setIsLongPressed(true);
-      console.log(target);
-      setContent(todoList[target].title);
-    }, CLICK_THRESHOLD);
+      timerRef.current = setTimeout(() => {
+        setIsLongPressed(true);
+        setContent(todoList[target].title);
+      }, CLICK_THRESHOLD);
+    }
   };
 
-  const onMouseUpHandler = (target) => {
-    if (Date.now() - startTimeRef.current < CLICK_THRESHOLD) {
+  const onMouseUpHandler = async (target) => {
+    if (Date.now() - startTimeRef.current < CLICK_THRESHOLD && !isLongPressed) {
       clearTimeout(timerRef.current);
 
       const newTodoList = [...todoList];
@@ -74,6 +75,7 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
       };
 
       setTodoList(newTodoList);
+      await postToDoList(newTodoList);
     }
   };
 
@@ -86,14 +88,22 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
       {isLongPressed ? (
         <>
           <StyledInput onChange={onChange} value={content}></StyledInput>
-          <ItemDeleteButton onClick={() => onModifyHandler(content, index)}>
+          <ItemDeleteButton
+            onClick={() => onModifyHandler(content, index)}
+            onMouseDown={(e) => e.stopPropagation()}
+            onMouseUp={(e) => e.stopPropagation()}
+          >
             수정
           </ItemDeleteButton>
         </>
       ) : (
         <>
           <ItemContent $isDone={isDone}>{title}</ItemContent>
-          <ItemDeleteButton onClick={() => onDeleteHandler(index)}>
+          <ItemDeleteButton
+            onClick={(event) => onDeleteHandler(event, index)}
+            onMouseDown={(e) => e.stopPropagation()}
+            onMouseUp={(e) => e.stopPropagation()}
+          >
             삭제
           </ItemDeleteButton>
         </>

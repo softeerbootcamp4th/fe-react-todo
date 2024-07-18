@@ -13,8 +13,9 @@ const Input = () => {
     if (content) {
       const newTodoList = await postToDoList([
         ...todoList,
-        { title: content, isDone: false },
+        { title: content, isDone: false, id: Date.now() },
       ]);
+
       setTodoList(newTodoList);
       reset();
     }
