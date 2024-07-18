@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import { AutoComplete } from "./AutoComplete";
 
 export const TodoInput = () => {
-  const { addTodo } = useTodosContext();
+  const { addTodo, todos } = useTodosContext();
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -36,6 +36,10 @@ export const TodoInput = () => {
   );
 
   const rect = inputRef.current?.getBoundingClientRect();
+  const recentTitles = todos
+    .slice(-5)
+    .map((todo) => todo.title)
+    .reverse();
   return (
     <div
       css={css`
@@ -50,6 +54,7 @@ export const TodoInput = () => {
         placeholder="할일을 입력하세요"
         css={css`
           flex: 1;
+          padding: 0.5rem;
         `}
         ref={inputRef}
         name="todo"
@@ -61,7 +66,7 @@ export const TodoInput = () => {
       {isFocused && (
         <AutoComplete
           rect={rect}
-          items={["React", "Vue", "Angular"]}
+          items={recentTitles}
           onSelect={handleSelect}
         />
       )}

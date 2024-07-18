@@ -9,6 +9,10 @@ interface AutoCompleteProps {
 const autoCompleteStyle = css`
   padding: 0.5rem;
   cursor: pointer;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   &:hover {
     background-color: #6d6d6d;
   }
