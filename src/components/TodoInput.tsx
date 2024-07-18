@@ -32,6 +32,8 @@ export const TodoInput = () => {
           flex: 1;
         `}
         ref={inputRef}
+        name="todo"
+        autoComplete="on"
       />
       <button onClick={handleAddTodo}>등록</button>
     </div>

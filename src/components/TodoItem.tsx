@@ -34,10 +34,20 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
         display: flex;
         gap: 1rem;
         justify-content: space-between;
+        align-items: center;
         text-decoration: ${isCompleted ? "line-through" : "none"};
       `}
-      ref={longPressRef}
+      draggable
     >
+      <span
+        css={css`
+          cursor: pointer;
+          user-select: none;
+          font-size: 1.5rem;
+        `}
+      >
+        =
+      </span>
       <input
         onClick={handleToggleStatus}
         type="checkbox"
@@ -49,7 +59,9 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
           width: 100%;
           overflow: hidden;
           text-overflow: ellipsis;
+          cursor: pointer;
         `}
+        ref={longPressRef}
       >
         {todo.title}
       </h3>
