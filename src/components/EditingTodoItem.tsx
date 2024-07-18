@@ -19,7 +19,10 @@ export const EditingTodoItem = ({ todo }: EditingTodoItemProps) => {
   };
 
   const handleEditComplete = () => {
-    editTodo(todo.id, title);
+    editTodo({
+      ...todo,
+      title: title,
+    });
   };
   return (
     <div

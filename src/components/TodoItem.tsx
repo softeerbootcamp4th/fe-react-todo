@@ -10,13 +10,20 @@ interface TodoItemProps {
 export const TodoItem = ({ todo }: TodoItemProps) => {
   const isNotCompleted = todo.status === "active";
 
-  const { updateTodoStatus, setEditingTodoId } = useTodosContext();
+  const { updateTodoStatus, setEditingTodoId, removeTodo } = useTodosContext();
   const longPressRef = useLongPress(() => {
     if (!isNotCompleted) return;
     setEditingTodoId(todo.id);
   }, 2000);
   const handleComplete = () => {
-    updateTodoStatus(todo.id, "completed");
+    updateTodoStatus({
+      ...todo,
+      status: "completed",
+    });
+  };
+
+  const handleRemove = () => {
+    removeTodo(todo.id);
   };
   return (
     <div
@@ -33,7 +40,7 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
       <h3>{todo.title}</h3>
       <span>
         {isNotCompleted && <button onClick={handleComplete}>완료</button>}
-        <button>삭제</button>
+        <button onClick={handleRemove}>삭제</button>
       </span>
     </div>
   );
