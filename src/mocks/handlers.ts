@@ -91,4 +91,26 @@ export const handlers = [
 
     return new HttpResponse(null, { status: 200 });
   }),
+
+  http.get(`${BASE_URL}/logs`, async () => {
+    const items = localStorage.getItem("logs");
+
+    const logList = items ? JSON.parse(items) : [];
+
+    return HttpResponse.json(logList);
+  }),
+
+  http.post(`${BASE_URL}/logs`, async ({ request }) => {
+    const items = localStorage.getItem("logs");
+
+    const logList = items ? JSON.parse(items) : [];
+
+    const data = (await request.json()) as PostTodo;
+
+    logList.push(data);
+
+    localStorage.setItem("todos", JSON.stringify(logList));
+
+    return new HttpResponse(null, { status: 201 });
+  }),
 ];
