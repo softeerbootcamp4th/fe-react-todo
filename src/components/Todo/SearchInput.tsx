@@ -1,30 +1,41 @@
-import { useState, ChangeEvent } from 'react';
-import { handleSubmit } from '../../apis/fetch';
+import { useState, ChangeEvent } from "react";
+import { handleSubmit } from "@/apis/fetch";
+import { useTodoContext } from "@/hooks/useTodoContext";
 
 function SearchInput() {
+  const [newItem, setNewItem] = useState<string>("");
+  const { getTodoList } = useTodoContext();
 
-  const [newItem, SetNewItem] = useState<string>('');
-
-  const handleInputChange =(e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    SetNewItem(e.target.value);
-  }
+    setNewItem(e.target.value);
+  };
 
-  const handleNewItem = () => {
-    handleSubmit(newItem);
-    SetNewItem('');  
-  }
+  const handleNewItem = async () => {
+    try {
+      handleSubmit(newItem);
+      await getTodoList();
+      setNewItem("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <div className="justify-center items-center border-l-2 ml-2 w-[300px] flex-row p-2">
-      <input type="text" 
+    <div className="justify-center items-center ml-2 w-[250px] flex-row p-2">
+      <input
+        className="ml-[10px] border-2 border-solid w-[160px]"
+        type="text"
         name="search input"
         value={newItem}
         onChange={handleInputChange}
         placeholder="할일을 입력하세요"
       />
-      <button className=" bg-green-600 text-white ml-[10px]" onClick={handleNewItem}>등록</button>
+      <button className=" bg-green-600 text-white ml-[10px]" onClick={handleNewItem}>
+        등록
+      </button>
     </div>
-  )
+  );
 }
 
-export default SearchInput
+export default SearchInput;
