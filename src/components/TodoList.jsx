@@ -1,19 +1,25 @@
 import React from 'react';
-import TodoButton from './TodoButton';
-import styles from '../styles/todoList.module.css';
+import TodoListElement from './TodoListElement';
 
-function TodoList({ todoArr, removeTodo }) {
+function TodoList({ todoArr, removeTodo, detailLiClick, updateTodo, handleDragStart, handleDragEnd }) {
+
+
     return (
-        <div>
-            <ul>
-                {todoArr.map((todo) => (
-                    <li key={todo.id} className={styles.todoItem}>
-                        {todo.text}
-                        <TodoButton text="삭제" onClick={() => removeTodo(todo.id)} />
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <ul>
+            {todoArr.map((todo, index) => (
+                <li key={todo.id}>
+                    <TodoListElement
+                        todo={todo}
+                        index={index}
+                        removeTodo={removeTodo}
+                        detailLiClick={detailLiClick}
+                        updateTodo={updateTodo}
+                        onDragStart={handleDragStart}
+                        onDragEnd={handleDragEnd}
+                    />
+                </li>
+            ))}
+        </ul>
     );
 }
 
