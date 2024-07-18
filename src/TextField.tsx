@@ -7,10 +7,9 @@ interface TextFieldProps {
     addToDo: (todo: string) => undefined;
 }
 
-
 const TextField = ({ toDo, setToDo, addToDo }: TextFieldProps) => {
     return (
-        <div className="flex w-1/3 gap-4 mt-40">
+        <div className="flex w-1/3 gap-4 mt-20">
             <input
                 type="text"
                 value={toDo}
