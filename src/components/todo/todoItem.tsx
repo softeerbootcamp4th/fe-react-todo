@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { TodoItem as TodoItemType } from 'src/store/types/todoTypes';
 import useLongPress from 'src/hooks/useLongPress';
 import useTodo from 'src/viewModel/useTodo';
+import { Button } from 'src/components/ui/button';
 
 interface TodoItemProps {
   todoItem: TodoItemType;
@@ -23,17 +24,20 @@ function TodoItem({ todoItem, todoItemIndex }: TodoItemProps) {
   const handleUpdate = () => {
     // TODO: index로 처리 시 error. 로직 수정 필요
     updateTodo({ index: todoItemIndex, title: text });
-    setIsEditable(true);
+    setIsEditable(false);
   };
 
   return (
-    <div className="bg-green-200 flex" ref={longPressRef}>
-      <input
-        disabled={!isEditable}
-        value={text}
-        onChange={({ target: { value } }) => setText(value)}
-      />
-      {registerDate.toISOString()}
+    <div className="flex justify-between items-center w-full gap-2" ref={longPressRef}>
+      <div className="bg-white px-3 py-1 h-10 rounded-xl w-full flex justify-between">
+        <input
+          disabled={!isEditable}
+          value={text}
+          onChange={({ target: { value } }) => setText(value)}
+        />
+        {registerDate.toISOString()}
+
+      </div>
       {isEditable ? (
         <ActionButton label="수정" onClick={handleUpdate} />
       ) : (
@@ -52,8 +56,8 @@ interface ActionButtonProps {
 
 function ActionButton({ label, onClick }: ActionButtonProps) {
   return (
-    <button type="button" className="ml-2 bg-black text-white p-1.5" onClick={onClick}>
+    <Button onClick={onClick}>
       {label}
-    </button>
+    </Button>
   );
 }

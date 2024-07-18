@@ -34,7 +34,7 @@ const todoReducer = (state: TodoState, { type, payload }: TodoAction): TodoState
         ...state,
         todoHistory: [
           {
-            status: '등록',
+            status: payload.status,
             registerDate: new Date(),
             title: payload.title,
           },
