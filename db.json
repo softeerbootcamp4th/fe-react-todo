@@ -1,9 +1,98 @@
 {
   "todo": [
     {
-      "id": "fb7d",
-      "description": "가아란",
-      "isChecked": true
+      "id": "bdf0",
+      "description": "물마시기",
+      "isChecked": false
+    },
+    {
+      "id": "79ea",
+      "description": "노트북 충전하기",
+      "isChecked": false
+    },
+    {
+      "id": "5f5e",
+      "description": "집에 가서 양말 벗고 양치하고 머리 감고 누워서 휴대폰 하고 자기",
+      "isChecked": false
+    },
+    {
+      "id": "e985",
+      "description": "청소하기",
+      "isChecked": false
+    }
+  ],
+  "log": [
+    {
+      "id": "6183",
+      "status": "등록",
+      "description": "밥먹기"
+    },
+    {
+      "id": "6508",
+      "status": "등록",
+      "description": "옷입기"
+    },
+    {
+      "id": "4740",
+      "status": "등록",
+      "description": "세수하기"
+    },
+    {
+      "id": "fc67",
+      "status": "등록",
+      "description": "가방싸기"
+    },
+    {
+      "id": "d63a",
+      "status": "등록",
+      "description": "물마시긱"
+    },
+    {
+      "id": "8585",
+      "status": "수정",
+      "prevDescription": "물마시긱",
+      "description": "물마시기"
+    },
+    {
+      "id": "dc7f",
+      "status": "삭제",
+      "description": "세수하기"
+    },
+    {
+      "id": "d207",
+      "status": "등록",
+      "description": "노트북 충전하기"
+    },
+    {
+      "id": "c700",
+      "status": "등록",
+      "description": "집에 가서 양말 벗고 양치하고 머리 감고 누워서 자기"
+    },
+    {
+      "id": "61f6",
+      "status": "삭제",
+      "description": "밥먹기"
+    },
+    {
+      "id": "779a",
+      "status": "삭제",
+      "description": "옷입기"
+    },
+    {
+      "id": "c946",
+      "status": "삭제",
+      "description": "가방싸기"
+    },
+    {
+      "id": "bba8",
+      "status": "등록",
+      "description": "청소하기"
+    },
+    {
+      "id": "bf84",
+      "status": "수정",
+      "prevDescription": "집에 가서 양말 벗고 양치하고 머리 감고 누워서 자기",
+      "description": "집에 가서 양말 벗고 양치하고 머리 감고 누워서 휴대폰 하고 자기"
     }
   ]
 }

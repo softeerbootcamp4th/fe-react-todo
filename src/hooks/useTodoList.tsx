@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { TodoContext } from "../contexts/todoContext";
+import { TodoContext, TodoContextType } from "../contexts/todoContext";
 
-export const useTodoList = () => {
+export const useTodoList = (): TodoContextType => {
     const context = useContext(TodoContext);
     if (context === undefined) {
         throw new Error("todoContext must be used within a TodoProvider");

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import TodoItem from "../TodoItem";
 import { useTodoList } from "../../hooks/useTodoList";
+import { TodoItemType } from "../../types/todo";
 
 function TodoList() {
     const { todoList, getTodoList, isEditing } = useTodoList();
@@ -18,8 +19,8 @@ function TodoList() {
     }, [todoList]);
 
     return (
-        <ul ref={scrollRef} className="grow overflow-auto">
-            {todoList.map((todo: any) => (
+        <ul ref={scrollRef} className="w-full grow overflow-auto">
+            {todoList.map((todo: TodoItemType) => (
                 <TodoItem key={todo.id} todo={todo} />
             ))}
         </ul>
