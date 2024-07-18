@@ -4,9 +4,23 @@ import { TodoHistory } from 'src/store/types/todoTypes';
 const mockHistories: TodoHistory[] = [
   {
     id: 1,
-    title: 'string',
-    registerDate: new Date('2022-02-02'),
+    updatedDate: new Date('2022-02-02'),
+    todo: {
+      id: 1,
+      title: 'string',
+      registerDate: new Date('2022-02-02'),
+    },
     status: '등록',
+  },
+  {
+    id: 2,
+    updatedDate: new Date('2022-02-02'),
+    todo: {
+      id: 1,
+      title: 'string',
+      registerDate: new Date('2022-02-02'),
+    },
+    status: '수정',
   },
 ];
 

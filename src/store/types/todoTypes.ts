@@ -8,7 +8,10 @@ export interface TodoItem {
   registerDate: Date;
 }
 
-export interface TodoHistory extends TodoItem {
+export interface TodoHistory {
+  id: number;
+  updatedDate: Date;
+  todo: TodoItem;
   status: TodoStatus;
 }
 
