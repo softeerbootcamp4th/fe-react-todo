@@ -3,6 +3,7 @@ import { postTodo } from "./todos/post";
 import { getTodos } from "./todos/get";
 import { deleteTodo } from "./todos/delete";
 import { patchTodo } from "./todos/patch";
+import { readLogs } from "./logs/get";
 
 const API_BASE_URL = "/api" as const;
 export const handlers = [
@@ -10,4 +11,5 @@ export const handlers = [
   http.get(`${API_BASE_URL}/todos`, getTodos),
   http.delete(`${API_BASE_URL}/todos/:id`, deleteTodo),
   http.patch(`${API_BASE_URL}/todos/:id`, patchTodo),
+  http.get(`${API_BASE_URL}/logs`, readLogs),
 ];
