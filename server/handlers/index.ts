@@ -5,11 +5,13 @@ import { deleteTodo } from "./todos/:id/delete";
 import { patchTodo } from "./todos/:id/patch";
 import { readLogs } from "./logs/get";
 import { getRecentTodos } from "./todos/recent/get";
+import { changeTodoPosition } from "./todos/patch";
 
 const API_BASE_URL = "/api" as const;
 export const handlers = [
   http.post(`${API_BASE_URL}/todos`, postTodo),
   http.get(`${API_BASE_URL}/todos`, getTodos),
+  http.patch(`${API_BASE_URL}/todos`, changeTodoPosition),
   http.delete(`${API_BASE_URL}/todos/:id`, deleteTodo),
   http.patch(`${API_BASE_URL}/todos/:id`, patchTodo),
   http.get(`${API_BASE_URL}/todos/recent`, getRecentTodos),

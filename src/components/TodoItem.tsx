@@ -5,9 +5,19 @@ import { useLongPress } from "../hooks/useLongPress";
 
 interface TodoItemProps {
   todo: Todo;
+  index: number;
+  onDragStart: (index: number) => void;
+  onDragOver: (index: number) => void;
+  onDragEnd: () => void;
 }
 
-export const TodoItem = ({ todo }: TodoItemProps) => {
+export const TodoItem = ({
+  todo,
+  index,
+  onDragStart,
+  onDragOver,
+  onDragEnd,
+}: TodoItemProps) => {
   const isCompleted = todo.status === "completed";
 
   const { updateTodoStatus, setEditingTodoId, removeTodo } = useTodosContext();
@@ -38,6 +48,9 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
         text-decoration: ${isCompleted ? "line-through" : "none"};
       `}
       draggable
+      onDragStart={() => onDragStart(index)}
+      onDragOver={() => onDragOver(index)}
+      onDragEnd={onDragEnd}
     >
       <span
         css={css`
