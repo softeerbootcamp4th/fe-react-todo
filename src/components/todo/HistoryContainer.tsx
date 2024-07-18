@@ -1,22 +1,15 @@
-import { TodoItem } from 'src/store/types/todoTypes';
+import { Suspense } from 'react';
+import TodoHistoryList from 'src/components/todo/TodoHistoryList';
 
-interface HistoryContainerProps {
-    todoHistory: TodoItem[]
-}
-function HistoryContainer({ todoHistory } : HistoryContainerProps) {
+function HistoryContainer() {
   return (
 
     <div className="w-full flex flex-col">
       <h2 className="container-title">◕ ‿‿ ◕ History ◕ ‿‿ ◕</h2>
       <div className="mt-3">
-        {todoHistory.map(({ title, registerDate, status }, todoIndex) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <div key={`history-${registerDate}-${todoIndex}`}>
-            {title}
-            {status}
-          </div>
-        ))}
-
+        <Suspense fallback="Loading todo history list...">
+          <TodoHistoryList />
+        </Suspense>
       </div>
     </div>
 

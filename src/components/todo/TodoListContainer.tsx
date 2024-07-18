@@ -1,19 +1,15 @@
-import React, { Suspense, useState } from 'react';
-import { Button } from 'src/components/ui/button';
-import Dropdown from 'src/components/common/Dropdown';
-import { Input } from 'src/components/ui/input';
-import { TodoItem as TodoItemType } from 'src/store/types/todoTypes';
-import TodoList from 'src/components/todo/TodoList';
+import { Suspense, useState } from 'react';
+
 import useCreateTodo from 'src/hooks/todo/useCreateTodo';
 
-interface TodoContainerProps {
-  addTodo: (value : string) => void;
-  todoList: TodoItemType[];
-  recentTodoList: TodoItemType[];
+import { Button } from 'src/components/ui/button';
+import { Input } from 'src/components/ui/input';
 
-}
+import Dropdown from 'src/components/common/Dropdown';
+import TodoList from 'src/components/todo/TodoList';
+import RecentTodoList from 'src/components/todo/RecentTodoList';
 
-function TodoContainer({ addTodo, todoList, recentTodoList } : TodoContainerProps) {
+export default function TodoListContainer() {
   const [text, setText] = useState<string>('');
   const resetText = () => setText('');
   const { mutate: createTodo } = useCreateTodo();
@@ -46,30 +42,15 @@ function TodoContainer({ addTodo, todoList, recentTodoList } : TodoContainerProp
           </div>
 
           <Dropdown isOpen={dropdownOpen}>
-            {recentTodoList.map(({ title, registerDate }, todoIndex) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <div key={`recent-${registerDate}-${todoIndex}`}>{title}</div>
-            ))}
+            <RecentTodoList />
           </Dropdown>
         </div>
         <div className="w-full flex flex-col gap-2 h-full overflow-hidden mt-5">
-          <Suspense fallback="Loading todo List..."> 
+          <Suspense fallback="Loading todo List...">
             <TodoList />
           </Suspense>
-          {/* {todoList.map((todoItem, todoIndex) => (
-            <TodoItem
-          // eslint-disable-next-line react/no-array-index-key
-              key={`todo-${todoItem.registerDate}-${todoIndex}`}
-              todoItemIndex={todoIndex}
-              todoItem={todoItem}
-            />
-          ))} */}
         </div>
-
       </div>
-
     </div>
   );
 }
-
-export default TodoContainer;
