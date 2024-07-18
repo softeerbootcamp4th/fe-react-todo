@@ -9,7 +9,7 @@ function Dropdown({ children, isOpen }: PropsWithChildren<DropdownProps>) {
 
   return (
     <div
-      className={`${openCondition} overflow-hidden transition-all absolute bg-white z-10 w-[150px]`}
+      className={`${openCondition} overflow-hidden transition-all absolute bg-white z-10 w-[280px] flex flex-col gap-1 px-1 py-2 drop-shadow-lg`}
     >
       {children}
     </div>
