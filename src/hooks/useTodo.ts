@@ -1,5 +1,5 @@
 import { deleteTodo, getTodoList, patchTodo, patchTodoSplice } from "@/apis/todoList";
-import { Todo, PatchTodoRequestBody, PatchTodoSpliceRequestBody } from "@/types/todoType";
+import { Todo, PatchTodoRequestBody, PatchTodoSpliceRequestBody, TodoMutate } from "@/types/todoType";
 import { useState, useEffect, useCallback } from "react";
 
 const useTodo = () => {
@@ -15,7 +15,7 @@ const useTodo = () => {
     initTodoList();
   }, []);
 
-  const mutate = {
+  const mutate: TodoMutate = {
     updateTodoItem: (id: number, data: PatchTodoRequestBody) => {
       patchTodo(id, data)
         .then(() => getTodoList())
