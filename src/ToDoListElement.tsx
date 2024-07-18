@@ -3,12 +3,17 @@ import Button from "./Button";
 
 interface ToDoListElement {
     todo: string;
+    deleteToDo: (todo: string) => void;
 }
 
-const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo }: ToDoListElement) => {
+const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo, deleteToDo }: ToDoListElement) => {
     const [isEditingMode, setIsEditingMode] = useState<boolean>(false)
     const [toDo, setToDo] = useState<string>(todo)
     const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+    useEffect(() => {
+        setToDo(todo);
+    }, [todo]);
 
     useEffect(() => {
         if (timerRef.current) {
@@ -40,10 +45,14 @@ const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo }: ToDoListEleme
         setToDo(event.target.value)
     }
 
+    const handleDelete = () => {
+        deleteToDo(todo);
+    };
+
     let content = (
         <>
             <p>{toDo}</p>
-            <Button width={50} height={30} backgroundColor="6c90bb" title={"삭제"} cb={toggleEditingMode} value="z" />
+            <Button width={50} height={30} backgroundColor="6c90bb" title={"삭제"} cb={handleDelete} value={todo} />
         </>
     )
     if (isEditingMode) {
@@ -63,9 +72,9 @@ const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo }: ToDoListEleme
 
     return (
         <>
-            <div className="flex justify-between mx-4 my-8 w-1/3" onMouseUp={endClick} onMouseDown={startClick}>
+            <li className="flex justify-between mx-4 my-8 w-1/3" onMouseUp={endClick} onMouseDown={startClick}>
                 {content}
-            </div>
+            </li>
         </>
     )
 })

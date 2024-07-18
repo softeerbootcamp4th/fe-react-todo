@@ -11,7 +11,12 @@ const App: React.FC = () => {
 
     const addToDo = (todo: string): undefined => {
         setToDos(currentArray => [todo, ...currentArray]);
+        setToDo("");
     };
+
+    const deleteToDo = (todo: string): undefined => {
+        setToDos(currentArray => currentArray.filter(item => item !== todo));
+    }
 
     const changeCurrentToDo = (event: React.ChangeEvent<HTMLInputElement>) => {
         setToDo(event.target.value)
@@ -22,7 +27,7 @@ const App: React.FC = () => {
                 <div className="flex flex-col items-center w-full">
                     <Header />
                     <TextField toDo={toDo} setToDo={changeCurrentToDo} addToDo={addToDo} />
-                    <ToDoList toDos={toDos} />
+                    <ToDoList toDos={toDos} deleteToDo={deleteToDo} />
                 </div>
                 <div className="absolute right-10 top-10 z-10">
                     <div className=''>
