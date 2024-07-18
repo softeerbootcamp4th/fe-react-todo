@@ -7,11 +7,11 @@ import Input from "./components/Input";
 import TodoList from "./components/TodoList";
 import { TodoStore } from "./Provider/todoContext";
 import { getTodoList } from "./api/todo";
-import { LogStore } from "./Provider/logContext";
+import { LogStore, example } from "./Provider/logContext";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
-  const [logList, setLogList] = useState([]);
+  const [logList, setLogList] = useState(example);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <Title>to do app</Title>
-      <LogStore.Provider value={{}}>
+      <LogStore.Provider value={{ logList, setLogList }}>
         <ToDoListContainer>
           <TodoStore.Provider value={{ todoList, setTodoList }}>
             <Input />
