@@ -1,12 +1,13 @@
 import { css } from "@emotion/react";
 import { useTodosContext } from "../hooks/useTodosContext";
-import { useRef } from "react";
+import { useCallback, useRef, useState } from "react";
+import { AutoComplete } from "./AutoComplete";
 
 export const TodoInput = () => {
   const { addTodo } = useTodosContext();
 
   const inputRef = useRef<HTMLInputElement>(null);
-
+  const [isFocused, setIsFocused] = useState(false);
   const handleAddTodo = () => {
     const value = inputRef.current?.value;
     if (!value) {
@@ -17,12 +18,31 @@ export const TodoInput = () => {
     addTodo(value);
     inputRef.current!.value = "";
   };
+
+  const handleFocus = useCallback(() => {
+    setIsFocused(true);
+  }, []);
+
+  const handleBlur = useCallback(() => {
+    setIsFocused(false);
+  }, []);
+  const handleSelect = useCallback(
+    (item: string) => {
+      if (!inputRef.current) return;
+      inputRef.current.value = item;
+      handleBlur();
+    },
+    [handleBlur],
+  );
+
+  const rect = inputRef.current?.getBoundingClientRect();
   return (
     <div
       css={css`
         display: flex;
         width: 100%;
         gap: 1rem;
+        position: relative;
       `}
     >
       <input
@@ -34,8 +54,17 @@ export const TodoInput = () => {
         ref={inputRef}
         name="todo"
         autoComplete="on"
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
       <button onClick={handleAddTodo}>등록</button>
+      {isFocused && (
+        <AutoComplete
+          rect={rect}
+          items={["React", "Vue", "Angular"]}
+          onSelect={handleSelect}
+        />
+      )}
     </div>
   );
 };
