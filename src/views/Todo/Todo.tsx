@@ -1,7 +1,7 @@
 import { Suspense, useState } from 'react';
 import Dropdown from 'src/components/common/Dropdown';
-import TodoHistoryList from 'src/components/history/TodoHistoryList';
-import RecentTodoList from 'src/components/recentTodo/RecentTodoList';
+import TodoHistoryList from 'src/components/todo/TodoHistoryList';
+import RecentTodoList from 'src/components/todo/RecentTodoList';
 import TodoList from 'src/components/todo/TodoList';
 import useCreateTodo from 'src/hooks/todo/useCreateTodo';
 

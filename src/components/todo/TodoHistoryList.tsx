@@ -1,4 +1,4 @@
-import TodoHistory from 'src/components/history/TodoHistory';
+import TodoHistory from 'src/components/todo/TodoHistory';
 import useGetTodoHistoryList from 'src/hooks/history/useGetTodoHistoryList';
 import { TodoHistory as TodoHistoryType } from 'src/store/types/todoTypes';
 
