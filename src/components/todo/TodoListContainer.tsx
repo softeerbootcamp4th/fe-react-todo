@@ -20,7 +20,7 @@ export default function TodoListContainer() {
 
   return (
     <div className="w-full">
-      <h2 className="container-title">◕ ‿‿ ◕ Todo List ◕ ‿‿ ◕ </h2>
+      <h2 className="container-title min-w-max">◕ ‿‿ ◕ Todo List ◕ ‿‿ ◕ </h2>
       <div className="flex flex-col w-full mt-3">
         <div className="relative">
           <div className="w-full flex flex-row gap-2">
