@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 import { TodoItem as TodoItemType } from 'src/store/types/todoTypes';
 import useLongPress from 'src/hooks/useLongPress';
-import useTodo from 'src/viewModel/useTodo';
+import useDeleteTodo from 'src/hooks/todo/useDeleteTodo';
+import useUpdateTodo from 'src/hooks/todo/useUpdateTodo';
 
 interface TodoItemProps {
   todoItem: TodoItemType;
-  todoItemIndex: number;
 }
 
-function TodoItem({ todoItem, todoItemIndex }: TodoItemProps) {
-  const { title, registerDate } = todoItem;
+function TodoItem({ todoItem }: TodoItemProps) {
+  const { mutate: deleteTodo } = useDeleteTodo();
+  const { mutate: updateTodo } = useUpdateTodo();
+
+  const { id, title, registerDate } = todoItem;
 
   const [text, setText] = useState<string>(title);
   useEffect(() => setText(todoItem.title), [todoItem]);
@@ -17,14 +20,8 @@ function TodoItem({ todoItem, todoItemIndex }: TodoItemProps) {
   const [isEditable, setIsEditable] = useState<boolean>(false);
   const longPressRef = useLongPress(() => setIsEditable(true));
 
-  const { removeTodo, updateTodo } = useTodo();
-
-  const handleRemove = () => removeTodo(todoItemIndex);
-  const handleUpdate = () => {
-    // TODO: index로 처리 시 error. 로직 수정 필요
-    updateTodo({ index: todoItemIndex, title: text });
-    setIsEditable(true);
-  };
+  const handleDelete = () => deleteTodo(id);
+  const handleUpdate = () => updateTodo(todoItem, { onSuccess: () => setIsEditable(true) });
 
   return (
     <div className="bg-green-200 flex" ref={longPressRef}>
@@ -37,7 +34,7 @@ function TodoItem({ todoItem, todoItemIndex }: TodoItemProps) {
       {isEditable ? (
         <ActionButton label="수정" onClick={handleUpdate} />
       ) : (
-        <ActionButton label="삭제" onClick={handleRemove} />
+        <ActionButton label="삭제" onClick={handleDelete} />
       )}
     </div>
   );

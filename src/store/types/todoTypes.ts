@@ -3,9 +3,10 @@ import { Dispatch } from 'react';
 export type TodoStatus = '수정' | '삭제' | '등록';
 
 export interface TodoItem {
+  id: number;
   title: string;
   registerDate: Date;
-  status: TodoStatus;
+  status?: TodoStatus;
 }
 
 export interface TodoState {

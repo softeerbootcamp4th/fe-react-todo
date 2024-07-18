@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import Dropdown from 'src/components/common/Dropdown';
-import TodoItem from 'src/components/todo/todoItem';
+import TodoList from 'src/components/todo/TodoList';
 import useTodo from 'src/viewModel/useTodo';
 
 export default function Todo() {
   const { todo, addTodo } = useTodo();
-  const { todoList, recentTodoList, todoHistory } = todo;
+  const { recentTodoList, todoHistory } = todo;
 
   const [text, setText] = useState<string>('');
 
@@ -50,14 +50,9 @@ export default function Todo() {
 
         <div className="w-full flex flex-col gap-2 h-full overflow-hidden">
           투두
-          {todoList.map((todoItem, todoIndex) => (
-            <TodoItem
-              // eslint-disable-next-line react/no-array-index-key
-              key={`todo-${todoItem.registerDate}-${todoIndex}`}
-              todoItemIndex={todoIndex}
-              todoItem={todoItem}
-            />
-          ))}
+          <Suspense>
+            <TodoList />
+          </Suspense>
         </div>
 
         <div className="border-4 border-black" />
