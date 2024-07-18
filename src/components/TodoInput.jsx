@@ -10,6 +10,7 @@ function TodoInput() {
     const [inputText, setInputText] = useState('');
     const [recentSearchArr, setRecentSearchArr] = useState([]);
     const [showRecentSearch, setshowRecentSearch] = useState(false);
+    const [enterkeyDown, setEnterkeyDown] = useState(false);
 
 
 
@@ -31,15 +32,29 @@ function TodoInput() {
     const registerClick = async (e) => {
         e.preventDefault();
         if (inputText.trim() === '') return;
+        if (inputText.length > 20) {
+            alert("20자 이하로 작성해주세요!!");
+            return;
+        }
         await addTodo(inputText);
         setRecentSearchArr([inputText, ...recentSearchArr]);
         setInputText('');
-        setshowRecentSearch(false);
+        if (enterkeyDown) {
+            setshowRecentSearch(true);
+            setEnterkeyDown(false);
+        }
+        else {
+            setshowRecentSearch(false);
+        }
+
     };
 
 
     const handleInputClick = () => {
-        setshowRecentSearch(true);
+        if (recentSearchArr.length > 0) {
+            setshowRecentSearch(true);
+        }
+
     }
 
 
@@ -48,23 +63,42 @@ function TodoInput() {
     }
 
 
+    const handleEnterKeyDown = (e) => {
+        if (e.key === "Enter") {
+            setEnterkeyDown(true);
+        }
+    }
+
+
+
     return (
         <>
+            {showRecentSearch ?
+                <div className={styles.recentSearchBox}>
+                    {recentSearchArr.slice(0, 5).map((recentSearch, index) => <div key={index} className={styles.recentSearchEach}>{recentSearch}</div>)}
+                </div>
+                : null}
             <form className={styles.container} onSubmit={registerClick}
-                onFocus={handleInputClick}
-                onBlur={notShowResearchArr}>
+
+
+            >
                 <input
                     id="todoInput"
                     type="text"
-                    placeholder="할일을 입력하세요"
+                    placeholder="할 일을 입력하세요"
                     value={inputText}
                     className={styles.todoInput}
                     onChange={handleInputChange}
+                    onFocus={handleInputClick}
+                    onBlur={notShowResearchArr}
+                    onKeyDown={handleEnterKeyDown}
                     autoComplete='off'
                 />
                 <TodoButton text="등록" />
+
             </form>
-            {showRecentSearch ? recentSearchArr.slice(0, 5).map((recentSearch, index) => <div key={index}>{recentSearch}</div>) : null}
+
+
         </>
     );
 }

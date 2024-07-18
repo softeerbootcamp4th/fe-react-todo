@@ -5,10 +5,7 @@
     align-items: center;
     width: 90%;
     border-bottom: 1px solid gray;
-    font-size: 40px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 22px;
 }
 
 .noncompleted {
@@ -17,8 +14,5 @@
     align-items: center;
     width: 90%;
     border-bottom: 1px solid gray;
-    font-size: 40px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 22px;
 }

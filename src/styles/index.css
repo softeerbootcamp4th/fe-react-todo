@@ -72,12 +72,22 @@ button:disabled {
 
 body {
     padding: 0;
-    font-family: 'Ownglyph_UNZ-Rg', sans-serif;
+    font-family: 'ONE-Mobile-POP';
 }
 
 @font-face {
-    font-family: 'Ownglyph_UNZ-Rg';
-    src: url('../fonts/defaultFont.ttf') format('woff2');
+    font-family: 'ONE-Mobile-POP';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+}
+
+input:focus {
+    border: none;
+    outline: none;
+}
+
+input {
+    border: 2px solid rgb(65, 65, 65);
+    border-radius: 15px;
 }
