@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { Button } from 'src/components/ui/button';
 import Dropdown from 'src/components/common/Dropdown';
-import TodoItem from 'src/components/todo/TodoItem';
 import { Input } from 'src/components/ui/input';
 import { TodoItem as TodoItemType } from 'src/store/types/todoTypes';
+import TodoList from 'src/components/todo/TodoList';
+import useCreateTodo from 'src/hooks/todo/useCreateTodo';
 
 interface TodoContainerProps {
   addTodo: (value : string) => void;
@@ -14,13 +15,12 @@ interface TodoContainerProps {
 
 function TodoContainer({ addTodo, todoList, recentTodoList } : TodoContainerProps) {
   const [text, setText] = useState<string>('');
+  const resetText = () => setText('');
+  const { mutate: createTodo } = useCreateTodo();
 
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
-  const handleSubmit = (value: string) => {
-    setText('');
-    addTodo(value);
-  };
+  const handleSubmit = (value: string) => createTodo(value, { onSuccess: resetText });
 
   return (
     <div className="w-full">
@@ -53,14 +53,17 @@ function TodoContainer({ addTodo, todoList, recentTodoList } : TodoContainerProp
           </Dropdown>
         </div>
         <div className="w-full flex flex-col gap-2 h-full overflow-hidden mt-5">
-          {todoList.map((todoItem, todoIndex) => (
+          <Suspense fallback="Loading todo List..."> 
+            <TodoList />
+          </Suspense>
+          {/* {todoList.map((todoItem, todoIndex) => (
             <TodoItem
           // eslint-disable-next-line react/no-array-index-key
               key={`todo-${todoItem.registerDate}-${todoIndex}`}
               todoItemIndex={todoIndex}
               todoItem={todoItem}
             />
-          ))}
+          ))} */}
         </div>
 
       </div>
