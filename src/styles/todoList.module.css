@@ -1,0 +1,13 @@
+.container {
+    height: 90%;
+    overflow: scroll;
+}
+
+.todoListLi {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10%;
+    margin-bottom: 5%;
+    width: 100%;
+}
