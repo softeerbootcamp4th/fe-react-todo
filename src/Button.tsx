@@ -6,7 +6,7 @@ interface ButtonProps {
     backgroundColor: string;
     title: string;
     value: string;
-    cb: (param: string) => undefined;
+    cb: (param: string) => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -17,11 +17,10 @@ const Button: React.FC<ButtonProps> = ({
     value,
     cb
 }: ButtonProps) => {
-    console.log(value)
     const buttonStyle: React.CSSProperties = {
         backgroundColor: `#${backgroundColor}ff`,
         width: `${width}px`,
-        height: `${height}px`,
+        height: `${height}px`
     };
 
     const titleStyle: React.CSSProperties = {
@@ -30,7 +29,6 @@ const Button: React.FC<ButtonProps> = ({
         color: "white"
     }
     const temp = () => {
-        console.log(value)
         cb(value)
     }
 
