@@ -9,25 +9,33 @@ function App() {
     <TodosProvider>
       <div
         css={css`
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-          height: 100vh;
+          display: grid;
+          grid-template-columns: 500px 1fr;
+          gap: 2rem;
           padding: 2rem;
+          width: 100vw;
+          height: 100vh;
         `}
       >
-        <h1
+        <div
           css={css`
-            font-size: 4rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
           `}
         >
-          My Todo App
-        </h1>
-        <TodoInput />
-        <TodoItems />
+          <h1
+            css={css`
+              font-size: 4rem;
+              font-weight: bold;
+              margin-bottom: 2rem;
+              text-align: center;
+            `}
+          >
+            My Todo App
+          </h1>
+          <TodoInput />
+          <TodoItems />
+        </div>
         <LogItems />
       </div>
     </TodosProvider>

@@ -15,7 +15,6 @@ export const LogItems = () => {
   return (
     <div
       css={css`
-        max-height: 300px;
         overflow-y: auto;
         border: 1px solid #000000;
       `}
