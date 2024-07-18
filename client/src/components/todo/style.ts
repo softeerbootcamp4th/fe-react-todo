@@ -10,10 +10,10 @@ export const todoStyle = css`
   border-radius: 10px;
   box-shadow: 0 0 20px 10px gainsboro;
   z-index: 999;
-  padding: 48px;
+  padding: 60px 80px;
 
   .title {
-    font-size: 1.4rem;
+    font-size: 2.4rem;
     font-weight: 900;
   }
 `;

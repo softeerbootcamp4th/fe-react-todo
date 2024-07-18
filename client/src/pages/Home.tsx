@@ -1,6 +1,6 @@
 import React from 'react';
 import Todo from '../components/todo/Todo';
-import Log from '../components/Log';
+import Log from '../components/log/Log';
 import { css } from '@emotion/react';
 import Badge from '../components/badge/Badge';
 

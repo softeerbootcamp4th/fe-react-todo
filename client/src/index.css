@@ -134,3 +134,17 @@ table {
   justify-content: center;
   align-items: center;
 }
+
+
+
+.flex-between{
+  display:  flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input{
+  width : 80%
+}
+
+
