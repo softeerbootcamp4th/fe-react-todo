@@ -1,13 +1,56 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import styles from '../styles/todoListElement.module.css';
 import TodoButton from './TodoButton';
+import axios from "axios";
+import todoListContext from "../context/root";
 
-function TodoListElement({ todo, index, removeTodo, detailLiClick, updateTodo, onDragStart, onDragEnd }) {
+
+function TodoListElement({ todo, index, onDragStart, onDragEnd }) {
     const [updateText, setUpdateText] = useState(todo.text);
     const [mouseDownTime, setMouseDownTime] = useState(null);
     const timeRef = useRef(null);
     const [updateMouseDown, setUpdateMouseDown] = useState(false);
     const [isMouseDown, setIsMouseDown] = useState(false);
+    const [todoListArr, setTodoListArr] = useContext(todoListContext);
+
+
+
+    const removeTodo = async (id) => {
+        try {
+            await axios.delete(`http://localhost:5000/todos/${id}`);
+            setTodoListArr(todoListArr.filter(todo => todo.id !== id));
+        } catch (error) {
+            console.error("제거 싪패");
+        }
+    };
+    const detailLiClick = async (index) => {
+        try {
+            const updatedTodo = todoListArr[index];
+            const response = await axios.patch(`http://localhost:5000/todos/${updatedTodo.id}`, {
+                isDone: !updatedTodo.isDone
+            });
+            setTodoListArr(prev => prev.map(todo =>
+                todo.id === response.data.id ? response.data : todo
+            ));
+        } catch (error) {
+            console.error("업데이트 실패");
+        }
+    }
+
+
+    const updateTodo = async (id, updateText) => {
+        try {
+            const response = await axios.patch(`http://localhost:5000/todos/${id}`, {
+                text: updateText
+            });
+            setTodoListArr(prev => prev.map(todo =>
+                todo.id === response.data.id ? response.data : todo
+            ));
+        }
+        catch {
+            console.log("텍스트 업데이트 실패")
+        }
+    }
 
     const handleMouseDown = () => {
         setMouseDownTime(new Date().getTime());
@@ -41,6 +84,8 @@ function TodoListElement({ todo, index, removeTodo, detailLiClick, updateTodo, o
             clearTimeout(timeRef.current);
         }
     };
+
+
 
     return (
         <>
