@@ -6,4 +6,5 @@ export const todoItemStyle = css`
   align-items: center;
   border-bottom: 1px solid #ddd;
   padding: 12px;
+  cursor: pointer;
 `;

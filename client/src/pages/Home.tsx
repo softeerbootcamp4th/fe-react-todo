@@ -1,8 +1,8 @@
-import React from 'react';
-import Todo from '../components/todo/Todo';
-import Log from '../components/log/Log';
+import React, { useState } from 'react';
+import Todo from '../components/todoBox/TodoBox';
+import Log from '../components/logBox/LogBox';
 import { css } from '@emotion/react';
-import Badge from '../components/badge/Badge';
+import { ITodoItem } from '../apis/todo';
 
 const containerStyle = css`
   display: flex;
@@ -13,9 +13,11 @@ const containerStyle = css`
 `;
 
 const Home: React.FC = () => {
+  const [todoItemDatas, setTodoItemDatas] = useState<ITodoItem[]>([]);
+
   return (
     <div css={containerStyle}>
-      <Todo /> <Log />
+      <Todo todoItemDatas={todoItemDatas} setTodoItemDatas={setTodoItemDatas} /> <Log todoItemDatas={todoItemDatas} />
     </div>
   );
 };

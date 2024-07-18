@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ButtonProps } from './type';
+import { ButtonSize, ButtonType } from './type';
 
 export const ButtonStyleProps = {
   DELETE: css`
@@ -32,7 +32,7 @@ export const ButtonStyle = css`
 `;
 
 // 사용자 Props와 스타일 합치는 함수
-export const getButtonStyle = (type: ButtonProps['type'], size: ButtonProps['size']) => {
+export const getButtonStyle = (type: ButtonType, size: ButtonSize) => {
   return css`
     ${ButtonStyle};
     ${ButtonStyleProps[type]};
