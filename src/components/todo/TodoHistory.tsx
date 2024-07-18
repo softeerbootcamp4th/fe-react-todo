@@ -7,7 +7,7 @@ interface TodoHistoryProps {
 export default function TodoHistory({ history }: TodoHistoryProps) {
   return (
     <div>
-      {history.todo.title}
+      {history.title}
       {history.status}
     </div>
   );
