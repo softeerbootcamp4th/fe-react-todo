@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
 
-export type TodoStatus = '수정' | '삭제' | '등록';
+export type TodoStatus = 'register' | 'delete' | 'update';
 
 export interface TodoItem {
   todoId: number;
