@@ -5,7 +5,7 @@ export const StorageKeys = Object.freeze({
 });
 
 export function getLocalStorage(key: string) {
-  return JSON.parse(localStorage.getItem(key) ?? '');
+  return JSON.parse(localStorage.getItem(key) as string);
 }
 
 export function setLocalStorage(key: string, value: any) {

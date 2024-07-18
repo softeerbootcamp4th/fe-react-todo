@@ -1,4 +1,4 @@
-import TodoItem from 'src/components/todo/todoItem';
+import TodoItem from 'src/components/todo/TodoItem';
 import useGetTodoList from 'src/hooks/todo/useGetTodoList';
 import type { TodoItem as TodoItemType } from 'src/types/todo';
 
