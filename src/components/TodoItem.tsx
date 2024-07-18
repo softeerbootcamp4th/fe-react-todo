@@ -8,17 +8,17 @@ interface TodoItemProps {
 }
 
 export const TodoItem = ({ todo }: TodoItemProps) => {
-  const isNotCompleted = todo.status === "active";
+  const isCompleted = todo.status === "completed";
 
   const { updateTodoStatus, setEditingTodoId, removeTodo } = useTodosContext();
   const longPressRef = useLongPress(() => {
-    if (!isNotCompleted) return;
+    if (isCompleted) return;
     setEditingTodoId(todo.id);
   }, 2000);
   const handleToggleStatus = () => {
     updateTodoStatus({
       ...todo,
-      status: todo.status === "active" ? "completed" : "active",
+      status: isCompleted ? "active" : "completed",
     });
   };
 
@@ -34,11 +34,15 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
         display: flex;
         gap: 1rem;
         justify-content: space-between;
-        text-decoration: ${isNotCompleted ? "none" : "line-through"};
+        text-decoration: ${isCompleted ? "line-through" : "none"};
       `}
       ref={longPressRef}
     >
-      <input onClick={handleToggleStatus} type="checkbox" />
+      <input
+        onClick={handleToggleStatus}
+        type="checkbox"
+        checked={isCompleted}
+      />
       <h3
         css={css`
           width: 100%;
