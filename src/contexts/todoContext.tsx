@@ -16,7 +16,7 @@ export interface TodoContextType {
     updateTodoList: (newTodoList: TodoItemType[]) => Promise<void>;
 }
 
-export const TodoContext = createContext<TodoContextType>({} as TodoContextType);
+export const TodoContext = createContext<TodoContextType | null>(null);
 
 export const TodoProvider = ({ children }: { children: ReactNode }) => {
     const [todoList, setTodoList] = useState<TodoItemType[]>([]);

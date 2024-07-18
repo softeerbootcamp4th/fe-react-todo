@@ -1,8 +1,8 @@
 {
   "todo": [
     {
-      "id": "b63c",
-      "description": "빨래하기",
+      "id": "ed70",
+      "description": "집가기",
       "isChecked": false
     },
     {
@@ -11,18 +11,18 @@
       "isChecked": false
     },
     {
-      "id": "ed70",
-      "description": "집가기",
+      "id": "b95c",
+      "description": "씻기",
+      "isChecked": false
+    },
+    {
+      "id": "b63c",
+      "description": "빨래하기",
       "isChecked": false
     },
     {
       "id": "560e",
       "description": "우산쓰기",
-      "isChecked": false
-    },
-    {
-      "id": "b95c",
-      "description": "씻기",
       "isChecked": false
     }
   ],
