@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "http://localhost:5173";
 
 export const http = {
   get: async function <T>(url: string) {
@@ -19,7 +19,7 @@ export const http = {
     }
   },
 
-  post: async function (url: string, body: BodyInit) {
+  post: async function (url: string, body?: BodyInit) {
     const response = await fetch(`${BASE_URL}${url}`, { method: "POST", body });
 
     if (!response.ok) {
@@ -29,7 +29,7 @@ export const http = {
     return null;
   },
 
-  patch: async function (url: string, body: BodyInit) {
+  patch: async function (url: string, body?: BodyInit) {
     const response = await fetch(`${BASE_URL}${url}`, { method: "PATCH", body });
 
     if (!response.ok) {
