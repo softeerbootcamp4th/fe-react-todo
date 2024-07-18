@@ -23,7 +23,7 @@ module.exports = {
     'no-confusing-arrow': ['error', { allowParens: true, onlyOneSimpleParam: true }],
     'implicit-arrow-linebreak': 'off',
     'function-paren-newline': 'off',
-    'consistent-return': ['error', { treatUndefinedAsUnspecified: true }],
+    'consistent-return': 'off',
     'no-use-before-define': [
       'error',
       {

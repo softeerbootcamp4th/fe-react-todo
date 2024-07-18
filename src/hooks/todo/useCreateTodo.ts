@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import API from 'src/constants/api';
+import { API, API_HEADER } from 'src/constants/api';
 import { RecentTodo } from 'src/types/todo';
 import { getLocalStorage, setLocalStorage, StorageKeys } from 'src/utils/localStorage';
 
@@ -9,6 +9,7 @@ export default function useCreateTodo() {
   const mutation = useMutation({
     mutationFn: async (title: string) => {
       await fetch(API.TODOS, {
+        ...API_HEADER,
         method: 'POST',
         body: JSON.stringify({ title }),
       });

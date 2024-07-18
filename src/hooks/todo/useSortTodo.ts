@@ -2,20 +2,19 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { API, API_HEADER } from 'src/constants/api';
 import { TodoItem } from 'src/types/todo';
 
-export default function useUpdateTodo() {
+export default function useSortTodo() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: async (todo: TodoItem) => {
-      await fetch(API.TODOS, {
+    mutationFn: async (todos: TodoItem[]) => {
+      await fetch(API.SORT_TODO, {
         ...API_HEADER,
-        method: 'PUT',
-        body: JSON.stringify({ ...todo }),
+        method: 'POST',
+        body: JSON.stringify({ todos }),
       });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['todos'] });
-      queryClient.invalidateQueries({ queryKey: ['todos-histories'] });
     },
   });
 

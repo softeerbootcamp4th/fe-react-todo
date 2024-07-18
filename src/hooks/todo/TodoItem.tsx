@@ -22,15 +22,19 @@ function TodoItem({ todoItem }: TodoItemProps) {
   const longPressRef = useLongPress(() => setIsEditable(true));
 
   const handleDelete = () => deleteTodo(todoId);
-  const handleUpdate = () => updateTodo(todoItem, { onSuccess: () => setIsEditable(true) });
+  const handleUpdate = () =>
+    updateTodo({ ...todoItem, title: text }, { onSuccess: () => setIsEditable(false) });
 
   const day = useMemo(() => {
     const date = new Date(registerDate);
-    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   }, [registerDate]);
 
   return (
-    <div className="flex justify-between items-center w-max gap-2" ref={longPressRef}>
+    <div
+      className="todo-item-container flex justify-between items-center w-max gap-2 p-1"
+      ref={longPressRef}
+    >
       <div className="bg-white px-3 py-1 h-10 rounded-xl w-full flex justify-between items-center">
         <input
           disabled={!isEditable}
@@ -38,9 +42,7 @@ function TodoItem({ todoItem }: TodoItemProps) {
           onChange={({ target: { value } }) => setText(value)}
           className="bg-transparent"
         />
-        <p className="w-max">
-          {day}
-        </p>
+        <p className="w-max">{day}</p>
       </div>
       {isEditable ? (
         <ActionButton label="수정" onClick={handleUpdate} />

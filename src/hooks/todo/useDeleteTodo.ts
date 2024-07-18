@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import API from 'src/constants/api';
+import { API, API_HEADER } from 'src/constants/api';
 
 export default function useDeleteTodo() {
   const queryClient = useQueryClient();
@@ -7,6 +7,7 @@ export default function useDeleteTodo() {
   const mutation = useMutation({
     mutationFn: async (todoId: number) => {
       await fetch(API.TODOS, {
+        ...API_HEADER,
         method: 'DELETE',
         body: JSON.stringify({ todoId }),
       });
