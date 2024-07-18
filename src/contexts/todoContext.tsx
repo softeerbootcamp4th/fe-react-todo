@@ -13,6 +13,7 @@ export interface TodoContextType {
     logList: LogType[];
     getLogList: () => Promise<void>;
     setLogListItem: (log: LogType) => Promise<void>;
+    updateTodoList: (newTodoList: TodoItemType[]) => Promise<void>;
 }
 
 export const TodoContext = createContext<TodoContextType>({} as TodoContextType);
@@ -36,6 +37,11 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
         await LogAPI.post(log);
     };
 
+    const updateTodoList = async (newTodoList: TodoItemType[]) => {
+        await TodoAPI.deleteAll(newTodoList);
+        await TodoAPI.postAll(newTodoList);
+    };
+
     return (
         <TodoContext.Provider
             value={{
@@ -47,6 +53,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
                 logList,
                 getLogList,
                 setLogListItem,
+                updateTodoList,
             }}
         >
             {children}

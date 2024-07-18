@@ -56,4 +56,39 @@ export class TodoAPI {
                 throw error;
             });
     }
+    // DELETE ALL 요청
+    public static async deleteAll(data: TodoItemType[]) {
+        const promises = data.map(item => {
+            return fetch(`${this.baseURL}/${item.id}`, {
+                method: "DELETE",
+                headers: this.headers,
+            });
+        });
+        try {
+            const responses = await Promise.all(promises);
+            const results = await Promise.all(responses.map(response => response.json()));
+            return results;
+        } catch (error) {
+            console.error("Error:", error);
+            throw error;
+        }
+    }
+    // POST ALL 요청
+    public static async postAll(data: TodoItemType[]) {
+        const promises = data.map(item => {
+            return fetch(`${this.baseURL}`, {
+                method: "POST",
+                headers: this.headers,
+                body: JSON.stringify(item),
+            });
+        });
+        try {
+            const responses = await Promise.all(promises);
+            const results = await Promise.all(responses.map(response => response.json()));
+            return results;
+        } catch (error) {
+            console.error("Error:", error);
+            throw error;
+        }
+    }
 }
