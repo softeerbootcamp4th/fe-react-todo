@@ -7,7 +7,7 @@ export default function useUpdateTodo() {
   const mutation = useMutation({
     mutationFn: (todo: TodoItem) => Promise.resolve(todo),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
+      queryClient.invalidateQueries({ queryKey: [['todos'], ['todos-histories']] });
     },
   });
 

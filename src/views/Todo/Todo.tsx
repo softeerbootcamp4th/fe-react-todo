@@ -1,11 +1,12 @@
 import { Suspense, useState } from 'react';
 import Dropdown from 'src/components/common/Dropdown';
+import TodoHistoryList from 'src/components/history/TodoHistoryList';
 import TodoList from 'src/components/todo/TodoList';
 import useTodo from 'src/viewModel/useTodo';
 
 export default function Todo() {
   const { todo, addTodo } = useTodo();
-  const { recentTodoList, todoHistory } = todo;
+  const { recentTodoList } = todo;
 
   const [text, setText] = useState<string>('');
 
@@ -50,7 +51,7 @@ export default function Todo() {
 
         <div className="w-full flex flex-col gap-2 h-full overflow-hidden">
           투두
-          <Suspense>
+          <Suspense fallback="Loading todo list...">
             <TodoList />
           </Suspense>
         </div>
@@ -59,13 +60,9 @@ export default function Todo() {
 
         <div className="w-full flex flex-col">
           히스토리
-          {todoHistory.map(({ title, registerDate, status }, todoIndex) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <div key={`history-${registerDate}-${todoIndex}`}>
-              {title}
-              {status}
-            </div>
-          ))}
+          <Suspense fallback="Loading todo history list...">
+            <TodoHistoryList />
+          </Suspense>
         </div>
       </div>
     </div>

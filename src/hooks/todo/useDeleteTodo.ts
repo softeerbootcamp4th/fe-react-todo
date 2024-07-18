@@ -6,7 +6,7 @@ export default function useDeleteTodo() {
   const mutation = useMutation({
     mutationFn: (id: number) => Promise.resolve(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
+      queryClient.invalidateQueries({ queryKey: [['todos'], ['todos-histories']] });
     },
   });
 

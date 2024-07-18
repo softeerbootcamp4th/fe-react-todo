@@ -6,13 +6,16 @@ export interface TodoItem {
   id: number;
   title: string;
   registerDate: Date;
-  status?: TodoStatus;
+}
+
+export interface TodoHistory extends TodoItem {
+  status: TodoStatus;
 }
 
 export interface TodoState {
   recentTodoList: TodoItem[];
   todoList: TodoItem[];
-  todoHistory: TodoItem[];
+  todoHistory: TodoHistory[];
 }
 
 export const enum TODO_ACTION {
