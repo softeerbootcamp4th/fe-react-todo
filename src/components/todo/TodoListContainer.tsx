@@ -45,7 +45,7 @@ export default function TodoListContainer() {
             <RecentTodoList />
           </Dropdown>
         </div>
-        <div className="w-full flex flex-col gap-2 h-full overflow-hidden mt-5">
+        <div className="w-full flex flex-col gap-5 h-full overflow-hidden mt-5">
           <Suspense fallback="Loading todo List...">
             <TodoList />
           </Suspense>
