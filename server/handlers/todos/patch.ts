@@ -15,7 +15,12 @@ export const patchTodo = async ({
     title,
     status,
   });
-
+  db.insertLog({
+    id: Date.now(),
+    createdAt: new Date().toISOString(),
+    type: "UPDATE",
+    message: `Updated todo with id ${id}`,
+  });
   if (!todo) {
     return HttpResponse.json({ message: "Todo not found" }, { status: 404 });
   }

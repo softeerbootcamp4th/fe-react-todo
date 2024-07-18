@@ -24,6 +24,12 @@ export const postTodo = async ({
     status: "active",
   };
 
+  db.insertLog({
+    id: Date.now(),
+    createdAt: new Date().toISOString(),
+    type: "CREATE",
+    message: `Created todo with id ${todo.id}`,
+  });
   db.insertTodo(todo);
   return HttpResponse.json(todo, {
     status: 201,
