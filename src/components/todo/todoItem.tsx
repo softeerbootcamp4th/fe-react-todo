@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { TodoItem as TodoItemType } from 'src/store/types/todoTypes';
 import useLongPress from 'src/hooks/useLongPress';
 import useTodo from 'src/viewModel/useTodo';
-import { Button } from 'src/components/ui/button';
+import ActionButton from 'src/components/common/ActionButton';
 
 interface TodoItemProps {
   todoItem: TodoItemType;
@@ -34,6 +34,7 @@ function TodoItem({ todoItem, todoItemIndex }: TodoItemProps) {
           disabled={!isEditable}
           value={text}
           onChange={({ target: { value } }) => setText(value)}
+          className="bg-transparent"
         />
         {registerDate.toISOString()}
 
@@ -48,16 +49,3 @@ function TodoItem({ todoItem, todoItemIndex }: TodoItemProps) {
 }
 
 export default TodoItem;
-
-interface ActionButtonProps {
-  label: string;
-  onClick: () => void;
-}
-
-function ActionButton({ label, onClick }: ActionButtonProps) {
-  return (
-    <Button onClick={onClick}>
-      {label}
-    </Button>
-  );
-}

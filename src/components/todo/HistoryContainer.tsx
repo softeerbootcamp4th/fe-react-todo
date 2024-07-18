@@ -1,4 +1,3 @@
-import React from 'react';
 import { TodoItem } from 'src/store/types/todoTypes';
 
 interface HistoryContainerProps {
@@ -8,7 +7,7 @@ function HistoryContainer({ todoHistory } : HistoryContainerProps) {
   return (
 
     <div className="w-full flex flex-col">
-      <p className="font-bold text-4xl mt-3 text-white">◕ ‿‿ ◕ History ◕ ‿‿ ◕</p>
+      <h2 className="container-title">◕ ‿‿ ◕ History ◕ ‿‿ ◕</h2>
       <div className="mt-3">
         {todoHistory.map(({ title, registerDate, status }, todoIndex) => (
           // eslint-disable-next-line react/no-array-index-key

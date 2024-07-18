@@ -4,19 +4,15 @@ import Dropdown from 'src/components/common/Dropdown';
 import TodoItem from 'src/components/todo/TodoItem';
 import { Input } from 'src/components/ui/input';
 import { TodoItem as TodoItemType } from 'src/store/types/todoTypes';
-// import useTodo from 'src/viewModel/useTodo';
 
 interface TodoContainerProps {
   addTodo: (value : string) => void;
-  todoList: TodoItem[];
-  recentTodoList: TodoItem[];
+  todoList: TodoItemType[];
+  recentTodoList: TodoItemType[];
 
 }
 
 function TodoContainer({ addTodo, todoList, recentTodoList } : TodoContainerProps) {
-  // const { todo, addTodo } = useTodo();
-  // const { todoList, recentTodoList } = todo;
-
   const [text, setText] = useState<string>('');
 
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
@@ -28,10 +24,10 @@ function TodoContainer({ addTodo, todoList, recentTodoList } : TodoContainerProp
 
   return (
     <div className="w-full">
-      <h2 className="font-bold text-4xl mt-3 text-white">◕ ‿‿ ◕ Todo List ◕ ‿‿ ◕ </h2>
+      <h2 className="container-title">◕ ‿‿ ◕ Todo List ◕ ‿‿ ◕ </h2>
       <div className="flex flex-col w-full mt-3">
         <div className="relative">
-          <div className="w-full flex flex-row">
+          <div className="w-full flex flex-row gap-2">
             <Input
               value={text}
               onKeyPress={({ code }) => {
