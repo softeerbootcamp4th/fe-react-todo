@@ -1,11 +1,11 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 
 interface UseFetchType {
   method: "get" | "post" | "patch" | "delete";
   path: string;
 }
 
-export function useFetch<T>({ method, path }: UseFetchType) {
+export function useFetch<T>({ method, path } : UseFetchType) {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean | null>(null);
