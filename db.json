@@ -1,227 +1,98 @@
 {
   "todo": [
     {
-      "id": "9e13",
-      "description": "adfaㄹㄹㄹㄹㅇㄹㅇfff",
+      "id": "bdf0",
+      "description": "물마시기",
       "isChecked": false
     },
     {
-      "id": "2ba6",
-      "description": "ㅏㅏㅏㅏ",
+      "id": "79ea",
+      "description": "노트북 충전하기",
       "isChecked": false
     },
     {
-      "id": "b244",
-      "description": "ㅓㅓㅓㅓ",
+      "id": "5f5e",
+      "description": "집에 가서 양말 벗고 양치하고 머리 감고 누워서 휴대폰 하고 자기",
       "isChecked": false
     },
     {
-      "id": "3b19",
-      "description": "ㅛㅛㅛ",
-      "isChecked": false
-    },
-    {
-      "id": "d9f1",
-      "description": "dfdsfds",
-      "isChecked": false
-    },
-    {
-      "id": "ca71",
-      "description": "dsfefdsxc",
-      "isChecked": false
-    },
-    {
-      "id": "f5aa",
-      "description": "sdfdsf",
-      "isChecked": false
-    },
-    {
-      "id": "80f6",
-      "description": "errrr",
-      "isChecked": false
-    },
-    {
-      "id": "54aa",
-      "description": "rr",
-      "isChecked": false
-    },
-    {
-      "id": "6a05",
-      "description": "rrfds33",
-      "isChecked": false
-    },
-    {
-      "id": "7983",
-      "description": "ewrrerer",
-      "isChecked": false
-    },
-    {
-      "id": "4657",
-      "description": "dfdfdfㅇㄴㅁㄴㅇㄹㅇㄴㅇㄴㅇㄴㅇㄹㅁㅇㅇㄹㅁㄴㅇㅇㅁㄹㄴㅇㅁㅇㅁㄹㅇㄹㄴㅇㅇㄹ",
-      "isChecked": true
-    },
-    {
-      "id": "0cea",
-      "description": "afdadsfdfsadfjhdafshajksljhfkafdfh",
-      "isChecked": false
-    },
-    {
-      "id": "ebf6",
-      "description": "ㅁㅇ러ㅏㅣㅏㅁㄴㅇ러ㅏㅇㄹ어나오ㅓㅏㅁㅇㄴㅇㄹㅇㅁㅇㄹㅇㄹㅁㅇㅁㅁㄹㅇ",
-      "isChecked": false
-    },
-    {
-      "id": "c7ef",
-      "description": "sfsdaf",
-      "isChecked": false
-    },
-    {
-      "id": "2288",
-      "description": "sdfsdaf",
-      "isChecked": false
-    },
-    {
-      "id": "5f1c",
-      "description": "ㄹㄹㄹ",
+      "id": "e985",
+      "description": "청소하기",
       "isChecked": false
     }
   ],
   "log": [
     {
-      "id": "9e13",
+      "id": "6183",
       "status": "등록",
-      "description": "adㅇfff"
+      "description": "밥먹기"
     },
     {
-      "id": "7a45",
+      "id": "6508",
       "status": "등록",
-      "description": "dfdsfds"
+      "description": "옷입기"
     },
     {
-      "id": "4b03",
+      "id": "4740",
       "status": "등록",
-      "description": "dsfefdsxc"
+      "description": "세수하기"
     },
     {
-      "id": "2ce2",
+      "id": "fc67",
       "status": "등록",
-      "description": "sdfdsf"
+      "description": "가방싸기"
     },
     {
-      "id": "aa2a",
+      "id": "d63a",
       "status": "등록",
-      "description": "errrr"
+      "description": "물마시긱"
     },
     {
-      "id": "820d",
-      "status": "등록",
-      "description": "rr"
+      "id": "8585",
+      "status": "수정",
+      "prevDescription": "물마시긱",
+      "description": "물마시기"
     },
     {
-      "id": "bfe6",
-      "status": "등록",
-      "description": "resdffcx"
-    },
-    {
-      "id": "6ade",
-      "status": "등록",
-      "description": "rrfds"
-    },
-    {
-      "id": "0cce",
-      "status": "등록",
-      "description": "x"
-    },
-    {
-      "id": "eeb5",
-      "status": "등록",
-      "description": "gdfdsfsdfs"
-    },
-    {
-      "id": "c9e1",
-      "status": "등록",
-      "description": "ewrrerer"
-    },
-    {
-      "id": "209f",
-      "status": "등록",
-      "description": "dfdfdf"
-    },
-    {
-      "id": "2557",
+      "id": "dc7f",
       "status": "삭제",
-      "description": "x"
+      "description": "세수하기"
     },
     {
-      "id": "2542",
+      "id": "d207",
+      "status": "등록",
+      "description": "노트북 충전하기"
+    },
+    {
+      "id": "c700",
+      "status": "등록",
+      "description": "집에 가서 양말 벗고 양치하고 머리 감고 누워서 자기"
+    },
+    {
+      "id": "61f6",
       "status": "삭제",
-      "description": "gdfdsfsdfs"
+      "description": "밥먹기"
     },
     {
-      "id": "d196",
-      "status": "수정",
-      "prevDescription": "resdffcx",
-      "description": "resdffcx444444"
-    },
-    {
-      "id": "bb75",
-      "status": "수정",
-      "prevDescription": "resdffcx444444",
-      "description": "resdffcx44"
-    },
-    {
-      "id": "90ff",
-      "status": "수정",
-      "prevDescription": "rrfds",
-      "description": "rrfds33"
-    },
-    {
-      "id": "234c",
-      "status": "수정",
-      "prevDescription": "resdffcx44",
-      "description": "resdffcx443423424242323423423423423423423434234234234234234234234"
-    },
-    {
-      "id": "1a5b",
+      "id": "779a",
       "status": "삭제",
-      "description": "resdffcx443423424242323423423423423423423434234234234234234234234"
+      "description": "옷입기"
     },
     {
-      "id": "ada0",
+      "id": "c946",
+      "status": "삭제",
+      "description": "가방싸기"
+    },
+    {
+      "id": "bba8",
       "status": "등록",
-      "description": "afdadsfdfsadfjhdafshajksljhfkafdfh"
+      "description": "청소하기"
     },
     {
-      "id": "54f9",
-      "status": "등록",
-      "description": "ㅁㅇ러ㅏㅣㅏㅁㄴㅇ러ㅏㅇㄹ어나오ㅓㅏㅁㅇㄴㅇㄹㅇㅁㅇㄹㅇㄹㅁㅇㅁㅁㄹㅇ"
-    },
-    {
-      "id": "1997",
+      "id": "bf84",
       "status": "수정",
-      "prevDescription": "dfdfdf",
-      "description": "dfdfdfㅇㄴㅁㄴㅇㄹㅇㄴㅇㄴㅇㄴㅇㄹㅁㅇㅇㄹㅁㄴㅇㅇㅁㄹㄴㅇㅁㅇㅁㄹㅇㄹㄴㅇㅇㄹ"
-    },
-    {
-      "id": "43b3",
-      "status": "수정",
-      "prevDescription": "dfdfdfㅇㄴㅁㄴㅇㄹㅇㄴㅇㄴㅇㄴㅇㄹㅁㅇㅇㄹㅁㄴㅇㅇㅁㄹㄴㅇㅁㅇㅁㄹㅇㄹㄴㅇㅇㄹ",
-      "description": "dfdfdfㅇㄴㅁㄴㅇㄹㅇㄴㅇㄴㅇㄴㅇㄹㅁㅇㅇㄹㅁㄴㅇㅇㅁㄹㄴㅇㅁㅇㅁㄹㅇㄹㄴㅇㅇㄹ"
-    },
-    {
-      "id": "83c2",
-      "status": "등록",
-      "description": "sfsdaf"
-    },
-    {
-      "id": "1990",
-      "status": "등록",
-      "description": "sdfsdaf"
-    },
-    {
-      "id": "6862",
-      "status": "등록",
-      "description": "ㄹㄹㄹ"
+      "prevDescription": "집에 가서 양말 벗고 양치하고 머리 감고 누워서 자기",
+      "description": "집에 가서 양말 벗고 양치하고 머리 감고 누워서 휴대폰 하고 자기"
     }
   ]
 }

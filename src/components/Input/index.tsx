@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { TodoAPI } from "../../apis/todoAPI";
 import { useTodoList } from "../../hooks/useTodoList";
 import { LOG_STATUS } from "../../constants/log";
+import { AddLog } from "../../types/log";
 
 function Input() {
     const [inputValue, setInputValue] = useState("");
@@ -25,7 +26,7 @@ function Input() {
         try {
             await TodoAPI.post({ description: inputValue, isChecked: false });
             await getTodoList();
-            await setLogListItem({ status: LOG_STATUS.add, description: inputValue });
+            await setLogListItem({ status: LOG_STATUS.add, description: inputValue } as AddLog);
             await getLogList();
 
             const updatedSearches = [inputValue, ...recentSearches];

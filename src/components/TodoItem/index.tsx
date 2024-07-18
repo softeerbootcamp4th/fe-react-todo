@@ -3,6 +3,7 @@ import { TodoItemProps } from "../../types/todo";
 import { TodoAPI } from "../../apis/todoAPI";
 import { useTodoList } from "../../hooks/useTodoList";
 import { LOG_STATUS } from "../../constants/log";
+import { DeleteLog, EditLog } from "../../types/log";
 
 function TodoItem({ todo }: TodoItemProps) {
     const { getTodoList, setLogListItem, getLogList } = useTodoList();
@@ -34,7 +35,10 @@ function TodoItem({ todo }: TodoItemProps) {
         try {
             await TodoAPI.delete({ id: todo.id });
             await getTodoList();
-            await setLogListItem({ status: LOG_STATUS.delete, description: inputValue });
+            await setLogListItem({
+                status: LOG_STATUS.delete,
+                description: inputValue,
+            } as DeleteLog);
             await getLogList();
         } catch (error) {
             console.error("Error:", error);
@@ -47,7 +51,7 @@ function TodoItem({ todo }: TodoItemProps) {
                 status: LOG_STATUS.edit,
                 prevDescription: todo.description,
                 description: inputValue,
-            });
+            } as EditLog);
             await getLogList();
             await TodoAPI.patch({ ...todo, description: inputValue });
             setIsEditing(false);
@@ -80,7 +84,7 @@ function TodoItem({ todo }: TodoItemProps) {
                 id={`${todo.id}-checkbox`}
                 type="checkbox"
                 value=""
-                className="w-4 h-4 bg-gray-100 border-gray-200 rounded"
+                className="w-4 h-4 bg-gray-100 border-gray-200 rounded cursor-pointer"
                 checked={isChecked}
                 onChange={handleCheckChange}
             />
@@ -108,7 +112,7 @@ function TodoItem({ todo }: TodoItemProps) {
                     <>
                         <label
                             htmlFor={`${todo.id}-checkbox`}
-                            className={`truncate w-72 ${isChecked && "line-through text-gray-400"}`}
+                            className={`truncate w-72 cursor-pointer ${isChecked && "line-through text-gray-400"}`}
                             onMouseDown={handleMouseDown}
                             onMouseUp={handleMouseUp}
                         >

@@ -4,13 +4,13 @@ interface BaseLog {
     prevDescription?: string;
 }
 
-interface AddLog extends BaseLog {
+export interface AddLog extends BaseLog {
     status: "등록";
 }
-interface DeleteLog extends BaseLog {
+export interface DeleteLog extends BaseLog {
     status: "삭제";
 }
-interface EditLog extends BaseLog {
+export interface EditLog extends BaseLog {
     status: "수정";
 }
 
