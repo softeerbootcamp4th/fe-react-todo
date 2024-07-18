@@ -1,18 +1,8 @@
 {
   "todo": [
     {
-      "id": "c5d9",
-      "description": "sadf",
-      "isChecked": false
-    },
-    {
       "id": "b63c",
       "description": "빨래하기",
-      "isChecked": false
-    },
-    {
-      "id": "0a81",
-      "description": "asdf",
       "isChecked": false
     },
     {
@@ -21,8 +11,18 @@
       "isChecked": false
     },
     {
-      "id": "63ef",
-      "description": "df",
+      "id": "ed70",
+      "description": "집가기",
+      "isChecked": false
+    },
+    {
+      "id": "560e",
+      "description": "우산쓰기",
+      "isChecked": false
+    },
+    {
+      "id": "b95c",
+      "description": "씻기",
       "isChecked": false
     }
   ],
@@ -180,6 +180,36 @@
       "id": "011f",
       "status": "삭제",
       "description": "wer"
+    },
+    {
+      "id": "7284",
+      "status": "삭제",
+      "description": "sadf"
+    },
+    {
+      "id": "df07",
+      "status": "삭제",
+      "description": "df"
+    },
+    {
+      "id": "4dba",
+      "status": "삭제",
+      "description": "asdf"
+    },
+    {
+      "id": "61cd",
+      "status": "등록",
+      "description": "집가기"
+    },
+    {
+      "id": "ebdc",
+      "status": "등록",
+      "description": "우산쓰기"
+    },
+    {
+      "id": "18d3",
+      "status": "등록",
+      "description": "씻기"
     }
   ]
 }
