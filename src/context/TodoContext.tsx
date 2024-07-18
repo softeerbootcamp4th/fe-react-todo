@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, ReactNode, Dispatch } from "react";
 import { Todo } from "@/types/todoType";
+import { LogMsg } from "@/types/LogType";
 import { getTodoList, deleteTodo } from "@/apis/todoList";
-import useTodo from "@/hooks/useTodo";
 
 export interface TodoContextType {
   todoItemList: Todo[];
@@ -10,8 +10,8 @@ export interface TodoContextType {
   setIsEdit: Dispatch<boolean>;
   updateTodoList: () => Promise<void>;
   handleDeleteTodoItem: (id: number) => void;
-  logList: string[];
-  setLogList: Dispatch<string[]>;
+  logList: LogMsg[];
+  setLogList: Dispatch<LogMsg[]>;
 }
 
 export const TodoContext = createContext<TodoContextType | null>(null);
@@ -19,7 +19,7 @@ export const TodoContext = createContext<TodoContextType | null>(null);
 export const TodoProvider = ({ children }: { children: ReactNode }) => {
   const [todoItemList, setTodoItemList] = useState<Todo[]>([]);
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [logList, setLogList] = useState<string[]>([]);
+  const [logList, setLogList] = useState<LogMsg[]>([]);
 
   const updateTodoList = async () => {
     try {
