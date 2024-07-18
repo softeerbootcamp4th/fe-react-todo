@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, ReactNode, Dispatch } from "react";
 import { Todo } from "@/types/todoType";
-import { getToList, deleteTodo } from "@/apis/todoList";
+import { getTodoList, deleteTodo } from "@/apis/todoList";
+import useTodo from "@/hooks/useTodo";
 
 export interface TodoContextType {
   todoItemList: Todo[];
@@ -19,7 +20,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
 
   const updateTodoList = async () => {
     try {
-      const data = await getToList();
+      const data = await getTodoList();
       setTodoItemList(data ?? []);
     } catch (error) {
       console.error("Error fetching todo list:", error);

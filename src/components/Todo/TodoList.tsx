@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Todo } from "@/types/todoType";
 import { patchTodo } from "@/apis/todoList";
 import { useTodoContext } from "@/hooks/useTodoContext";
-import { patchTodoSplice, getToList } from "@/apis/todoList";
+import { patchTodoSplice, getTodoList } from "@/apis/todoList";
 
 function TodoList() {
   const { isEdit, todoItemList, setTodoItemList, setIsEdit, handleDeleteTodoItem } = useTodoContext();
@@ -39,7 +39,7 @@ function TodoList() {
     if (dragItem.current === undefined || dragOverItem.current === undefined) return;
 
     patchTodoSplice({ targetIndex: dragItem.current, destinationIndex: dragOverItem.current })
-      .then(() => getToList())
+      .then(() => getTodoList())
       .then((list) => {
         setTodoItemList(list ?? []);
       });
