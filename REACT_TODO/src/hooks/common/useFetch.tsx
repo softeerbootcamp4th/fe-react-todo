@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 interface UseFetchType {
-  method: "get" | "post" | "patch" | "delete";
+  method: "get" | "post" | "patch" | "delete" | "put";
   path: string;
 }
 

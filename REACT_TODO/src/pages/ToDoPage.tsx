@@ -1,98 +1,101 @@
-import { useState, useEffect } from "react";
-import { useFetch } from "../hooks/useFetch";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import ToDoItem from "../components/ToDoItem";
+import { useEffect } from "react";
 
-// 제목
-// input 상자 + 버튼
-// 리스트! (useState 사용)
-// 리스트 항목
+import { useFetch } from "../hooks/common/useFetch";
+import { useToDoState, useToDoHandlers } from "../hooks/pages/useToDo";
 
-interface TodoData {
+import { Button, Input } from "../atoms/styles";
+import { ToDoItem, Moniter, AddedList } from "../components/toDoPage";
+
+import styled from "styled-components";
+
+interface ToDoDataType {
   id: number;
   title: string;
 }
 
 const todo = {
-  "get": {method: "get", path: "/todo"},
-  "delete": {method: "delete", path: "/todo"},
+  "get": { method: "get", path: "/todo" },
+  "delete": { method: "delete", path: "/todo" },
+  "add": { method: "post", path: "/todo" },
+  "changeTitle": { method: "put", path: "/todo" },
+  "changeOrder": { method: "post", path: "/todo/change" },
+  "getLog": { method: "get", path: "/todo/log" }
 }
 
-function ToDoPage () {
-  // const { fetchData: changeToDo } = useFetch<any>({ method: "delete", path: "/todo" });
-  const [id, setId] = useState<number|null>(null);
-  const [param, setParam] = useState<string|null>(null);
-  const { fetchData: getToDo, data: todoDatas, loading: todoLoading } = useFetch<any>(todo.get);
-  const { fetchData: addToDo, loading: addLoading } = useFetch<any>({ method: "post", path: "/todo" });
-  const { fetchData: deleteToDo, loading: deleteLoading } = useFetch<any>({ method: "delete", path: `/todo` });
-  const { fetchData: changeOrderToDo, loading: changeLoading } = useFetch<any>({ method: "post", path: `/todo/change` });
+function ToDoPage() {
+  // 서버 상태 및 reftch
+  const { fetchData: getToDo, data: todoDatas } = useFetch<ToDoDataType[]>(todo.get);
+  const { fetchData: changeTitleToDo, loading: changeTitleLoading } = useFetch(todo.changeTitle);
+  const { fetchData: addToDo, loading: addLoading } = useFetch(todo.add);
+  const { fetchData: deleteToDo, loading: deleteToDoLoading } = useFetch(todo.delete);
+  const { fetchData: changeOrderToDo, loading: changeOrderLoading } = useFetch(todo.changeOrder);
+  const { fetchData: getLog, data: todoLogs } = useFetch(todo.getLog);
 
   useEffect(() => {
-    getToDo({});
-  }, [])
-  
-  const [value, setValue] = useState("");
-  
-  function onChangeValue(e: React.ChangeEvent<HTMLInputElement>) {
-    setValue(e.target.value);
-  }
-  
-  function onClickRegister() {
-    addToDo({ body: { title: value } });
-    getToDo({});
-    setValue("");
-  }
-  
-  function onClickDelete(id: number) {
-    deleteToDo({ param: String(id) });
-    getToDo({});
-  }
-  
-  function handleDragStart(id: number) {
-    setDraggedId(id);
-  }
-  
-  function handleDrop() {
-    if (draggedId !== droppedId) {
-      changeOrderToDo({ body: { id1: droppedId, id2: draggedId } });
+    if (!changeTitleLoading || !addLoading || !deleteToDoLoading || !changeOrderLoading) {
       getToDo({});
-      setDraggedId(null);
-      setDroppedId(null);
+      getLog({});
     }
-  }
+  }, [changeTitleLoading, addLoading, deleteToDoLoading, changeOrderLoading]);
 
-  function handleDragOver(id: number) {
-    setDroppedId(id);
-  }
-  
-  const [draggedId, setDraggedId] = useState<number | null>(null);
-  const [droppedId, setDroppedId] = useState<number | null>(null);
+  // 클라이언트 상태 및 핸들러 함수
+  const [toDoState, setToDoState] = useToDoState();
+
+  const handlers = useToDoHandlers(
+    toDoState,
+    setToDoState,
+    addToDo,
+    deleteToDo,
+    changeOrderToDo,
+    changeTitleToDo
+  );
+
+  const { value, addedTitles, isHidden, inputRef } = toDoState;
 
   return (
     <>
-      <div>
+      <Wrapper>
         <h1>My Todo App</h1>
-        <Input placeholder="할 일을 입력하세요" onChange={onChangeValue} value={value}/>
-        <Button variant="register" onClick={onClickRegister}>등록</Button>
+        
+        {todoLogs?.length > 0 && <Moniter logs={todoLogs} />}
+        
+        <Input
+          placeholder="할 일을 입력하세요"
+          ref={inputRef}
+          onChange={handlers.onChangeValue}
+          value={value}
+          onFocus={handlers.handleFocus}
+          onBlur={handlers.handleBlur}
+          onKeyPress={handlers.handleKeyPress}
+        />
+        
+        <Button variant="register" onClick={handlers.onClickRegister}>등록</Button>
+        
+        {!isHidden && <AddedList data={addedTitles} />}
+        
         <div>
           {
-            todoDatas?.map((item: TodoData) => (
+            todoDatas?.map((item: ToDoDataType) => (
               <ToDoItem
                 key={item.id}
                 id={item.id}
                 title={item.title}
-                onClick={() => onClickDelete(item.id)} 
-                onDragStart={handleDragStart}
-                onDragOver={handleDragOver}
-                onDrop={handleDrop}
+                onClick={() => handlers.onClickDelete(item.id)}
+                onDragStart={() => handlers.handleDragStart(item.id)}
+                onDragOver={() => handlers.handleDragOver(item.id)}
+                onDrop={handlers.handleDrop}
+                onTitleChange={(title) => handlers.handleTitleChange({ id: item.id, title })}
               />
             ))
           }
         </div>
-      </div>
+      </Wrapper>
     </>
   );
 }
 
 export default ToDoPage;
+
+const Wrapper = styled.div`
+  display: relative;
+`;
