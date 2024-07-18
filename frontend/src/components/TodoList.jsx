@@ -9,6 +9,35 @@ import useLogList from "../hooks/useLogList";
 
 const TodoList = () => {
   const { todoList, setTodoList } = useContext(TodoStore);
+  const dragStartPosition = useRef(null);
+  const dragEndPosition = useRef(null);
+  const timerRef = useRef(null);
+
+  // drag 이벤트 핸들러
+  const onDragStartHandler = (event, target) => {
+    dragStartPosition.current = target;
+    clearTimeout(timerRef.current);
+  };
+
+  const onDragEnterHandler = (event, target) => {
+    dragEndPosition.current = target;
+  };
+
+  const onDragEndHandler = (event) => {
+    console.log("end");
+    console.log(dragEndPosition.current, dragStartPosition.current);
+    const newTodoList = [...todoList];
+    const temp = newTodoList[dragStartPosition.current];
+    newTodoList[dragStartPosition.current] =
+      newTodoList[dragEndPosition.current];
+    newTodoList[dragEndPosition.current] = temp;
+    dragStartPosition.current = null;
+    dragEndPosition.current = null;
+    setTodoList(newTodoList);
+    console.log(todoList);
+    console.log(newTodoList);
+    postToDoList(newTodoList);
+  };
 
   return (
     <ListContainer>
@@ -20,21 +49,32 @@ const TodoList = () => {
             title={todo.title}
             isLast={index === todoList.length - 1}
             isDone={todo.isDone}
+            onDragStartHandler={onDragStartHandler}
+            onDragEnterHandler={onDragEnterHandler}
+            onDragEndHandler={onDragEndHandler}
+            setTimeRef={timerRef}
           />
         ))}
     </ListContainer>
   );
 };
 
-const TodoListItem = ({ title, index, isLast, isDone }) => {
+const TodoListItem = ({
+  title,
+  index,
+  isLast,
+  isDone,
+  onDragEndHandler,
+  onDragStartHandler,
+  onDragEnterHandler,
+  setTimeRef,
+}) => {
   const { todoList, setTodoList } = useContext(TodoStore);
   const { logList, setLogList } = useContext(LogStore);
   const [isLongPressed, setIsLongPressed] = useState(false);
+  const [isDragged, setIsDragged] = useState(false);
   const { content, onChange, reset, setContent } = useInput();
-  const timerRef = useRef(null);
   const startTimeRef = useRef(0);
-
-  useEffect(() => {}, [todoList]);
 
   const onModifyHandler = async (newTitle, target) => {
     const newTodoList = [...todoList];
@@ -82,10 +122,11 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
   };
 
   const onMouseDownHandler = (target) => {
+    console.log("down");
     if (!isLongPressed) {
       startTimeRef.current = Date.now();
 
-      timerRef.current = setTimeout(() => {
+      setTimeRef.current = setTimeout(() => {
         setIsLongPressed(true);
         setContent(todoList[target].title);
       }, CLICK_THRESHOLD);
@@ -94,7 +135,7 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
 
   const onMouseUpHandler = async (target) => {
     if (Date.now() - startTimeRef.current < CLICK_THRESHOLD && !isLongPressed) {
-      clearTimeout(timerRef.current);
+      clearTimeout(setTimeRef.current);
 
       const newTodoList = [...todoList];
       newTodoList[target] = {
@@ -134,9 +175,14 @@ const TodoListItem = ({ title, index, isLast, isDone }) => {
 
   return (
     <ItemContainer
+      draggable={true}
       $isLast={isLast}
       onMouseDown={() => onMouseDownHandler(index)}
       onMouseUp={() => onMouseUpHandler(index)}
+      onDragStart={(event) => onDragStartHandler(event, index)}
+      onDragEnter={(event) => onDragEnterHandler(event, index)}
+      onDragEnd={onDragEndHandler}
+      onDragOver={(event) => event.preventDefault()}
     >
       {isLongPressed ? (
         <>

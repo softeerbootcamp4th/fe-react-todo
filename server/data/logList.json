@@ -1,108 +1,58 @@
 [
   {
-    "id": 1721279380229,
+    "id": 1721287020031,
     "type": "완료",
     "before": {
-      "title": "asdf",
+      "title": "정리정리정리",
       "isDone": false,
-      "id": 1721279291703
+      "id": 1721285797890
     },
     "after": {
-      "title": "asdf",
+      "title": "정리정리정리",
       "isDone": true,
-      "id": 1721279291703
+      "id": 1721285797890
     }
   },
   {
-    "id": 1721279381245,
-    "type": "완료취소",
-    "before": {
-      "title": "asdf",
-      "isDone": true,
-      "id": 1721279291703
-    },
-    "after": {
-      "title": "asdf",
-      "isDone": false,
-      "id": 1721279291703
-    }
-  },
-  {
-    "id": 1721279382449,
+    "id": 1721287021080,
     "type": "완료",
     "before": {
-      "title": "asdf",
+      "title": "추가추가",
       "isDone": false,
-      "id": 1721279291995
+      "id": 1721285795646
     },
     "after": {
-      "title": "asdf",
+      "title": "추가추가",
       "isDone": true,
-      "id": 1721279291995
+      "id": 1721285795646
     }
   },
   {
-    "id": 1721279382998,
+    "id": 1721287021937,
     "type": "완료취소",
     "before": {
-      "title": "asdf",
+      "title": "정리정리정리",
       "isDone": true,
-      "id": 1721279291995
+      "id": 1721285797890
     },
     "after": {
-      "title": "asdf",
+      "title": "정리정리정리",
       "isDone": false,
-      "id": 1721279291995
+      "id": 1721285797890
     }
   },
   {
-    "id": 1721279387701,
-    "type": "삭제",
+    "id": 1721287022634,
+    "type": "완료취소",
     "before": {
-      "title": "asdf",
-      "isDone": false,
-      "id": 1721279291703
+      "title": "추가추가",
+      "isDone": true,
+      "id": 1721285795646
     },
-    "after": null
-  },
-  {
-    "id": 1721279388006,
-    "type": "삭제",
-    "before": {
-      "title": "asdf",
-      "isDone": false,
-      "id": 1721279291995
-    },
-    "after": null
-  },
-  {
-    "id": 1721279388279,
-    "type": "삭제",
-    "before": {
-      "title": "asdf",
-      "isDone": false,
-      "id": 1721279292233
-    },
-    "after": null
-  },
-  {
-    "id": 1721279388610,
-    "type": "삭제",
-    "before": {
-      "title": "asfd",
-      "isDone": false,
-      "id": 1721279292587
-    },
-    "after": null
-  },
-  {
-    "id": 1721279393552,
-    "type": "추가",
-    "before": {},
     "after": {
-      "title": "드래그 앤 드롭",
+      "title": "추가추가",
       "isDone": false,
-      "id": 1721279393539
+      "id": 1721285795646
     }
   }
 ]
