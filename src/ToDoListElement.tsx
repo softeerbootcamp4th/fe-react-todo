@@ -52,7 +52,7 @@ const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo, deleteToDo }: T
     let content = (
         <>
             <p>{toDo}</p>
-            <Button width={50} height={30} backgroundColor="6c90bb" title={"삭제"} cb={handleDelete} value={todo} />
+            <Button width={60} height={40} backgroundColor="6c90bb" title={"삭제"} cb={handleDelete} value={todo} />
         </>
     )
     if (isEditingMode) {
@@ -72,7 +72,7 @@ const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo, deleteToDo }: T
 
     return (
         <>
-            <li className="flex justify-between mx-4 my-8 w-1/3" onMouseUp={endClick} onMouseDown={startClick}>
+            <li style={{ borderBottom: "olive 1px solid" }} className="flex justify-between mx-4 py-4 w-1/3" onMouseUp={endClick} onMouseDown={startClick}>
                 {content}
             </li>
         </>
