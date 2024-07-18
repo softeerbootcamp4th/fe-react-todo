@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { pushData } from "../utils/db";
+import { pushData, pushHistory } from "../utils/db";
 import { getRecentTodo, pushRecentTodo } from "../utils/local";
 
-export default function TodoForm({ todoList, setTodoList }) {
+export default function TodoForm({ todoList, setTodoList, historyList, setHistoryList }) {
   const [formString, setFormString] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [recentTodoList, setRecentTodoList] = useState([]);
@@ -22,10 +22,13 @@ export default function TodoForm({ todoList, setTodoList }) {
       pushData({ title: formString, completed: false }).then((newId) => {
         setTodoList([...todoList, { id: newId, title: formString, completed: false }]);
       });
+      const newHistory = { date: new Date(), type: "add", before: "", after: formString };
+      pushRecentTodo(formString);
+      setRecentTodoList(getRecentTodo());
+      pushHistory(newHistory);
+      setHistoryList([newHistory, ...historyList]);
+      setFormString("");
     }
-    setFormString("");
-    pushRecentTodo(formString);
-    setRecentTodoList(getRecentTodo());
   };
 
   return (

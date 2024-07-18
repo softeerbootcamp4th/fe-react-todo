@@ -1,31 +1,38 @@
 import { Fragment, useEffect, useRef, useState } from "react"
-import { getData } from "/utils/db";
+import { getData, getHistory } from "/utils/db";
 import Todo from "/components/todo";
 import DropLocation from "../components/dropLocation";
 import TodoForm from "../components/todoForm";
+import History from "../components/history";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [editTodoId, setEditTodoId] = useState("");
   const timerRef = useRef(null);
   const [draggedTodoId, setDraggedTodoId] = useState("");
+  const [historyList, setHistoryList] = useState([]);
 
   useEffect(() => {
     getData().then((data) => {
       setTodoList(data);
     });
+    getHistory().then((data) => {
+      setHistoryList(data)
+    });
   }, [])
 
   return (
-    <div className="h-full min-h-screen flex justify-center bg-green-100">
-      <div className="mt-16 max-w-xl w-full h-fit p-7 flex flex-col items-center border border-slate-300 rounded-2xl bg-slate-50">
+    <div className="pt-16 h-full gap-5 min-h-screen flex justify-center bg-green-100">
+      <div className="max-w-xl w-full h-fit p-7 flex flex-col items-center border border-slate-300 rounded-2xl bg-slate-50">
         <span
           className="font-bold text-3xl mb-5">My Todo App
         </span>
 
         <TodoForm
           todoList={todoList}
-          setTodoList={setTodoList} />
+          setTodoList={setTodoList}
+          historyList={historyList}
+          setHistoryList={setHistoryList} />
 
         <div className="w-full flex flex-col">
           <DropLocation
@@ -43,7 +50,10 @@ function App() {
                 editTodoId={editTodoId}
                 setEditTodoId={setEditTodoId}
                 draggedTodoId={draggedTodoId}
-                setDraggedTodoId={setDraggedTodoId} />
+                historyList={historyList}
+                setHistoryList={setHistoryList}
+                setDraggedTodoId={setDraggedTodoId}
+              />
 
               <DropLocation
                 draggedTodoId={draggedTodoId}
@@ -54,6 +64,10 @@ function App() {
           ))}
         </div>
       </div>
+
+      <History
+        historyList={historyList}
+        setHistoryList={setHistoryList} />
     </div>
   )
 }

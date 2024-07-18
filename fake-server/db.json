@@ -1,29 +1,5 @@
 {
-  "todo": [
-    {
-      "id": "60f7",
-      "title": "아침먹기",
-      "completed": false
-    },
-    {
-      "id": "23a6",
-      "title": "점심먹기",
-      "completed": false
-    },
-    {
-      "id": "5c94",
-      "title": "아침먹기ㅁㅁ",
-      "completed": false
-    },
-    {
-      "id": "285a",
-      "title": "저녁먹기",
-      "completed": false
-    },
-    {
-      "id": "ffb8",
-      "title": "간식먹기",
-      "completed": false
-    }
+  "todo": [],
+  "history": [
   ]
 }

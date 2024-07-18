@@ -33,3 +33,17 @@ export async function replaceAllData(data) {
   oldData.forEach(async (todo) => popData(todo.id));
   data.forEach(async (todo) => await pushData(todo));
 }
+
+export async function getHistory() {
+  const data = await fetch("http://localhost:3000/history?_sort=-date");
+  const dataList = await data.json();
+  return dataList;
+}
+
+export function pushHistory(newHistory) {
+  fetch("http://localhost:3000/history", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newHistory)
+  })
+}

@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { popData, modifyData } from "/utils/db";
+import { popData, modifyData, pushHistory } from "/utils/db";
 
-export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTodoId, setDraggedTodoId, editTodoId, setEditTodoId }) {
+export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTodoId, setDraggedTodoId, editTodoId, setEditTodoId, setHistoryList, historyList }) {
   const [editString, setEditString] = useState("");
   //const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   function onClickPop() {
     setTodoList(todoList.filter((_todo) => _todo.id !== todo.id));
     popData(todo.id);
+
+    const newHistory = { date: new Date(), type: "delete", before: todo.title, after: "" };
+    setHistoryList([newHistory, ...historyList]);
+    pushHistory(newHistory);
   }
 
   function onClickCompleted() {
@@ -36,6 +40,10 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
       modifyData(todo.id, { title: editString });
       setEditTodoId("");
       setTodoList(todoList.map((_todo) => _todo.id === todo.id ? { ..._todo, title: editString } : _todo));
+
+      const newHistory = { date: new Date(), type: "edit", before: todo.title, after: editString };
+      setHistoryList([newHistory, ...historyList]);
+      pushHistory(newHistory);
     }
   }
 
