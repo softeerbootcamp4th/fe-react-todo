@@ -1,4 +1,4 @@
-import { TodoHistory as TodoHistoryType } from 'src/store/types/todoTypes';
+import { TodoHistory as TodoHistoryType } from 'src/types/todo';
 
 interface TodoHistoryProps {
   history: TodoHistoryType;

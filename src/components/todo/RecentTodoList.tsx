@@ -1,4 +1,4 @@
-import { RecentTodo } from 'src/store/types/todoTypes';
+import { RecentTodo } from 'src/types/todo';
 import { getLocalStorage, StorageKeys } from 'src/utils/localStorage';
 
 export default function RecentTodoList() {

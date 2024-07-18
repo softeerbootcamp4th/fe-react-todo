@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { TodoItem } from 'src/store/types/todoTypes';
+import { TodoItem } from 'src/types/todo';
 
 export default function useUpdateTodo() {
   const queryClient = useQueryClient();

@@ -1,6 +1,6 @@
 import TodoHistory from 'src/components/todo/TodoHistory';
-import useGetTodoHistoryList from 'src/hooks/history/useGetTodoHistoryList';
-import { TodoHistory as TodoHistoryType } from 'src/store/types/todoTypes';
+import useGetTodoHistoryList from 'src/hooks/todo/useGetTodoHistoryList';
+import { TodoHistory as TodoHistoryType } from 'src/types/todo';
 
 export default function TodoHistoryList() {
   const { histories } = useGetTodoHistoryList();

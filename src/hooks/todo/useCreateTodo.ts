@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { RecentTodo, TodoItem } from 'src/store/types/todoTypes';
+import { RecentTodo, TodoItem } from 'src/types/todo';
 import { getLocalStorage, setLocalStorage, StorageKeys } from 'src/utils/localStorage';
 
 export default function useCreateTodo() {

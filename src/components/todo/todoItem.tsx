@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TodoItem as TodoItemType } from 'src/store/types/todoTypes';
+import { TodoItem as TodoItemType } from 'src/types/todo';
 import useLongPress from 'src/hooks/useLongPress';
 import useDeleteTodo from 'src/hooks/todo/useDeleteTodo';
 import useUpdateTodo from 'src/hooks/todo/useUpdateTodo';

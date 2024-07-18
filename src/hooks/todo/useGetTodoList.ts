@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { TodoItem } from 'src/store/types/todoTypes';
+import { TodoItem } from 'src/types/todo';
 
 const mockTodos: TodoItem[] = [{ id: 1, title: 'string', registerDate: new Date('2022-02-02') }];
 

@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { TodoHistory } from 'src/store/types/todoTypes';
+import { TodoHistory } from 'src/types/todo';
 
 const mockHistories: TodoHistory[] = [
   {
