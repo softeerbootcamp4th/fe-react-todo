@@ -49,7 +49,7 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
 
   return (
     <div
-      draggable="true"
+      draggable={!editTodoId}
       onDragStart={onDragStartTodo}
       onDrag={onDragTodo}
       onDragEnd={() => setDraggedTodoId("")}
