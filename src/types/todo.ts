@@ -3,15 +3,12 @@ import { Dispatch } from 'react';
 export type TodoStatus = '수정' | '삭제' | '등록';
 
 export interface TodoItem {
-  id: number;
+  todoId: number;
   title: string;
   registerDate: Date;
 }
 
-export interface TodoHistory {
-  id: number;
-  updatedDate: Date;
-  todo: TodoItem;
+export interface TodoHistory extends TodoItem {
   status: TodoStatus;
 }
 

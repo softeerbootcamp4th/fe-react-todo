@@ -1,12 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import API from 'src/constants/api';
 
 export default function useDeleteTodo() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (id: number) => Promise.resolve(id),
+    mutationFn: async (todoId: number) => {
+      await fetch(API.TODOS, {
+        method: 'DELETE',
+        body: JSON.stringify({ todoId }),
+      });
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [['todos'], ['todos-histories']] });
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
+      queryClient.invalidateQueries({ queryKey: ['todos-histories'] });
     },
   });
 
