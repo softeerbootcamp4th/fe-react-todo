@@ -1,12 +1,14 @@
-import { useEffect, useRef, useState } from "react"
-import { getData, pushData } from "/utils/db";
+import { Fragment, useEffect, useRef, useState } from "react"
+import { getData } from "/utils/db";
 import Todo from "/components/todo";
+import DropLocation from "../components/dropLocation";
+import TodoForm from "../components/todoForm";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
-  const [formString, setFormString] = useState("");
-  // const [isLongPress, setIsLongPress] = useState(false);
+  const [editTodoId, setEditTodoId] = useState("");
   const timerRef = useRef(null);
+  const [draggedTodoId, setDraggedTodoId] = useState("");
 
   useEffect(() => {
     getData().then((data) => {
@@ -14,36 +16,43 @@ function App() {
     });
   }, [])
 
-  function onChangeForm(e) {
-    const string = e.target.value;
-    setFormString(string);
-  };
-
-  function onClickPush(e) {
-    e.preventDefault();
-    if (formString) {
-      pushData({ title: formString, completed: false, }).then((newId) => {
-        setTodoList([...todoList, { id: newId, title: formString }]);
-      });
-    }
-    setFormString("");
-  };
-
   return (
-    <div className="h-screen flex justify-center items-center">
-      <div className="w-96 p-5 flex flex-col items-center border border-gray-500">
-        <span>My Todo App</span>
+    <div className="h-full min-h-screen flex justify-center bg-green-100">
+      <div className="mt-16 max-w-xl w-full h-fit p-7 flex flex-col items-center border border-slate-300 rounded-2xl bg-slate-50">
+        <span
+          className="font-bold text-3xl mb-5">My Todo App
+        </span>
 
-        <form>
-          <input value={formString} placeholder="할일을 입력하세요" onChange={onChangeForm} type="text" className="border border-black" />
-          <button onClick={onClickPush} className="bg-green-700 text-white">
-            등록
-          </button>
-        </form>
+        <TodoForm
+          todoList={todoList}
+          setTodoList={setTodoList} />
 
-        {todoList.map((todo) => (
-          <Todo key={todo.id} todo={todo} todoList={todoList} setTodoList={setTodoList} timerRef={timerRef} />
-        ))}
+        <div className="w-full flex flex-col">
+          <DropLocation
+            draggedTodoId={draggedTodoId}
+            frontId=""
+            todoList={todoList}
+            setTodoList={setTodoList} />
+
+          {todoList.map((todo) => (
+            <Fragment key={todo.id}>
+              <Todo todo={todo}
+                todoList={todoList}
+                setTodoList={setTodoList}
+                timerRef={timerRef}
+                editTodoId={editTodoId}
+                setEditTodoId={setEditTodoId}
+                draggedTodoId={draggedTodoId}
+                setDraggedTodoId={setDraggedTodoId} />
+
+              <DropLocation
+                draggedTodoId={draggedTodoId}
+                frontId={todo.id}
+                todoList={todoList}
+                setTodoList={setTodoList} />
+            </Fragment>
+          ))}
+        </div>
       </div>
     </div>
   )
