@@ -42,6 +42,7 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
         onClick={handleToggleStatus}
         type="checkbox"
         checked={isCompleted}
+        readOnly
       />
       <h3
         css={css`
