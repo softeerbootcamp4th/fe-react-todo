@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import { TodoInput } from "./components/TodoInput";
 import { TodoItems } from "./components/TodoItems";
 import { TodosProvider } from "./providers/TodosProvider";
+import { LogItems } from "./components/LogItems";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         </h1>
         <TodoInput />
         <TodoItems />
+        <LogItems />
       </div>
     </TodosProvider>
   );
