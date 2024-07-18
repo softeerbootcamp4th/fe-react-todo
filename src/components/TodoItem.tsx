@@ -15,10 +15,10 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
     if (!isNotCompleted) return;
     setEditingTodoId(todo.id);
   }, 2000);
-  const handleComplete = () => {
+  const handleToggleStatus = () => {
     updateTodoStatus({
       ...todo,
-      status: "completed",
+      status: todo.status === "active" ? "completed" : "active",
     });
   };
 
@@ -32,14 +32,23 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
         padding: 1rem;
         border-bottom: 1px solid #ccc;
         display: flex;
+        gap: 1rem;
         justify-content: space-between;
         text-decoration: ${isNotCompleted ? "none" : "line-through"};
       `}
       ref={longPressRef}
     >
-      <h3>{todo.title}</h3>
+      <input onClick={handleToggleStatus} type="checkbox" />
+      <h3
+        css={css`
+          width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        `}
+      >
+        {todo.title}
+      </h3>
       <span>
-        {isNotCompleted && <button onClick={handleComplete}>완료</button>}
         <button onClick={handleRemove}>삭제</button>
       </span>
     </div>
