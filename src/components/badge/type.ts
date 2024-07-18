@@ -1,4 +1,4 @@
 export interface BadgeProps {
-  type: 'DELETE' | 'ADD' | 'EDIT';
+  type: 'GREEN' | 'BLUE' | 'RED';
   text: string;
 }

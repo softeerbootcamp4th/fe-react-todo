@@ -1,5 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
+import TodoItem from './todoItem/TodoItem';
+import Badge from './badge/Badge';
 
 const logStyle = css`
   position: relative;
@@ -11,11 +13,14 @@ const logStyle = css`
   border-radius: 10px;
   box-shadow: 0 0 20px 10px gainsboro;
   left: -30px;
-  z-index: -1;
 `;
 
 const Log: React.FC = () => {
-  return <div css={logStyle}></div>;
+  return (
+    <div css={logStyle}>
+      <TodoItem leftItem="hello" rightItem={<Badge text="DELETE" type="RED" />}></TodoItem>
+    </div>
+  );
 };
 
 export default Log;
