@@ -4,9 +4,10 @@ import Button from "./Button";
 interface ToDoListElement {
     todo: string;
     deleteToDo: (todo: string) => void;
+    updateToDo: (oldTodo: string, newTodo: string) => void;
 }
 
-const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo, deleteToDo }: ToDoListElement) => {
+const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo, deleteToDo, updateToDo }: ToDoListElement) => {
     const [isEditingMode, setIsEditingMode] = useState<boolean>(false)
     const [toDo, setToDo] = useState<string>(todo)
     const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -36,8 +37,10 @@ const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo, deleteToDo }: T
         }
     }
 
-    const toggleEditingMode = (noUse: string): undefined => {
-        if (noUse) return;
+    const toggleEditingMode = () => {
+        if (isEditingMode) {
+            updateToDo(todo, toDo);
+        }
         setIsEditingMode(!isEditingMode)
     }
 
@@ -65,7 +68,7 @@ const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo, deleteToDo }: T
                     placeholder={toDo}
                     className="w-full mr-10"
                 />
-                <Button width={50} height={30} backgroundColor="6c90bb" title={"완료"} cb={toggleEditingMode} value="z" />
+                <Button width={60} height={40} backgroundColor="6c90bb" title={"완료"} cb={toggleEditingMode} value="" />
             </>
         )
     }
