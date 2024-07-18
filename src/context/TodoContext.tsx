@@ -1,26 +1,26 @@
 import { createContext, useState, useEffect, ReactNode, Dispatch } from "react";
-import Todo from "@/types/todoType";
-import { fetchToDoList, handleDelete } from "@/apis/fetch";
+import { Todo } from "@/types/todoType";
+import { getToList, deleteTodo } from "@/apis/todoList";
 
 export interface TodoContextType {
   todoItemList: Todo[];
   setTodoItemList: Dispatch<Todo[]>;
   isEdit: boolean;
   setIsEdit: Dispatch<boolean>;
-  getTodoList: () => Promise<void>;
+  updateTodoList: () => Promise<void>;
   handleDeleteTodoItem: (id: number) => void;
 }
 
-export const TodoContext = createContext<TodoContextType | undefined>(undefined);
+export const TodoContext = createContext<TodoContextType | null>(null);
 
 export const TodoProvider = ({ children }: { children: ReactNode }) => {
   const [todoItemList, setTodoItemList] = useState<Todo[]>([]);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
-  const getTodoList = async () => {
+  const updateTodoList = async () => {
     try {
-      const data = await fetchToDoList();
-      setTodoItemList(data);
+      const data = await getToList();
+      setTodoItemList(data ?? []);
     } catch (error) {
       console.error("Error fetching todo list:", error);
     }
@@ -29,7 +29,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
   const handleDeleteTodoItem = (id: number) => {
     //콜백으로 설정?
     try {
-      handleDelete(id);
+      deleteTodo(id);
       setTodoItemList(todoItemList.filter((todo) => todo.id !== id));
     } catch (error) {
       console.error("Error:", error);
@@ -37,7 +37,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    getTodoList();
+    updateTodoList();
   }, []);
 
   const value: TodoContextType = {
@@ -45,7 +45,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     setTodoItemList,
     isEdit,
     setIsEdit,
-    getTodoList,
+    updateTodoList,
     handleDeleteTodoItem,
   };
 
