@@ -13,15 +13,23 @@ export default function History({ historyList, setHistoryList }) {
   }
 
   function printAction(history) {
-    if (history.type === "delete") {
-      return `${history.before} 삭제`;
+    if (!history.after) {
+      return <span>
+        <span className="italic">{history.before}</span>
+        <span className="text-red-700"> 삭제</span>
+      </span>
     }
-    else if (history.type === "edit") {
-      return `${history.before}(을)를 ${history.after}(으)로 수정`;
+    if (!history.before) {
+      return <span>
+        <span className="italic">{history.after}</span>
+        <span className="text-blue-700"> 추가</span>
+      </span>
     }
-    else if (history.type === "add") {
-      return `${history.after} 추가`;
-    }
+    return <span>
+      <span className="italic">{history.before}</span>{"(을)를 "}
+      <span className="italic">{history.after}</span>{"(으)로 "}
+      <span className="text-green-700">수정</span>
+    </span>
   }
 
   function clearHistory() {

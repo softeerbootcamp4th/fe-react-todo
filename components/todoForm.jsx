@@ -22,7 +22,7 @@ export default function TodoForm({ todoList, setTodoList, historyList, setHistor
       pushData({ title: formString, completed: false }).then((newId) => {
         setTodoList([...todoList, { id: newId, title: formString, completed: false }]);
       });
-      const newHistory = { date: new Date(), type: "add", before: "", after: formString };
+      const newHistory = { date: new Date(), before: "", after: formString };
       pushRecentTodo(formString);
       setRecentTodoList(getRecentTodo());
       pushHistory(newHistory);

@@ -9,7 +9,7 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
     setTodoList(todoList.filter((_todo) => _todo.id !== todo.id));
     popData(todo.id);
 
-    const newHistory = { date: new Date(), type: "delete", before: todo.title, after: "" };
+    const newHistory = { date: new Date(), before: todo.title, after: "" };
     setHistoryList([newHistory, ...historyList]);
     pushHistory(newHistory);
   }
@@ -41,7 +41,7 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
       setEditTodoId("");
       setTodoList(todoList.map((_todo) => _todo.id === todo.id ? { ..._todo, title: editString } : _todo));
 
-      const newHistory = { date: new Date(), type: "edit", before: todo.title, after: editString };
+      const newHistory = { date: new Date(), before: todo.title, after: editString };
       setHistoryList([newHistory, ...historyList]);
       pushHistory(newHistory);
     }
