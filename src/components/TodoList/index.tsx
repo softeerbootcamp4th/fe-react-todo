@@ -4,7 +4,7 @@ import { useTodoList } from "../../hooks/useTodoList";
 import { TodoItemType } from "../../types/todo";
 
 function TodoList() {
-    const { todoList, updateTodoList, getTodoList, isEditing } = useTodoList();
+    const { todoList, updateTodoList, getTodoList, isSubmitted, setIsSubmitted } = useTodoList();
     const scrollRef = useRef<HTMLUListElement>(null);
     const [draggingItem, setDraggingItem] = useState<string | null>(null);
 
@@ -13,10 +13,11 @@ function TodoList() {
     }, []);
 
     useEffect(() => {
-        if (!isEditing && scrollRef.current) {
+        if (isSubmitted && scrollRef.current) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+            setIsSubmitted(false);
         }
-    }, [todoList]);
+    }, [isSubmitted]);
 
     const handleDragStart = (id: string) => {
         setDraggingItem(id);

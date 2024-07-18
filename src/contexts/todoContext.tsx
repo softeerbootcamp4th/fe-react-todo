@@ -8,8 +8,8 @@ export interface TodoContextType {
     todoList: TodoItemType[];
     setTodoList: Dispatch<TodoItemType[]>;
     getTodoList: () => Promise<void>;
-    isEditing: boolean;
-    setIsEditing: Dispatch<boolean>;
+    isSubmitted: boolean;
+    setIsSubmitted: Dispatch<boolean>;
     logList: LogType[];
     getLogList: () => Promise<void>;
     setLogListItem: (log: LogType) => Promise<void>;
@@ -20,7 +20,7 @@ export const TodoContext = createContext<TodoContextType | null>(null);
 
 export const TodoProvider = ({ children }: { children: ReactNode }) => {
     const [todoList, setTodoList] = useState<TodoItemType[]>([]);
-    const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
     const [logList, setLogList] = useState<LogType[]>([]);
 
     const getTodoList = async () => {
@@ -48,8 +48,8 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
                 todoList,
                 setTodoList,
                 getTodoList,
-                isEditing,
-                setIsEditing,
+                isSubmitted,
+                setIsSubmitted,
                 logList,
                 getLogList,
                 setLogListItem,
