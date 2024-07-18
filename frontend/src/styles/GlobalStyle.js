@@ -27,6 +27,8 @@ export const GlobalStyle = createGlobalStyle`
         display: block;
     }
     body {
+        width: 100vw;
+        height: 100vh;
         line-height: 1;
     }
     ol, ul {
@@ -43,5 +45,15 @@ export const GlobalStyle = createGlobalStyle`
     table {
         border-collapse: collapse;
         border-spacing: 0;
+    }
+    #root{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4rem;
+    }
+    *{
+        box-sizing: border-box;
     }
 `;

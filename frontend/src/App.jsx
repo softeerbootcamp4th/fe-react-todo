@@ -7,9 +7,11 @@ import Input from "./components/Input";
 import TodoList from "./components/TodoList";
 import { TodoStore } from "./Provider/todoContext";
 import { getTodoList } from "./api/todo";
+import { LogStore } from "./Provider/logContext";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
+  const [logList, setLogList] = useState([]);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -22,20 +24,23 @@ function App() {
   return (
     <>
       <Title>to do app</Title>
-      <TodoStore.Provider value={{ todoList, setTodoList }}>
+      <LogStore.Provider value={{}}>
         <ToDoListContainer>
-          <Input />
-          <TodoList />
+          <TodoStore.Provider value={{ todoList, setTodoList }}>
+            <Input />
+            <TodoList />
+          </TodoStore.Provider>
         </ToDoListContainer>
-      </TodoStore.Provider>
-      <ActivityLog></ActivityLog>
+        <ActivityLog></ActivityLog>
+      </LogStore.Provider>
     </>
   );
 }
 
 const Title = styled.h1`
-  background-color: orange;
-  font-size: 2em;
+  margin-top: 10rem;
+  font-size: 3rem;
+  font-weight: 800;
   text-align: center;
   color: #bf4f74;
 `;
