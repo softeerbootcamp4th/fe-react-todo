@@ -1,21 +1,18 @@
 import { Suspense, useState } from 'react';
 import Dropdown from 'src/components/common/Dropdown';
 import TodoHistoryList from 'src/components/history/TodoHistoryList';
+import RecentTodoList from 'src/components/recentTodo/RecentTodoList';
 import TodoList from 'src/components/todo/TodoList';
-import useTodo from 'src/viewModel/useTodo';
+import useCreateTodo from 'src/hooks/todo/useCreateTodo';
 
 export default function Todo() {
-  const { todo, addTodo } = useTodo();
-  const { recentTodoList } = todo;
+  const { mutate: createTodo } = useCreateTodo();
 
   const [text, setText] = useState<string>('');
-
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
-  const handleSubmit = (value: string) => {
-    setText('');
-    addTodo(value);
-  };
+  const resetText = () => setText('');
+  const handleSubmit = (value: string) => createTodo(value, { onSuccess: resetText });
 
   return (
     <div className="bg-pink-400 w-full h-full flex flex-row justify-center items-center">
@@ -42,10 +39,7 @@ export default function Todo() {
           </div>
 
           <Dropdown isOpen={dropdownOpen}>
-            {recentTodoList.map(({ title, registerDate }, todoIndex) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <div key={`recent-${registerDate}-${todoIndex}`}>{title}</div>
-            ))}
+            <RecentTodoList />
           </Dropdown>
         </div>
 

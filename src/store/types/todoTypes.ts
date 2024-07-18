@@ -15,6 +15,8 @@ export interface TodoHistory {
   status: TodoStatus;
 }
 
+export interface RecentTodo extends TodoItem {}
+
 export interface TodoState {
   recentTodoList: TodoItem[];
   todoList: TodoItem[];
