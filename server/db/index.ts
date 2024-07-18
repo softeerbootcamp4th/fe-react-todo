@@ -1,3 +1,4 @@
+import { Log } from "../../src/models/Log";
 import { Todo } from "../../src/models/Todo";
 
 export const db = {
@@ -20,5 +21,13 @@ export const db = {
     const currentTodos = await db.readTodos();
     const updatedTodos = currentTodos.filter((t) => t.id !== id);
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
+  },
+
+  readLogs: async (): Promise<Array<Log>> => {
+    return JSON.parse(localStorage.getItem("logs") || "[]");
+  },
+  insertLog: async (log: Log) => {
+    const currentLogs = await db.readLogs();
+    localStorage.setItem("logs", JSON.stringify([...currentLogs, log]));
   },
 };
