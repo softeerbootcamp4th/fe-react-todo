@@ -13,7 +13,7 @@ export const TodosProvider = ({ children }: PropsWithChildren) => {
   }, []);
   useEffect(() => {
     readTodos();
-  }, [readTodos]);
+  }, []);
 
   const addTodo = useCallback(async (title: string) => {
     const newTodo = await todoRemotes.createTodo(title);
