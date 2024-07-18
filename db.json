@@ -6,18 +6,23 @@
       "isChecked": false
     },
     {
-      "id": "a5e5",
-      "description": "청소하기",
-      "isChecked": false
-    },
-    {
       "id": "560e",
       "description": "우산쓰기",
       "isChecked": false
     },
     {
+      "id": "a5e5",
+      "description": "청소하기",
+      "isChecked": false
+    },
+    {
       "id": "ed70",
       "description": "집가기",
+      "isChecked": false
+    },
+    {
+      "id": "5192",
+      "description": "방청소",
       "isChecked": false
     }
   ],
@@ -216,6 +221,17 @@
       "id": "9316",
       "status": "삭제",
       "description": "빨래하기"
+    },
+    {
+      "id": "c061",
+      "status": "수정",
+      "prevDescription": "청소하기",
+      "description": "청소하기"
+    },
+    {
+      "id": "58de",
+      "status": "등록",
+      "description": "방청소"
     }
   ]
 }

@@ -13,7 +13,7 @@ function TodoItem({ todo, handleDragStart, handleDragOver, handleDrop }: TodoIte
 
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const timeoutRef = useRef<number | null>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
         if (isEditing && inputRef.current) {
