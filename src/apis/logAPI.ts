@@ -1,30 +1,30 @@
 import { LogType } from "../types/log";
 
-export class LogAPI {
-    private static baseURL = "http://localhost:3000/log";
-    private static headers = {
-        "Content-Type": "application/json",
-    };
+const baseURL = "http://localhost:3000/log";
+const headers = {
+    "Content-Type": "application/json",
+};
 
+export const LogAPI = {
     // GET 요청
-    public static async get() {
+    async get() {
         try {
-            const response = await fetch(`${this.baseURL}`, {
+            const response = await fetch(`${baseURL}`, {
                 method: "GET",
-                headers: this.headers,
+                headers: headers,
             });
             return response.json();
         } catch (error) {
             console.error("Error:", error);
             throw error;
         }
-    }
+    },
     // POST 요청
-    public static async post(data: LogType) {
+    async post(data: LogType) {
         try {
-            const response = await fetch(`${this.baseURL}`, {
+            const response = await fetch(`${baseURL}`, {
                 method: "POST",
-                headers: this.headers,
+                headers: headers,
                 body: JSON.stringify(data),
             });
             return response.json();
@@ -32,5 +32,5 @@ export class LogAPI {
             console.error("Error:", error);
             throw error;
         }
-    }
-}
+    },
+};

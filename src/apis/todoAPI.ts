@@ -1,30 +1,30 @@
 import { BaseTodoId, BaseTodoItem, TodoItemType } from "../types/todo";
 
-export class TodoAPI {
-    private static baseURL = "http://localhost:3000/todo";
-    private static headers = {
-        "Content-Type": "application/json",
-    };
+const baseURL = "http://localhost:3000/todo";
+const headers = {
+    "Content-Type": "application/json",
+};
 
+export const TodoAPI = {
     // GET 요청
-    public static async get() {
+    async get() {
         try {
-            const response = await fetch(`${this.baseURL}`, {
+            const response = await fetch(`${baseURL}`, {
                 method: "GET",
-                headers: this.headers,
+                headers: headers,
             });
             return response.json();
         } catch (error) {
             console.error("Error:", error);
             throw error;
         }
-    }
+    },
     // POST 요청
-    public static async post(data: BaseTodoItem) {
+    async post(data: BaseTodoItem) {
         try {
-            const response = await fetch(`${this.baseURL}`, {
+            const response = await fetch(`${baseURL}`, {
                 method: "POST",
-                headers: this.headers,
+                headers: headers,
                 body: JSON.stringify(data),
             });
             return response.json();
@@ -32,26 +32,26 @@ export class TodoAPI {
             console.error("Error:", error);
             throw error;
         }
-    }
+    },
     // DELETE 요청
-    public static async delete(data: BaseTodoId) {
+    async delete(data: BaseTodoId) {
         try {
-            const response = await fetch(`${this.baseURL}/${data.id}`, {
+            const response = await fetch(`${baseURL}/${data.id}`, {
                 method: "DELETE",
-                headers: this.headers,
+                headers: headers,
             });
             return response.json();
         } catch (error) {
             console.error("Error:", error);
             throw error;
         }
-    }
+    },
     // PATCH 요청
-    public static async patch(data: TodoItemType) {
+    async patch(data: TodoItemType) {
         try {
-            const response = await fetch(`${this.baseURL}/${data.id}`, {
+            const response = await fetch(`${baseURL}/${data.id}`, {
                 method: "PATCH",
-                headers: this.headers,
+                headers: headers,
                 body: JSON.stringify(data),
             });
             return response.json();
@@ -59,13 +59,13 @@ export class TodoAPI {
             console.error("Error:", error);
             throw error;
         }
-    }
+    },
     // DELETE ALL 요청
-    public static async deleteAll(data: TodoItemType[]) {
+    async deleteAll(data: TodoItemType[]) {
         const promises = data.map(item => {
-            return fetch(`${this.baseURL}/${item.id}`, {
+            return fetch(`${baseURL}/${item.id}`, {
                 method: "DELETE",
-                headers: this.headers,
+                headers: headers,
             });
         });
         try {
@@ -76,13 +76,13 @@ export class TodoAPI {
             console.error("Error:", error);
             throw error;
         }
-    }
+    },
     // POST ALL 요청
-    public static async postAll(data: TodoItemType[]) {
+    async postAll(data: TodoItemType[]) {
         const promises = data.map(item => {
-            return fetch(`${this.baseURL}`, {
+            return fetch(`${baseURL}`, {
                 method: "POST",
-                headers: this.headers,
+                headers: headers,
                 body: JSON.stringify(item),
             });
         });
@@ -94,5 +94,5 @@ export class TodoAPI {
             console.error("Error:", error);
             throw error;
         }
-    }
-}
+    },
+};
