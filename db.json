@@ -6,11 +6,6 @@
       "isChecked": false
     },
     {
-      "id": "b63c",
-      "description": "빨래하기",
-      "isChecked": false
-    },
-    {
       "id": "a5e5",
       "description": "청소하기",
       "isChecked": false
@@ -216,6 +211,11 @@
       "status": "수정",
       "prevDescription": "씻기",
       "description": "씻기"
+    },
+    {
+      "id": "9316",
+      "status": "삭제",
+      "description": "빨래하기"
     }
   ]
 }

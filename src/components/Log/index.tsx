@@ -15,9 +15,8 @@ function Log() {
             <header className="text-5xl font-bold font-Cafe24Meongi">Log</header>
             <ul className="w-96 flex flex-col gap-4 overflow-auto">
                 {logList
-                    .slice()
+                    .slice(logList.length - 100, logList.length)
                     .reverse()
-                    .slice(0, 100)
                     .map((log: LogType) => (
                         <li key={log.id} className="flex gap-2 items-center">
                             <span
