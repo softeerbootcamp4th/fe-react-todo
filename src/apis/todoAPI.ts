@@ -79,20 +79,22 @@ export const TodoAPI = {
     },
     // POST ALL 요청
     async postAll(data: TodoItemType[]) {
-        const promises = data.map(item => {
-            return fetch(`${baseURL}`, {
-                method: "POST",
-                headers: headers,
-                body: JSON.stringify(item),
-            });
-        });
+        const results = [];
         try {
-            const responses = await Promise.all(promises);
-            const results = await Promise.all(responses.map(response => response.json()));
-            return results;
+            for (const item of data) {
+                const response = await fetch(`${baseURL}`, {
+                    method: "POST",
+                    headers: headers,
+                    body: JSON.stringify(item),
+                });
+                const result = await response.json();
+                results.push(result);
+            }
         } catch (error) {
             console.error("Error:", error);
             throw error;
         }
+
+        return results;
     },
 };
