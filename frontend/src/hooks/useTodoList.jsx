@@ -1,13 +1,39 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { TodoStore } from "../Provider/todoContext";
 
-const useTodoList = () => {
-  const [todoList, setTodoList] = useState([]);
+const useTodoContext = (context) => {
+  const { todoList, setTodoList } = useContext(context);
 
-  const onSubmit = (item) => {
-    setTodoList([...todoList, item]);
+  const addTodo = (todoItem) => {
+    const newTodoList = [...todoList, todoItem];
+
+    setTodoList(newTodoList);
+
+    return newTodoList;
   };
 
-  return { todoList, onSubmit };
+  const deleteTodo = (target) => {
+    const newTodoList = todoList.filter((_, index) => index !== target);
+
+    setTodoList(newTodoList);
+
+    return newTodoList;
+  };
+
+  const modifyTodo = (target, newContent) => {
+    const newTodoList = [...todoList];
+
+    newTodoList[target] = {
+      ...todoList[target],
+      title: newContent,
+    };
+
+    setTodoList(newTodoList);
+
+    return newTodoList;
+  };
+
+  return { todoList, addTodo, deleteTodo, modifyTodo };
 };
 
-export default useTodoList;
+export default useTodoContext;

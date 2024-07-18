@@ -1,13 +1,47 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
-const useLogList = () => {
-  const [logList, setLogList] = useState([]);
+const useLogContext = (context) => {
+  const { logList, setLogList } = useContext(context);
 
-  const addLog = (item) => {
-    setLogList([...todoList, item]);
+  const logTodoAddition = (todoItem) => {
+    const newLogList = [
+      ...logList,
+      {
+        id: Date.now(),
+        type: "추가",
+        before: {},
+        after: todoItem,
+      },
+    ];
+
+    setLogList(newLogList);
+
+    return newLogList;
   };
 
-  return { logList, addLog };
+  const logTodoDeletion = (todoItem) => {
+    const newLogList = [
+      ...logList,
+      { id: Date.now(), type: "삭제", before: todoItem, after: null },
+    ];
+
+    setLogList(newLogList);
+
+    return newLogList;
+  };
+
+  const logTodoUpdate = (todoItem, newTodoItem) => {
+    const newLogList = [
+      ...logList,
+      { id: Date.now(), type: "수정", before: todoItem, after: newTodoItem },
+    ];
+
+    setLogList(newLogList);
+
+    return newLogList;
+  };
+
+  return { logList, logTodoAddition, logTodoDeletion, logTodoUpdate };
 };
 
-export default useLogList;
+export default useLogContext;

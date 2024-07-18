@@ -5,32 +5,21 @@ import useInput from "../hooks/useInput";
 import { postLogList, postToDoList } from "../api/todo";
 import { TodoStore } from "../Provider/todoContext";
 import { LogStore } from "../Provider/logContext";
+import useTodoContext from "../hooks/useTodoList";
+import useLogContext from "../hooks/useLogList";
 
 const Input = () => {
   const { content, onChange, reset } = useInput();
-  const { todoList, setTodoList } = useContext(TodoStore);
-  const { logList, setLogList } = useContext(LogStore);
-
+  const { todoList, addTodo } = useTodoContext(TodoStore);
+  const { logList, logTodoAddition } = useLogContext(LogStore);
   const onSubmitHandler = async () => {
     if (content) {
-      const newTodoList = await postToDoList([
-        ...todoList,
-        { title: content, isDone: false, id: Date.now() },
-      ]);
+      const newTodo = { title: content, isDone: false, id: Date.now() };
+      const newTodoList = addTodo(newTodo);
+      const newLogList = logTodoAddition(newTodo);
 
-      const newLogList = [
-        ...logList,
-        {
-          id: Date.now(),
-          type: "추가",
-          before: {},
-          after: newTodoList[newTodoList.length - 1],
-        },
-      ];
-
-      setTodoList(newTodoList);
-      setLogList(newLogList);
-      postLogList(logList);
+      postToDoList(newTodoList);
+      postLogList(newLogList);
       reset();
     }
   };

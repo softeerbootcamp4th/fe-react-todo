@@ -6,6 +6,8 @@ import { CLICK_THRESHOLD } from "../constants/magicNumber";
 import useInput from "../hooks/useInput";
 import { LogStore } from "../Provider/logContext";
 import useLogList from "../hooks/useLogList";
+import useLogContext from "../hooks/useLogList";
+import useTodoContext from "../hooks/useTodoList";
 
 const TodoList = () => {
   const { todoList, setTodoList } = useContext(TodoStore);
@@ -69,55 +71,30 @@ const TodoListItem = ({
   onDragEnterHandler,
   setTimeRef,
 }) => {
-  const { todoList, setTodoList } = useContext(TodoStore);
-  const { logList, setLogList } = useContext(LogStore);
+  const { todoList, deleteTodo, modifyTodo } = useTodoContext(TodoStore);
+  const { logList, logTodoDeletion, logTodoUpdate } = useLogContext(LogStore);
   const [isLongPressed, setIsLongPressed] = useState(false);
-  const [isDragged, setIsDragged] = useState(false);
   const { content, onChange, reset, setContent } = useInput();
   const startTimeRef = useRef(0);
 
-  const onModifyHandler = async (newTitle, target) => {
-    const newTodoList = [...todoList];
-    newTodoList[target] = {
-      ...todoList[target],
-      title: newTitle,
-    };
+  const onModifyHandler = (newTitle, target) => {
+    const newTodoList = modifyTodo(target, newTitle);
+    postToDoList(newTodoList);
 
-    //수정
-    const newLogList = [
-      ...logList,
-      {
-        id: Date.now(),
-        type: "수정",
-        before: todoList[target],
-        after: newTodoList[target],
-      },
-    ];
-
-    setTodoList(newTodoList);
-    setLogList(newLogList);
     reset();
-
-    await postToDoList(todoList);
-    await postLogList(logList);
     setIsLongPressed(false);
+
+    const newLogList = logTodoUpdate(todoList[target], newTodoList[target]);
+    postLogList(newLogList);
   };
 
   const onDeleteHandler = async (event, target) => {
     event.stopPropagation(); // 이벤트 버블링 방지
-    const newTodoList = await postToDoList(
-      todoList.filter((todo, index) => index !== target)
-    );
 
-    //삭제
-    const newLogList = [
-      ...logList,
-      { id: Date.now(), type: "삭제", before: todoList[target], after: null },
-    ];
+    const newTodoList = deleteTodo(target);
+    postToDoList(newTodoList);
 
-    setTodoList(newTodoList);
-    setLogList(newLogList);
-
+    const newLogList = logTodoDeletion(todoList[target]);
     postLogList(newLogList);
   };
 
