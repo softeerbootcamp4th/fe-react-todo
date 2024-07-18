@@ -10,6 +10,8 @@ export interface TodoContextType {
   setIsEdit: Dispatch<boolean>;
   updateTodoList: () => Promise<void>;
   handleDeleteTodoItem: (id: number) => void;
+  logList: string[];
+  setLogList: Dispatch<string[]>;
 }
 
 export const TodoContext = createContext<TodoContextType | null>(null);
@@ -17,6 +19,7 @@ export const TodoContext = createContext<TodoContextType | null>(null);
 export const TodoProvider = ({ children }: { children: ReactNode }) => {
   const [todoItemList, setTodoItemList] = useState<Todo[]>([]);
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [logList, setLogList] = useState<string[]>([]);
 
   const updateTodoList = async () => {
     try {
@@ -48,6 +51,8 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     setIsEdit,
     updateTodoList,
     handleDeleteTodoItem,
+    logList,
+    setLogList,
   };
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
