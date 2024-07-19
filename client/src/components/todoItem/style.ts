@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const TodoItemWrap = styled.div<{ index: number; draggedIndex: number | null }>`
+export const TodoItem = styled.div<{ index: number; draggedIndex: number | null }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
