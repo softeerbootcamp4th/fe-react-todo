@@ -35,8 +35,9 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
     clearTimeout(timerRef.current);
   }
 
-  function onClickEditConfirm() {
-    if (editString) {
+  function onClickEditConfirm(e) {
+    e.preventDefault();
+    if (editString && editString !== todo.title) {
       modifyData(todo.id, { title: editString });
       setEditTodoId("");
       setTodoList(todoList.map((_todo) => _todo.id === todo.id ? { ..._todo, title: editString } : _todo));
@@ -58,6 +59,11 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
   function onDragEnd() {
     setDraggedTodoId("");
     setOverLocationIdx(null);
+  }
+
+  function onClickCancel(e) {
+    e.preventDefault();
+    setEditTodoId("");
   }
 
   return (
@@ -92,7 +98,7 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
         </button>
 
         <button
-          onClick={() => setEditTodoId("")}
+          onClick={onClickCancel}
           className="px-2 py-1 mr-1 rounded-xl bg-orange-600 hover:bg-red-600 transition text-white">
           취소
         </button>

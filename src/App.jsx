@@ -38,7 +38,6 @@ function App() {
         <div className="w-full flex flex-col">
           <DropLocation
             draggedTodoId={draggedTodoId}
-            frontId=""
             overLocationIdx={overLocationIdx}
             setOverLocationIdx={setOverLocationIdx}
             idx={-1}
@@ -62,7 +61,6 @@ function App() {
 
               <DropLocation
                 draggedTodoId={draggedTodoId}
-                frontId={todo.id}
                 todoList={todoList}
                 idx={index}
                 overLocationIdx={overLocationIdx}
