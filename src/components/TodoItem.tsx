@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import { Todo } from "../models/Todo";
 import { useTodosContext } from "../hooks/useTodosContext";
 import { useLongPress } from "../hooks/useLongPress";
+import { Button } from "./Button";
 
 interface TodoItemProps {
   todo: Todo;
@@ -78,8 +79,14 @@ export const TodoItem = ({
       >
         {todo.title}
       </h3>
-      <span>
-        <button onClick={handleRemove}>삭제</button>
+      <span
+        css={css`
+          flex-shrink: 0;
+        `}
+      >
+        <Button variant="error" onClick={handleRemove}>
+          삭제
+        </Button>
       </span>
     </div>
   );

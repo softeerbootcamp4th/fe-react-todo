@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import { useTodosContext } from "../hooks/useTodosContext";
 import { useCallback, useRef, useState } from "react";
 import { AutoComplete } from "./AutoComplete";
+import { Button } from "./Button";
 
 export const TodoInput = () => {
   const { addTodo, todos } = useTodosContext();
@@ -62,7 +63,7 @@ export const TodoInput = () => {
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
-      <button onClick={handleAddTodo}>등록</button>
+      <Button onClick={handleAddTodo}>등록</Button>
       {isFocused && (
         <AutoComplete
           rect={rect}
