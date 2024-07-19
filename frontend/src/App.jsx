@@ -7,7 +7,7 @@ import Input from "./components/Input";
 import TodoList from "./components/TodoList";
 import { TodoStore } from "./Provider/todoContext";
 import { getLogList, getTodoList } from "./api/todo";
-import { LogStore, example } from "./Provider/logContext";
+import { LogStore } from "./Provider/logContext";
 
 function App() {
   const [todoList, setTodoList] = useState([]);

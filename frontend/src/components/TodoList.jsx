@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { TodoStore } from "../Provider/todoContext";
 import { postLogList, postToDoList } from "../api/todo";
@@ -20,12 +20,12 @@ const TodoList = () => {
 
   const { dragStartPosition, dragEndPosition, timerRef } = dragControlInfo;
 
-  const onDragEndHandler = (event) => {
+  const onDragEndHandler = () => {
     const newTodoList = changeTodoOrder(
       dragStartPosition.current,
       dragEndPosition.current
     );
-    console.log(newTodoList);
+
     resetDragInfo();
     postToDoList(newTodoList);
   };
@@ -62,7 +62,7 @@ const TodoListItem = ({
 }) => {
   const { todoList, deleteTodo, modifyTodo, handleCompleteTodo } =
     useTodoContext(TodoStore);
-  const { logList, logTodoDeletion, logTodoUpdate, logTodoCompletion } =
+  const { logTodoDeletion, logTodoUpdate, logTodoCompletion } =
     useLogContext(LogStore);
   const [isLongPressed, setIsLongPressed] = useState(false);
   const { content, onChange, resetContent, setContent } = useInput();

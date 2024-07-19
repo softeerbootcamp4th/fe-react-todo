@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { TodoStore } from "../Provider/todoContext";
+import React, { useContext } from "react";
 
 const useTodoContext = (context) => {
   const { todoList, setTodoList } = useContext(context);
