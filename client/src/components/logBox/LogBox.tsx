@@ -7,7 +7,7 @@ import { ILog } from '../../apis/log';
 import { ILogBoxProps } from './type';
 import { deleteAllLog } from '../../apis/log';
 import { FaTrashCan } from 'react-icons/fa6';
-import { LogBoxStyle } from './style';
+import * as Styled from './style';
 
 const LogBox: React.FC<ILogBoxProps> = ({ isLogShow, todoItemDatas }) => {
   const [logDatas, setLogDatas] = useState<ILog[]>([]);
@@ -31,7 +31,7 @@ const LogBox: React.FC<ILogBoxProps> = ({ isLogShow, todoItemDatas }) => {
   };
 
   return (
-    <LogBoxStyle isLogShow={isLogShow}>
+    <Styled.LogBox isLogShow={isLogShow}>
       <h1 className="title">Log</h1>
       <Space size={36} />
       <ul ref={logListRef} css={{ overflowY: 'auto', height: '300px', scrollbarWidth: 'thin' }}>
@@ -50,7 +50,7 @@ const LogBox: React.FC<ILogBoxProps> = ({ isLogShow, todoItemDatas }) => {
         onClick={handleTrashCan}
         size={32}
       />
-    </LogBoxStyle>
+    </Styled.LogBox>
   );
 };
 

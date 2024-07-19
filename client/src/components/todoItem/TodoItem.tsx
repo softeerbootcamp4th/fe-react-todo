@@ -3,7 +3,7 @@ import { ITodoItemProps } from './type';
 import { getAllTodoItems, updateTodoItem, updateTodoItemIsEnd } from '../../apis/todo';
 import Button from '../button/Button';
 import { ButtonSize, ButtonType } from '../button/type';
-import { TodoItemWrap } from './style';
+import * as Styled from './style';
 
 const TodoItem: React.FC<ITodoItemProps> = ({ id, index, content, button, isEnd, draggedIndex, setTodoItemDatas }) => {
   const [oldContent, setoldContent] = useState(content);
@@ -66,7 +66,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({ id, index, content, button, isEnd,
   }, [draggedIndex]);
 
   return (
-    <TodoItemWrap
+    <Styled.TodoItem
       index={index}
       draggedIndex={draggedIndex}
       onMouseDown={handleMouseDown}
@@ -102,7 +102,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({ id, index, content, button, isEnd,
       ) : (
         button
       )}
-    </TodoItemWrap>
+    </Styled.TodoItem>
   );
 };
 

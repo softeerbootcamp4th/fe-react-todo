@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import TodoItem from '../todoItem/TodoItem';
 import Button from '../button/Button';
-import { logToggleButtonStyle, TodoBoxStyle } from './style';
+import { logToggleButtonStyle } from './style';
+import * as Styled from './style';
 import { Space } from '../../style/style';
 import {
   createTodoItem,
@@ -76,7 +77,7 @@ const TodoBox: React.FC<ITodoBoxProps> = ({ todoItemDatas, setTodoItemDatas, isL
   };
 
   return (
-    <TodoBoxStyle isLogShow={isLogShow}>
+    <Styled.TodoBox isLogShow={isLogShow}>
       <div className="flex-center">
         <h1 className="title">My Todo App</h1>
         {isLogShow ? (
@@ -150,7 +151,7 @@ const TodoBox: React.FC<ITodoBoxProps> = ({ todoItemDatas, setTodoItemDatas, isL
           ))}
         </ul>
       </div>
-    </TodoBoxStyle>
+    </Styled.TodoBox>
   );
 };
 

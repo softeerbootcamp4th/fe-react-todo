@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const LogBoxStyle = styled.div<{ isLogShow: boolean }>`
+export const LogBox = styled.div<{ isLogShow: boolean }>`
   position: relative;
   width: 25%;
   min-width: 350px;

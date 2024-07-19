@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-export const TodoBoxStyle = styled.div<{ isLogShow: boolean }>`
+export const TodoBox = styled.div<{ isLogShow: boolean }>`
   width: 30%;
   min-width: 600px;
   max-width: 1200px;
