@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import HState from './State';
-import store from './Store';
-import Reducer from './Reducer';
+import HState from '../State';
+import store from '../Store';
+import Reducer from '../Reducer';
 
 
 function useBind<PayLoad>(initialState: HState<PayLoad>, reducer: Reducer<PayLoad>): PayLoad {

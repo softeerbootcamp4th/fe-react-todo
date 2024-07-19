@@ -3,7 +3,7 @@ import State from "./State";
 
 interface Reducer<PayLoad> {
     type: string;
-    reducer: (state: State<PayLoad>, action: Action) => State<PayLoad>;
+    reducer: (state: State<PayLoad>, action: Action) => Promise<State<PayLoad>>;
 }
 
 export default Reducer;
