@@ -14,7 +14,7 @@ export const TodoBox = styled.div<{ isLogShow: boolean }>`
   padding: 60px 80px;
   position: relative;
   margin-left: ${({ isLogShow }) => (isLogShow ? '0' : '20%')};
-  transition: all 0.8s ease-in-out;
+  transition: all 0.5s ease-in-out;
 
   .title {
     font-size: 2.4rem;

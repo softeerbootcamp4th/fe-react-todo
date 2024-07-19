@@ -14,7 +14,7 @@ export const LogBox = styled.div<{ isLogShow: boolean }>`
   padding: 60px 40px;
   padding-left: 70px;
 
-  transition: all 0.8s ease-in-out;
+  transition: all 0.5s ease-in-out;
 
   .title {
     font-size: 2.4rem;
