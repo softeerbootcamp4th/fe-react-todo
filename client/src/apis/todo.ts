@@ -6,6 +6,22 @@ export interface ITodoItem {
   isEnd: boolean;
 }
 
+// Read all recent search items
+export async function getRecentSearchItems(): Promise<string[]> {
+  const response = await fetch(`${baseURL}/recent-search`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Error getting todo items: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
 // Create a new todo item
 export async function createTodoItem(content: string, isEnd: boolean): Promise<ITodoItem> {
   const response = await fetch(`${baseURL}/todo`, {
