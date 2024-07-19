@@ -1,15 +1,15 @@
 import { Fragment, useEffect, useRef, useState } from "react"
-import { getData, getHistory } from "/utils/db";
-import Todo from "/components/todo";
-import DropLocation from "../components/dropLocation";
-import TodoForm from "../components/todoForm";
-import History from "../components/history";
+import { getData, getHistory } from "./utils/db";
+import Todo from "./components/todo";
+import DropLocation from "./components/dropLocation";
+import TodoForm from "./components/todoForm";
+import History from "./components/history";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
-  const [editTodoId, setEditTodoId] = useState("");
+  const [editTodoId, setEditTodoId] = useState(null);
   const timerRef = useRef(null);
-  const [draggedTodoId, setDraggedTodoId] = useState("");
+  const [draggedTodoId, setDraggedTodoId] = useState(null);
   const [historyList, setHistoryList] = useState([]);
   const [overLocationIdx, setOverLocationIdx] = useState(null);
 

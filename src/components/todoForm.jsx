@@ -33,6 +33,7 @@ export default function TodoForm({ todoList, setTodoList, historyList, setHistor
 
   return (
     <form
+      // onSubmit={''}
       className="mb-4 flex">
       <div
         className="relative w-full mr-5">
@@ -55,7 +56,7 @@ export default function TodoForm({ todoList, setTodoList, historyList, setHistor
           {recentTodoList.map((todo, index) =>
             <li
               key={index}
-              onMouseOver={() => setFormString(todo)}
+              onMouseDown={() => setFormString(todo)}
               className="list-none w-full hover:bg-sky-100 transition duration-300 ease-out rounded px-2">
               {todo}
             </li>

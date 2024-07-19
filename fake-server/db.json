@@ -1,35 +1,4 @@
 {
-  "todo": [
-    {
-      "id": "83c7",
-      "title": "ㅋㅊ",
-      "completed": false
-    },
-    {
-      "id": "1449",
-      "title": "ㅁㄴㅇㄴㅁㅇ",
-      "completed": false
-    },
-    {
-      "id": "2714",
-      "title": "ㅁㄴ",
-      "completed": false
-    },
-    {
-      "id": "0837",
-      "title": "ㅂㅈㅈㅈㅂㅈ",
-      "completed": false
-    },
-    {
-      "id": "7825",
-      "title": "점심fdffff",
-      "completed": false
-    },
-    {
-      "id": "f93f",
-      "title": "ㄴㅁㅇ",
-      "completed": false
-    }
-  ],
+  "todo": [],
   "history": []
 }

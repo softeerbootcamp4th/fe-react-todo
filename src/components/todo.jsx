@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { popData, modifyData, pushHistory } from "/utils/db";
+import { popData, modifyData, pushHistory } from "../utils/db";
 
 export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTodoId, setDraggedTodoId, editTodoId, setEditTodoId, setHistoryList, historyList, setOverLocationIdx }) {
   const [editString, setEditString] = useState("");
