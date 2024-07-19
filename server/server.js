@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 let todoItems = [];
+let recentSearchItems = [];
 let logs = {};
 let todoIdCounter = 1;
 let logIdCounter = 1;
@@ -23,6 +24,12 @@ function createLog(content, type, oldContent = '') {
     logIdCounter++;
 }
 
+// Read all recent search items
+app.get('/recent-search', (req, res) => {
+    res.json(recentSearchItems.slice().reverse());
+});
+
+
 // Create a new todo item
 app.post('/todo', (req, res) => {
     const { content, isEnd } = req.body;
@@ -32,6 +39,12 @@ app.post('/todo', (req, res) => {
         isEnd
     };
     todoItems.push(newTodo);
+    recentSearchItems.push(content);
+
+    if (recentSearchItems.length > 5){
+        recentSearchItems.shift()
+    }
+
     createLog(`${content}`, 'ADD');
     todoIdCounter++;
     res.status(201).json(newTodo);
