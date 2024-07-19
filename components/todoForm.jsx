@@ -35,7 +35,7 @@ export default function TodoForm({ todoList, setTodoList, historyList, setHistor
     <form
       className="mb-4 flex">
       <div
-        className="relative w-80 mr-5">
+        className="relative w-full mr-5">
         <input
           value={formString}
           placeholder="할일을 입력하세요"
@@ -65,7 +65,7 @@ export default function TodoForm({ todoList, setTodoList, historyList, setHistor
 
       <button
         onClick={onClickPush}
-        className="bg-green-700 text-white px-3 py-1 rounded-xl hover:bg-green-900 transition">
+        className="bg-green-700 shrink-0 w-14 text-white px-3 py-1 rounded-xl hover:bg-green-900 transition">
         등록
       </button>
     </form>
