@@ -6,6 +6,6 @@ export const TodoItemWrap = styled.div<{ index: number; draggedIndex: number | n
   align-items: center;
   border-bottom: 1px solid #ddd;
   padding: 12px;
-  background-color: ${({ index, draggedIndex }) => (index === draggedIndex ? 'gainsboro' : 'transparent')};
+  background-color: ${({ index, draggedIndex }) => (index === draggedIndex ? '#eee' : 'transparent')};
   cursor: pointer;
 `;
