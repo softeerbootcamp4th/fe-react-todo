@@ -109,7 +109,7 @@ export const handlers = [
 
     logList.push(data);
 
-    localStorage.setItem("todos", JSON.stringify(logList));
+    localStorage.setItem("logs", JSON.stringify(logList));
 
     return new HttpResponse(null, { status: 201 });
   }),
