@@ -68,7 +68,7 @@ const ToDoListElement: React.FC<ToDoListElement> = memo(({ todo, deleteToDo, upd
                     placeholder={toDo}
                     className="w-full mr-10"
                 />
-                <Button width={60} height={40} backgroundColor="6c90bb" title={"완료"} cb={toggleEditingMode} value="" />
+                <Button width={100} height={40} backgroundColor="6c90bb" title={"수정완료"} cb={toggleEditingMode} value="" />
             </>
         )
     }
