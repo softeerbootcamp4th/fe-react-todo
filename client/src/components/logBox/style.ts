@@ -10,7 +10,7 @@ export const LogBoxStyle = styled.div<{ isLogShow: boolean }>`
   border-radius: 10px;
   box-shadow: 0 0 20px 10px gainsboro;
   left: ${({ isLogShow }) => (isLogShow ? '-30px' : '-20%')};
-  opacity: ${({ isLogShow }) => (isLogShow ? '1' : '1')};
+  opacity: ${({ isLogShow }) => (isLogShow ? '1' : '0.4')};
   padding: 60px 40px;
   padding-left: 70px;
 

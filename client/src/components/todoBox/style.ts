@@ -1,6 +1,7 @@
+import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-export const todoStyle = css`
+export const TodoBoxStyle = styled.div<{ isLogShow: boolean }>`
   width: 30%;
   min-width: 600px;
   max-width: 1200px;
@@ -12,6 +13,9 @@ export const todoStyle = css`
   z-index: 999;
   padding: 60px 80px;
   position: relative;
+  margin-left: ${({ isLogShow }) => (isLogShow ? '0' : '20%')};
+  transition: all 0.8s ease-in-out;
+
   .title {
     font-size: 2.4rem;
     font-weight: 900;
