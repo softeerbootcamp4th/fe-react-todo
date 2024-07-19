@@ -3,9 +3,10 @@ import { Todo } from "@/types/todoType";
 import { patchTodo } from "@/apis/todoList";
 import { useTodoContext } from "@/hooks/useTodoContext";
 import { patchTodoSplice, getTodoList } from "@/apis/todoList";
+import { postLog } from "@/apis/Log";
 
 function TodoList() {
-  const { isEdit, todoItemList, setTodoItemList, setIsEdit, handleDeleteTodoItem } = useTodoContext();
+  const { isEdit, todoItemList, setTodoItemList, setIsEdit, handleDeleteTodoItem, updateLogList } = useTodoContext();
   const timeRef = useRef<NodeJS.Timeout | null>(null);
   const [clickedId, setClickedId] = useState(0);
   const dragItem = useRef<number | undefined>();
@@ -73,6 +74,8 @@ function TodoList() {
 
   const patchEditText = (id: number) => {
     patchTodo(id, { text: editText });
+    postLog({ log: "수정", todoItem: editText });
+    updateLogList();
     const updatedTodoList = todoItemList.map((todo) => {
       if (todo.id === id) {
         return { ...todo, text: editText };
@@ -84,8 +87,8 @@ function TodoList() {
     setIsEdit(false);
   };
   return (
-    <div className="w-full">
-      <ul>
+    <div className="w-full h-full overflow-y-scroll">
+      <ul className="overflow-y-scroll">
         {todoItemList.map((todo, index) => (
           <li key={todo.id} className="mb-4 p-4 border border-gray-200 rounded shadow-sm">
             <div className="flex items-center justify-between">
@@ -122,7 +125,7 @@ function TodoList() {
                   </span>
                   <button
                     className="border-1 border-solid bg-blue-300 text-white py-1 px-3 rounded"
-                    onClick={() => handleDeleteTodoItem(todo.id)}
+                    onClick={() => handleDeleteTodoItem(todo.id, todo.text)}
                   >
                     삭제
                   </button>
