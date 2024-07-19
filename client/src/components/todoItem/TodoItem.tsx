@@ -21,6 +21,11 @@ const TodoItem: React.FC<ITodoItemProps> = ({ id, index, content, button, isEnd,
   };
 
   const handleUpdateItem = () => {
+    if (oldContent === content) {
+      setIsEditMode(false);
+      return;
+    }
+
     updateTodoItem(id, oldContent, isEndState).then(() => {
       getAllTodoItems().then(response => {
         setTodoItemDatas(response);
