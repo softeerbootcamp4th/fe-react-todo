@@ -5,7 +5,6 @@ import { postLogList, postToDoList } from "../api/todo";
 import { CLICK_THRESHOLD } from "../constants/magicNumber";
 import useInput from "../hooks/useInput";
 import { LogStore } from "../Provider/logContext";
-import useLogList from "../hooks/useLogList";
 import useLogContext from "../hooks/useLogList";
 import useTodoContext from "../hooks/useTodoList";
 
@@ -26,8 +25,6 @@ const TodoList = () => {
   };
 
   const onDragEndHandler = (event) => {
-    console.log("end");
-    console.log(dragEndPosition.current, dragStartPosition.current);
     const newTodoList = [...todoList];
     const temp = newTodoList[dragStartPosition.current];
     newTodoList[dragStartPosition.current] =
@@ -36,8 +33,6 @@ const TodoList = () => {
     dragStartPosition.current = null;
     dragEndPosition.current = null;
     setTodoList(newTodoList);
-    console.log(todoList);
-    console.log(newTodoList);
     postToDoList(newTodoList);
   };
 
@@ -74,14 +69,14 @@ const TodoListItem = ({
   const { todoList, deleteTodo, modifyTodo } = useTodoContext(TodoStore);
   const { logList, logTodoDeletion, logTodoUpdate } = useLogContext(LogStore);
   const [isLongPressed, setIsLongPressed] = useState(false);
-  const { content, onChange, reset, setContent } = useInput();
+  const { content, onChange, resetContent, setContent } = useInput();
   const startTimeRef = useRef(0);
 
   const onModifyHandler = (newTitle, target) => {
     const newTodoList = modifyTodo(target, newTitle);
     postToDoList(newTodoList);
 
-    reset();
+    resetContent();
     setIsLongPressed(false);
 
     const newLogList = logTodoUpdate(todoList[target], newTodoList[target]);
@@ -99,7 +94,6 @@ const TodoListItem = ({
   };
 
   const onMouseDownHandler = (target) => {
-    console.log("down");
     if (!isLongPressed) {
       startTimeRef.current = Date.now();
 

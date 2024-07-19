@@ -9,7 +9,7 @@ import useTodoContext from "../hooks/useTodoList";
 import useLogContext from "../hooks/useLogList";
 
 const Input = () => {
-  const { content, onChange, reset } = useInput();
+  const { content, onChange, resetContent } = useInput();
   const { todoList, addTodo } = useTodoContext(TodoStore);
   const { logList, logTodoAddition } = useLogContext(LogStore);
   const onSubmitHandler = async () => {
@@ -20,7 +20,7 @@ const Input = () => {
 
       postToDoList(newTodoList);
       postLogList(newLogList);
-      reset();
+      resetContent();
     }
   };
 
