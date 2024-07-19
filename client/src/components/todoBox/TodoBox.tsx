@@ -99,6 +99,7 @@ const TodoBox: React.FC<ITodoBoxProps> = ({ todoItemDatas, setTodoItemDatas }) =
             >
               <TodoItem
                 id={todoItem.id}
+                index={index}
                 isEnd={todoItem.isEnd}
                 content={todoItem.content}
                 setTodoItemDatas={setTodoItemDatas}

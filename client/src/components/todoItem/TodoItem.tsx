@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { todoItemStyle } from './style';
 import { ITodoItemProps } from './type';
 import { getAllTodoItems, updateTodoItem, updateTodoItemIsEnd } from '../../apis/todo';
 import Button from '../button/Button';
 import { ButtonSize, ButtonType } from '../button/type';
+import { TodoItemWrap } from './style';
 
-const TodoItem: React.FC<ITodoItemProps> = ({ id, content, button, isEnd, draggedIndex, setTodoItemDatas }) => {
+const TodoItem: React.FC<ITodoItemProps> = ({ id, index, content, button, isEnd, draggedIndex, setTodoItemDatas }) => {
   const [oldContent, setoldContent] = useState(content);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isEndState, setIsEndState] = useState(isEnd);
-
   const [isHolding, setIsHolding] = useState(false);
-
   const timerRef = useRef<number | null>(null);
 
   const handleClickItem = () => {
@@ -63,12 +61,13 @@ const TodoItem: React.FC<ITodoItemProps> = ({ id, content, button, isEnd, dragge
   }, [draggedIndex]);
 
   return (
-    <div
+    <TodoItemWrap
+      index={index}
+      draggedIndex={draggedIndex}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onTouchStart={handleMouseDown}
       onTouchEnd={handleMouseUp}
-      css={todoItemStyle}
     >
       {isEditMode ? (
         <input
@@ -80,7 +79,13 @@ const TodoItem: React.FC<ITodoItemProps> = ({ id, content, button, isEnd, dragge
           onChange={e => setoldContent(e.target.value)}
         />
       ) : (
-        <span onClick={handleClickItem} css={{ textDecoration: isEndState ? 'line-through' : 'none', flexGrow: 1 }}>
+        <span
+          onClick={handleClickItem}
+          css={{
+            textDecoration: isEndState ? 'line-through' : 'none',
+            flexGrow: 1,
+          }}
+        >
           {oldContent}
         </span>
       )}
@@ -92,7 +97,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({ id, content, button, isEnd, dragge
       ) : (
         button
       )}
-    </div>
+    </TodoItemWrap>
   );
 };
 
