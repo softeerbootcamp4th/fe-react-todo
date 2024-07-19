@@ -8,6 +8,8 @@ import { Input } from 'src/components/ui/input';
 import Dropdown from 'src/components/common/Dropdown';
 import TodoList from 'src/components/todo/TodoList';
 import RecentTodoList from 'src/components/todo/RecentTodoList';
+import { RecentTodo } from 'src/types/todo';
+import { getLocalStorage, StorageKeys, setLocalStorage } from 'src/utils/localStorage';
 
 export default function TodoListContainer() {
   const [text, setText] = useState<string>('');
@@ -16,7 +18,18 @@ export default function TodoListContainer() {
 
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
-  const handleSubmit = (value: string) => createTodo(value, { onSuccess: resetText });
+  const handleSubmit = (value: string) =>
+    createTodo(value, {
+      onSuccess: () => {
+        const todo = { title: text };
+        const todos: RecentTodo[] = getLocalStorage(StorageKeys.recentTodo) ?? [];
+        const newTodos: RecentTodo[] = [todo, ...todos.slice(0, 4)];
+
+        setLocalStorage(StorageKeys.recentTodo, newTodos);
+
+        resetText();
+      },
+    });
 
   return (
     <div className="w-full">

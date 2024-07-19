@@ -12,7 +12,7 @@ export interface TodoHistory extends TodoItem {
   status: TodoStatus;
 }
 
-export interface RecentTodo extends TodoItem {}
+export type RecentTodo = Pick<TodoItem, 'title'>;
 
 export interface TodoState {
   recentTodoList: TodoItem[];
