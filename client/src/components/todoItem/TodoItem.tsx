@@ -77,7 +77,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({ id, index, content, button, isEnd,
       {isEditMode ? (
         <input
           autoFocus={isEditMode}
-          style={{ border: 'none', outline: 'none' }}
+          style={{ border: 'none', outline: 'none', fontSize: 16 }}
           type="text"
           maxLength={24}
           value={oldContent}
