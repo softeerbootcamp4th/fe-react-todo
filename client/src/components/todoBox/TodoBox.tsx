@@ -3,23 +3,31 @@ import TodoItem from '../todoItem/TodoItem';
 import Button from '../button/Button';
 import { todoStyle } from './style';
 import { Space } from '../../style/style';
-import { createTodoItem, getAllTodoItems, deleteTodoItem, replaceTodoItems } from '../../apis/todo';
+import {
+  createTodoItem,
+  getAllTodoItems,
+  deleteTodoItem,
+  replaceTodoItems,
+  getRecentSearchItems,
+} from '../../apis/todo';
 import { ITodoBoxProps } from './type';
 import { ButtonSize, ButtonType } from '../button/type';
 
 const TodoBox: React.FC<ITodoBoxProps> = ({ todoItemDatas, setTodoItemDatas }) => {
   const [content, setContent] = useState('');
   const [draggedIndex, setdraggedIndex] = useState<number | null>(null);
+  const [recentSearchItems, setRecentSearchItems] = useState<string[]>([]);
 
   useEffect(() => {
-    getAllTodoItems().then(response => {
-      setTodoItemDatas(response);
-    });
+    updateTodoItemDatas();
   }, []);
 
   const updateTodoItemDatas = () => {
     getAllTodoItems().then(response => {
       setTodoItemDatas(response);
+    });
+    getRecentSearchItems().then(response => {
+      setRecentSearchItems(response);
     });
   };
 
@@ -82,7 +90,13 @@ const TodoBox: React.FC<ITodoBoxProps> = ({ todoItemDatas, setTodoItemDatas }) =
             value={content}
             onChange={e => setContent(e.target.value)}
             onKeyPress={handleKeyPress}
+            list="recent-search-items"
           />
+          <datalist id="recent-search-items">
+            {recentSearchItems.map(recentSearchItem => (
+              <option value={recentSearchItem} />
+            ))}
+          </datalist>
           <Button size={ButtonSize.LARGE} type={ButtonType.ADD} onClick={handleAddTodo}>
             등록
           </Button>
