@@ -1,17 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
+import { postLogList, postToDoList } from "../api/api";
 import { MESSAGE } from "../constants/message";
 import useInput from "../hooks/useInput";
-import { postLogList, postToDoList } from "../api/todo";
-import { TodoStore } from "../Provider/todoContext";
-import { LogStore } from "../Provider/logContext";
 import useTodoContext from "../hooks/useTodoList";
 import useLogContext from "../hooks/useLogList";
 
 const Input = () => {
   const { content, onChange, resetContent } = useInput();
-  const { todoList, addTodo } = useTodoContext(TodoStore);
-  const { logList, logTodoAddition } = useLogContext(LogStore);
+  const { addTodo } = useTodoContext();
+  const { logTodoAddition } = useLogContext();
   const onSubmitHandler = async () => {
     if (content) {
       const newTodo = { title: content, isDone: false, id: Date.now() };

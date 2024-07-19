@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { TodoStore } from "../Provider/todoContext";
-import { postLogList, postToDoList } from "../api/todo";
+import { postLogList, postToDoList } from "../api/api";
 import { CLICK_THRESHOLD } from "../constants/magicNumber";
+import { TodoStore } from "../Provider/todoProvider";
+import { LogStore } from "../Provider/logProvider";
 import useInput from "../hooks/useInput";
-import { LogStore } from "../Provider/logContext";
 import useLogContext from "../hooks/useLogList";
 import useTodoContext from "../hooks/useTodoList";
 import useDrag from "../hooks/useDrag";

@@ -1,406 +1,128 @@
 [
   {
-    "id": 1721352048384,
+    "id": 1721358350567,
     "type": "추가",
     "before": {},
     "after": {
-      "title": "asdf",
+      "title": "d",
       "isDone": false,
-      "id": 1721352048384
+      "id": 1721358350567
     }
   },
   {
-    "id": 1721352048963,
+    "id": 1721358545932,
     "type": "추가",
     "before": {},
     "after": {
-      "title": "sdf",
+      "title": "d",
       "isDone": false,
-      "id": 1721352048963
+      "id": 1721358545932
     }
   },
   {
-    "id": 1721352049275,
+    "id": 1721358546148,
     "type": "추가",
     "before": {},
     "after": {
-      "title": "asdf",
+      "title": "d",
       "isDone": false,
-      "id": 1721352049275
+      "id": 1721358546148
     }
   },
   {
-    "id": 1721352049632,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "sadf",
+    "id": 1721358547502,
+    "type": "삭제",
+    "before": {
+      "title": "d",
       "isDone": false,
-      "id": 1721352049632
-    }
+      "id": 1721358350567
+    },
+    "after": null
   },
   {
-    "id": 1721353232792,
+    "id": 1721358548212,
     "type": "완료",
     "before": {
-      "title": "asdf",
+      "title": "d",
       "isDone": false,
-      "id": 1721294945623
+      "id": 1721358545932
     },
     "after": {
-      "title": "asdf",
+      "title": "d",
       "isDone": true,
-      "id": 1721294945623
+      "id": 1721358545932
     }
   },
   {
-    "id": 1721353233357,
+    "id": 1721358548372,
     "type": "완료취소",
     "before": {
-      "title": "asdf",
+      "title": "d",
       "isDone": true,
-      "id": 1721294945623
+      "id": 1721358545932
     },
     "after": {
-      "title": "asdf",
+      "title": "d",
       "isDone": false,
-      "id": 1721294945623
+      "id": 1721358545932
     }
   },
   {
-    "id": 1721353233860,
+    "id": 1721358548528,
     "type": "완료",
     "before": {
-      "title": "asdf",
+      "title": "d",
       "isDone": false,
-      "id": 1721294945623
+      "id": 1721358545932
     },
     "after": {
-      "title": "asdf",
+      "title": "d",
       "isDone": true,
-      "id": 1721294945623
+      "id": 1721358545932
     }
   },
   {
-    "id": 1721353234230,
-    "type": "완료취소",
+    "id": 1721358552584,
+    "type": "수정",
     "before": {
-      "title": "asdf",
+      "title": "d",
       "isDone": true,
-      "id": 1721294945623
+      "id": 1721358545932
     },
     "after": {
-      "title": "asdf",
-      "isDone": false,
-      "id": 1721294945623
-    }
-  },
-  {
-    "id": 1721353235377,
-    "type": "완료",
-    "before": {
-      "title": "asdf",
-      "isDone": false,
-      "id": 1721352048384
-    },
-    "after": {
-      "title": "asdf",
+      "title": "d",
       "isDone": true,
-      "id": 1721352048384
+      "id": 1721358545932
     }
   },
   {
-    "id": 1721353236793,
-    "type": "완료취소",
+    "id": 1721358557487,
+    "type": "삭제",
     "before": {
-      "title": "asdf",
+      "title": "d",
+      "isDone": false,
+      "id": 1721358546148
+    },
+    "after": null
+  },
+  {
+    "id": 1721358557612,
+    "type": "삭제",
+    "before": {
+      "title": "d",
       "isDone": true,
-      "id": 1721352048384
-    },
-    "after": {
-      "title": "asdf",
-      "isDone": false,
-      "id": 1721352048384
-    }
-  },
-  {
-    "id": 1721353242999,
-    "type": "삭제",
-    "before": {
-      "title": "asdf",
-      "isDone": false,
-      "id": 1721352048384
+      "id": 1721358545932
     },
     "after": null
   },
   {
-    "id": 1721353243135,
-    "type": "삭제",
-    "before": {
-      "title": "asdf",
-      "isDone": false,
-      "id": 1721294945623
-    },
-    "after": null
-  },
-  {
-    "id": 1721353243357,
-    "type": "삭제",
-    "before": {
-      "title": "sdf",
-      "isDone": false,
-      "id": 1721352048963
-    },
-    "after": null
-  },
-  {
-    "id": 1721353243493,
-    "type": "삭제",
-    "before": {
-      "title": "asdf",
-      "isDone": false,
-      "id": 1721352049275
-    },
-    "after": null
-  },
-  {
-    "id": 1721353243622,
-    "type": "삭제",
-    "before": {
-      "title": "sadf",
-      "isDone": false,
-      "id": 1721352049632
-    },
-    "after": null
-  },
-  {
-    "id": 1721353245191,
+    "id": 1721364618766,
     "type": "추가",
     "before": {},
     "after": {
-      "title": "1",
+      "title": "d",
       "isDone": false,
-      "id": 1721353245190
-    }
-  },
-  {
-    "id": 1721353245884,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "2",
-      "isDone": false,
-      "id": 1721353245884
-    }
-  },
-  {
-    "id": 1721353246349,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "3",
-      "isDone": false,
-      "id": 1721353246349
-    }
-  },
-  {
-    "id": 1721353246646,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "4",
-      "isDone": false,
-      "id": 1721353246646
-    }
-  },
-  {
-    "id": 1721353246907,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "5",
-      "isDone": false,
-      "id": 1721353246907
-    }
-  },
-  {
-    "id": 1721353280947,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "1",
-      "isDone": false,
-      "id": 1721353280946
-    }
-  },
-  {
-    "id": 1721353281158,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "2",
-      "isDone": false,
-      "id": 1721353281158
-    }
-  },
-  {
-    "id": 1721353281382,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "3",
-      "isDone": false,
-      "id": 1721353281381
-    }
-  },
-  {
-    "id": 1721353281587,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "4",
-      "isDone": false,
-      "id": 1721353281587
-    }
-  },
-  {
-    "id": 1721353281851,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "5",
-      "isDone": false,
-      "id": 1721353281851
-    }
-  },
-  {
-    "id": 1721353359563,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "1",
-      "isDone": false,
-      "id": 1721353359563
-    }
-  },
-  {
-    "id": 1721353359762,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "2",
-      "isDone": false,
-      "id": 1721353359762
-    }
-  },
-  {
-    "id": 1721353359975,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "3",
-      "isDone": false,
-      "id": 1721353359975
-    }
-  },
-  {
-    "id": 1721353360171,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "4",
-      "isDone": false,
-      "id": 1721353360171
-    }
-  },
-  {
-    "id": 1721353426889,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "1",
-      "isDone": false,
-      "id": 1721353426889
-    }
-  },
-  {
-    "id": 1721353427075,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "2",
-      "isDone": false,
-      "id": 1721353427075
-    }
-  },
-  {
-    "id": 1721353427256,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "3",
-      "isDone": false,
-      "id": 1721353427255
-    }
-  },
-  {
-    "id": 1721353427439,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "4",
-      "isDone": false,
-      "id": 1721353427439
-    }
-  },
-  {
-    "id": 1721353534218,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "ㄴㄹㄴㅇ",
-      "isDone": false,
-      "id": 1721353534217
-    }
-  },
-  {
-    "id": 1721353534229,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "ㅇ",
-      "isDone": false,
-      "id": 1721353534229
-    }
-  },
-  {
-    "id": 1721353534701,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "ㄴㅇㄹㄴ",
-      "isDone": false,
-      "id": 1721353534700
-    }
-  },
-  {
-    "id": 1721353534711,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "ㄴ",
-      "isDone": false,
-      "id": 1721353534711
-    }
-  },
-  {
-    "id": 1721353535464,
-    "type": "추가",
-    "before": {},
-    "after": {
-      "title": "2",
-      "isDone": false,
-      "id": 1721353535464
+      "id": 1721364618766
     }
   }
 ]
