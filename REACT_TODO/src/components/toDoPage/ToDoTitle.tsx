@@ -42,14 +42,14 @@ const ToDoTitle: React.FC<ToDoTitleProps> = ({ value, onModified, onStopModify, 
     if (event.key === 'Enter') {
       onStopModify();
       if (value === changedValue) { return; }
-      onModified({ id: id, title: changedValue});
+      onModified(changedValue);
     }
-};
-
-const handleBlur = () => {
+  };
+  
+  const handleBlur = () => {
     onStopModify();
     if (value === changedValue) { return; }
-    onModified({ id: id, title: changedValue});
+    onModified(changedValue);
   }
 
   return (

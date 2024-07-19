@@ -13,7 +13,7 @@ export function useFetch<T>({ method, path } : UseFetchType) {
   let url = baseUrl + path;
   
   const fetchData = async ({ body = {}, param = null }) => {
-    console.log(method, path)
+    console.log(method, path, param, body)
     url += param ? `/${param}` : ""
     setLoading(true);
     try {
