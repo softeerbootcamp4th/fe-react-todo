@@ -87,8 +87,8 @@ function TodoList() {
     setIsEdit(false);
   };
   return (
-    <div className="w-full h-full overflow-y-scroll">
-      <ul className="overflow-y-scroll">
+    <div className="w-full h-[450px]">
+      <ul className="overflow-y-scroll h-full flex-col">
         {todoItemList.map((todo, index) => (
           <li key={todo.id} className="mb-4 p-4 border border-gray-200 rounded shadow-sm">
             <div className="flex items-center justify-between">
