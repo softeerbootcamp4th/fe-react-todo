@@ -5,6 +5,6 @@ export const getLogList = () => {
   return http.get<LogMsg[]>(`/logs`);
 };
 
-export const postLogList = (data: PostLogRequestBody) => {
+export const postLog = (data: PostLogRequestBody) => {
   return http.post(`/logs`, JSON.stringify(data));
 };
