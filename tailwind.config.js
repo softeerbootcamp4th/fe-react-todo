@@ -16,6 +16,8 @@ export default {
         border: {
           DEFAULT: 'hsl(var(--border))',
           primary: '#6495ED',
+          red: '#FF000f',
+          green: '#008000',
         },
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -54,6 +56,11 @@ export default {
         DEFALUT: '#F5F5F5',
         primary: '#B0C3DE',
         secondary: '#6495ED',
+      },
+      textColor: {
+        primary: '#6495ED',
+        red: '#FF000f',
+        green: '#008000',
       },
       borderRadius: {
         lg: 'var(--radius)',
