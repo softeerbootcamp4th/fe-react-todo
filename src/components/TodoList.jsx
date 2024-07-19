@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import TodoListElement from './TodoListElement';
 import axios from 'axios';
-import todoListContext from '../context/root';
+import { todoListContext } from '../context/root';
 import styles from '../styles/todoList.module.css'
 
 function TodoList() {

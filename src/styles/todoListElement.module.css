@@ -16,3 +16,20 @@
     border-bottom: 1px solid gray;
     font-size: 22px;
 }
+
+
+.updateInput {
+    width: 91%;
+    height: 50px;
+    padding: 10px;
+    font-size: 20px;
+    font-family: 'Ownglyph_UNZ-Rg', sans-serif;
+    margin-right: 1%;
+    z-index: 3;
+}
+
+.updateInput:focus {
+    border: 2px solid rgb(3, 198, 29);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}

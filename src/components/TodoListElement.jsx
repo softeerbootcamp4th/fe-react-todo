@@ -2,7 +2,7 @@ import { useState, useRef, useContext } from "react";
 import styles from '../styles/todoListElement.module.css';
 import TodoButton from './TodoButton';
 import axios from "axios";
-import todoListContext from "../context/root";
+import { todoListContext } from "../context/root";
 
 
 function TodoListElement({ todo, index, onDragStart, onDragEnd }) {
@@ -15,8 +15,9 @@ function TodoListElement({ todo, index, onDragStart, onDragEnd }) {
 
 
 
-    const removeTodo = async (id) => {
+    const removeTodo = async (id, text) => {
         try {
+            await axios.post('http://localhost:5000/logs', { "title": "삭제", "body": `${text}이(가) 삭제되었습니다` });
             await axios.delete(`http://localhost:5000/todos/${id}`);
             setTodoListArr(todoListArr.filter(todo => todo.id !== id));
         } catch (error) {
@@ -26,6 +27,7 @@ function TodoListElement({ todo, index, onDragStart, onDragEnd }) {
     const detailLiClick = async (index) => {
         try {
             const updatedTodo = todoListArr[index];
+            await axios.post('http://localhost:5000/logs', { "title": "완료", "body": `${updatedTodo.text}이(가) 완료되었습니다` });
             const response = await axios.patch(`http://localhost:5000/todos/${updatedTodo.id}`, {
                 isDone: !updatedTodo.isDone
             });
@@ -40,6 +42,7 @@ function TodoListElement({ todo, index, onDragStart, onDragEnd }) {
 
     const updateTodo = async (id, updateText) => {
         try {
+            await axios.post('http://localhost:5000/logs', { "title": "수정", "body": `${updateText}로 수정이 완료되었습니다` });
             const response = await axios.patch(`http://localhost:5000/todos/${id}`, {
                 text: updateText
             });
@@ -91,7 +94,7 @@ function TodoListElement({ todo, index, onDragStart, onDragEnd }) {
         <>
             {updateMouseDown ? (
                 <>
-                    <input type="text" value={updateText} onChange={handleUpdateText} />
+                    <input type="text" value={updateText} onChange={handleUpdateText} className={styles.updateInput} />
                     <TodoButton text="수정" onClick={() => {
                         updateTodo(todo.id, updateText);
                         setUpdateMouseDown(false);
@@ -107,7 +110,7 @@ function TodoListElement({ todo, index, onDragStart, onDragEnd }) {
                     >
                         {todo.text}
                     </div>
-                    <TodoButton text="삭제" onClick={() => removeTodo(todo.id)} />
+                    <TodoButton text="삭제" onClick={() => removeTodo(todo.id, todo.text)} />
                 </>
             )}
         </>

@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import TodoButton from './TodoButton';
 import styles from '../styles/todoInput.module.css';
-import todoListContext from '../context/root';
+import { todoListContext } from '../context/root';
 import axios from 'axios';
 
 function TodoInput() {
@@ -17,6 +17,7 @@ function TodoInput() {
     const addTodo = async (text) => {
         try {
             const response = await axios.post('http://localhost:5000/todos', { "text": text, "isDone": false });
+            await axios.post('http://localhost:5000/logs', { "title": "등록", "body": `${text}이(가) 등록되었습니다` });
             setTodoListArr([...todoListArr, response.data]);
         } catch (error) {
             console.log("추가 실패");
