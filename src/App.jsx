@@ -11,6 +11,7 @@ function App() {
   const timerRef = useRef(null);
   const [draggedTodoId, setDraggedTodoId] = useState("");
   const [historyList, setHistoryList] = useState([]);
+  const [overLocationIdx, setOverLocationIdx] = useState(null);
 
   useEffect(() => {
     getData().then((data) => {
@@ -38,10 +39,13 @@ function App() {
           <DropLocation
             draggedTodoId={draggedTodoId}
             frontId=""
+            overLocationIdx={overLocationIdx}
+            setOverLocationIdx={setOverLocationIdx}
+            idx={-1}
             todoList={todoList}
             setTodoList={setTodoList} />
 
-          {todoList.map((todo) => (
+          {todoList.map((todo, index) => (
             <Fragment key={todo.id}>
               <Todo todo={todo}
                 todoList={todoList}
@@ -53,12 +57,16 @@ function App() {
                 historyList={historyList}
                 setHistoryList={setHistoryList}
                 setDraggedTodoId={setDraggedTodoId}
+                setOverLocationIdx={setOverLocationIdx}
               />
 
               <DropLocation
                 draggedTodoId={draggedTodoId}
                 frontId={todo.id}
                 todoList={todoList}
+                idx={index}
+                overLocationIdx={overLocationIdx}
+                setOverLocationIdx={setOverLocationIdx}
                 setTodoList={setTodoList} />
             </Fragment>
           ))}

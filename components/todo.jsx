@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { popData, modifyData, pushHistory } from "/utils/db";
 
-export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTodoId, setDraggedTodoId, editTodoId, setEditTodoId, setHistoryList, historyList }) {
+export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTodoId, setDraggedTodoId, editTodoId, setEditTodoId, setHistoryList, historyList, setOverLocationIdx }) {
   const [editString, setEditString] = useState("");
   //const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -55,12 +55,17 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
     // setMousePosition({ x: e.clientX, y: e.clienY });
   }
 
+  function onDragEnd() {
+    setDraggedTodoId("");
+    setOverLocationIdx(null);
+  }
+
   return (
     <div
       draggable={!editTodoId}
       onDragStart={onDragStartTodo}
       onDrag={onDragTodo}
-      onDragEnd={() => setDraggedTodoId("")}
+      onDragEnd={onDragEnd}
       onDragLeave={endLongPress}
       className={`transition flex items-center justify-between ${draggedTodoId === todo.id ? "" : ""}`}>
       <span
@@ -72,7 +77,7 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
         {todo.title}
       </span>
 
-      <div className={`flex items-center ${editTodoId !== todo.id ? "hidden" : ""}`}>
+      <form className={`flex items-center ${editTodoId !== todo.id ? "hidden" : ""}`}>
         <input
           type="text"
           placeholder="수정하기"
@@ -91,7 +96,7 @@ export default function Todo({ todo, todoList, setTodoList, timerRef, draggedTod
           className="px-2 py-1 mr-1 rounded-xl bg-orange-600 hover:bg-red-600 transition text-white">
           취소
         </button>
-      </div>
+      </form>
 
       <button
         onClick={onClickPop}

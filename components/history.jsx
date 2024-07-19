@@ -16,20 +16,20 @@ export default function History({ historyList, setHistoryList }) {
     if (!history.after) {
       return <span>
         <span className="italic">{history.before}</span>
-        <span className="text-red-700"> 삭제</span>
-      </span>
+        <span className="text-red-700">{"  삭제"}</span>
+      </span>;
     }
     if (!history.before) {
       return <span>
         <span className="italic">{history.after}</span>
-        <span className="text-blue-700"> 추가</span>
-      </span>
+        <span className="text-blue-700">{"  추가"}</span>
+      </span>;
     }
     return <span>
-      <span className="italic">{history.before}</span>{"(을)를 "}
-      <span className="italic">{history.after}</span>{"(으)로 "}
+      <span className="italic">{history.before}</span>{" (을)를 "}
+      <span className="italic">{history.after}</span>{" (으)로 "}
       <span className="text-green-700">수정</span>
-    </span>
+    </span>;
   }
 
   function clearHistory() {
@@ -59,7 +59,7 @@ export default function History({ historyList, setHistoryList }) {
         {historyList.map((history, index) =>
           <li
             key={index}
-            className="text-sm">
+            className="text-sm whitespace-pre-wrap">
             {calculateDate(history.date)}에 {printAction(history)}
           </li>
         )}

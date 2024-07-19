@@ -1,9 +1,10 @@
 import { replaceAllData } from "../utils/db";
 
-export default function DropLocation({ draggedTodoId, frontId, todoList, setTodoList }) {
+export default function DropLocation({ draggedTodoId, frontId, todoList, setTodoList, idx, overLocationIdx, setOverLocationIdx }) {
 
   function onDropTodo(e) {
     e.preventDefault();
+
     const draggedTodo = todoList.find((todo) => todo.id === draggedTodoId);
     let tempList = frontId ? [] : [draggedTodo];
     todoList.forEach((todo) => {
@@ -21,9 +22,11 @@ export default function DropLocation({ draggedTodoId, frontId, todoList, setTodo
   return (
     <div
       className="h-5 flex items-center"
-      onDragOver={(e) => e.preventDefault()}
+      onDragOver={(e) => { e.preventDefault() }}
+      onDragEnter={() => setOverLocationIdx(idx)}
+      onDragLeave={() => setOverLocationIdx(null)}
       onDrop={onDropTodo}>
-      <div className={`w-full outline outline-1 outline-slate-200 ${draggedTodoId ? "outline-blue-300" : ""}`}>
+      <div className={`w-full outline ${overLocationIdx === idx ? "outline-blue-300 outline-2" : "outline-slate-200 outline-1"}`}>
       </div>
     </div>
   );
