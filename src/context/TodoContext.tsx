@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, ReactNode, Dispatch } from "react";
 import { Todo } from "@/types/todoType";
 import { LogMsg } from "@/types/LogType";
 import { getTodoList, deleteTodo } from "@/apis/todoList";
+import { getLogList, postLog } from "@/apis/Log";
 
 export interface TodoContextType {
   todoItemList: Todo[];
@@ -9,8 +10,9 @@ export interface TodoContextType {
   isEdit: boolean;
   setIsEdit: Dispatch<boolean>;
   updateTodoList: () => Promise<void>;
-  handleDeleteTodoItem: (id: number) => void;
+  handleDeleteTodoItem: (id: number, text: string) => Promise<void>;
   logList: LogMsg[];
+  updateLogList: () => Promise<void>;
   setLogList: Dispatch<LogMsg[]>;
 }
 
@@ -30,11 +32,22 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const handleDeleteTodoItem = (id: number) => {
+  const updateLogList = async () => {
+    try {
+      const data = await getLogList();
+      setLogList(data ?? []);
+    } catch (error) {
+      console.error("logList 불러오기 실패");
+    }
+  };
+
+  const handleDeleteTodoItem = async (id: number, text: string) => {
     //콜백으로 설정?
     try {
-      deleteTodo(id);
+      await deleteTodo(id);
       setTodoItemList(todoItemList.filter((todo) => todo.id !== id));
+      await postLog({ log: "삭제", todoItem: text });
+      updateLogList();
     } catch (error) {
       console.error("Error:", error);
     }
@@ -42,6 +55,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     updateTodoList();
+    updateLogList();
   }, []);
 
   const value: TodoContextType = {
@@ -52,6 +66,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     updateTodoList,
     handleDeleteTodoItem,
     logList,
+    updateLogList,
     setLogList,
   };
 
