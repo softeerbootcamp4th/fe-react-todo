@@ -7,8 +7,8 @@ interface LogListProps {
 
 const LogList: React.FC<LogListProps> = ({ logList }: LogListProps) => {
 
-    const content = logList.map((log) => (
-        <LogListElement todo={log.todo} status={log.status} />
+    const content = logList.map((log, index) => (
+        <LogListElement key={index} todo={log.todo} status={log.status} />
     ))
 
     return (

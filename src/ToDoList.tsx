@@ -1,10 +1,11 @@
 import React from "react";
 import ToDoListElement from "./ToDoListElement";
+import ToDo from "./Todo";
 
 interface ToDoListProps {
-    toDos: string[];
-    deleteToDo: (todo: string) => void;
-    updateToDo: (oldTodo: string, newTodo: string) => void;
+    toDos: ToDo[];
+    deleteToDo: (todo: ToDo) => void;
+    updateToDo: (oldTodo: ToDo, newTodo: ToDo) => void;
 }
 
 const ToDoList: React.FC<ToDoListProps> = ({ toDos, deleteToDo, updateToDo }: ToDoListProps) => {
