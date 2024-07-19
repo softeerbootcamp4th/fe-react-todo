@@ -33,7 +33,19 @@ const useTodoContext = (context) => {
     return newTodoList;
   };
 
-  return { todoList, addTodo, deleteTodo, modifyTodo };
+  const handleCompleteTodo = (target) => {
+    const newTodoList = [...todoList];
+    newTodoList[target] = {
+      ...todoList[target],
+      isDone: !todoList[target].isDone,
+    };
+
+    setTodoList(newTodoList);
+
+    return newTodoList;
+  };
+
+  return { todoList, addTodo, deleteTodo, modifyTodo, handleCompleteTodo };
 };
 
 export default useTodoContext;

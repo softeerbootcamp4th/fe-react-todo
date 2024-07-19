@@ -41,7 +41,42 @@ const useLogContext = (context) => {
     return newLogList;
   };
 
-  return { logList, logTodoAddition, logTodoDeletion, logTodoUpdate };
+  const logTodoCompletion = (todoItem, newTodoItem) => {
+    let newLogList;
+    if (newTodoItem.isDone) {
+      newLogList = [
+        ...logList,
+        {
+          id: Date.now(),
+          type: "완료",
+          before: todoItem,
+          after: newTodoItem,
+        },
+      ];
+    } else {
+      newLogList = [
+        ...logList,
+        {
+          id: Date.now(),
+          type: "완료취소",
+          before: todoItem,
+          after: newTodoItem,
+        },
+      ];
+    }
+
+    setLogList(newLogList);
+
+    return newLogList;
+  };
+
+  return {
+    logList,
+    logTodoAddition,
+    logTodoDeletion,
+    logTodoUpdate,
+    logTodoCompletion,
+  };
 };
 
 export default useLogContext;

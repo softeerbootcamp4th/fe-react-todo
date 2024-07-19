@@ -66,8 +66,10 @@ const TodoListItem = ({
   onDragEnterHandler,
   setTimeRef,
 }) => {
-  const { todoList, deleteTodo, modifyTodo } = useTodoContext(TodoStore);
-  const { logList, logTodoDeletion, logTodoUpdate } = useLogContext(LogStore);
+  const { todoList, deleteTodo, modifyTodo, handleCompleteTodo } =
+    useTodoContext(TodoStore);
+  const { logList, logTodoDeletion, logTodoUpdate, logTodoCompletion } =
+    useLogContext(LogStore);
   const [isLongPressed, setIsLongPressed] = useState(false);
   const { content, onChange, resetContent, setContent } = useInput();
   const startTimeRef = useRef(0);
@@ -108,37 +110,13 @@ const TodoListItem = ({
     if (Date.now() - startTimeRef.current < CLICK_THRESHOLD && !isLongPressed) {
       clearTimeout(setTimeRef.current);
 
-      const newTodoList = [...todoList];
-      newTodoList[target] = {
-        ...todoList[target],
-        isDone: !todoList[target].isDone,
-      };
+      const newTodoList = handleCompleteTodo(target);
 
-      let newLogList;
-      if (newTodoList[target].isDone) {
-        newLogList = [
-          ...logList,
-          {
-            id: Date.now(),
-            type: "완료",
-            before: todoList[target],
-            after: newTodoList[target],
-          },
-        ];
-      } else {
-        newLogList = [
-          ...logList,
-          {
-            id: Date.now(),
-            type: "완료취소",
-            before: todoList[target],
-            after: newTodoList[target],
-          },
-        ];
-      }
+      const newLogList = logTodoCompletion(
+        todoList[target],
+        newTodoList[target]
+      );
 
-      setTodoList(newTodoList);
-      setLogList(newLogList);
       postToDoList(newTodoList);
       postLogList(newLogList);
     }
