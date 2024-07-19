@@ -1,10 +1,11 @@
 import { useState, ChangeEvent, useEffect } from "react";
 import { postTodo } from "@/apis/todoList";
+import { postLog } from "@/apis/Log";
 import { useTodoContext } from "@/hooks/useTodoContext";
 
 function SearchInput() {
   const [newItem, setNewItem] = useState<string>("");
-  const { updateTodoList } = useTodoContext();
+  const { updateTodoList, updateLogList } = useTodoContext();
   const [searchList, setSearchList] = useState<string[]>();
 
   useEffect(() => {
@@ -23,7 +24,9 @@ function SearchInput() {
     try {
       if (newItem.trim() === "") return;
       await postTodo({ text: newItem, completed: false });
+      await postLog({ log: "등록", todoItem: newItem });
       updateTodoList();
+      updateLogList();
       let updatedSearchResult = [newItem, ...(searchList || [])];
       if (updatedSearchResult.length > 5) {
         updatedSearchResult = updatedSearchResult.slice(5);
