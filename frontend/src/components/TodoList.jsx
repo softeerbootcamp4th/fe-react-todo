@@ -7,32 +7,26 @@ import useInput from "../hooks/useInput";
 import { LogStore } from "../Provider/logContext";
 import useLogContext from "../hooks/useLogList";
 import useTodoContext from "../hooks/useTodoList";
+import useDrag from "../hooks/useDrag";
 
 const TodoList = () => {
-  const { todoList, setTodoList } = useContext(TodoStore);
-  const dragStartPosition = useRef(null);
-  const dragEndPosition = useRef(null);
-  const timerRef = useRef(null);
+  const { todoList, changeTodoOrder } = useTodoContext(TodoStore);
+  const {
+    dragControlInfo,
+    onDragStartHandler,
+    onDragEnterHandler,
+    resetDragInfo,
+  } = useDrag();
 
-  // drag 이벤트 핸들러
-  const onDragStartHandler = (event, target) => {
-    dragStartPosition.current = target;
-    clearTimeout(timerRef.current);
-  };
-
-  const onDragEnterHandler = (event, target) => {
-    dragEndPosition.current = target;
-  };
+  const { dragStartPosition, dragEndPosition, timerRef } = dragControlInfo;
 
   const onDragEndHandler = (event) => {
-    const newTodoList = [...todoList];
-    const temp = newTodoList[dragStartPosition.current];
-    newTodoList[dragStartPosition.current] =
-      newTodoList[dragEndPosition.current];
-    newTodoList[dragEndPosition.current] = temp;
-    dragStartPosition.current = null;
-    dragEndPosition.current = null;
-    setTodoList(newTodoList);
+    const newTodoList = changeTodoOrder(
+      dragStartPosition.current,
+      dragEndPosition.current
+    );
+    console.log(newTodoList);
+    resetDragInfo();
     postToDoList(newTodoList);
   };
 
@@ -128,8 +122,8 @@ const TodoListItem = ({
       $isLast={isLast}
       onMouseDown={() => onMouseDownHandler(index)}
       onMouseUp={() => onMouseUpHandler(index)}
-      onDragStart={(event) => onDragStartHandler(event, index)}
-      onDragEnter={(event) => onDragEnterHandler(event, index)}
+      onDragStart={() => onDragStartHandler(index)}
+      onDragEnter={() => onDragEnterHandler(index)}
       onDragEnd={onDragEndHandler}
       onDragOver={(event) => event.preventDefault()}
     >

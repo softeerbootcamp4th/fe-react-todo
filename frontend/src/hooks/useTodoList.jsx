@@ -45,7 +45,27 @@ const useTodoContext = (context) => {
     return newTodoList;
   };
 
-  return { todoList, addTodo, deleteTodo, modifyTodo, handleCompleteTodo };
+  const changeTodoOrder = (startIndex, endIndex) => {
+    const newTodoList = [...todoList];
+
+    [newTodoList[startIndex], newTodoList[endIndex]] = [
+      newTodoList[endIndex],
+      newTodoList[startIndex],
+    ];
+
+    setTodoList(newTodoList);
+
+    return newTodoList;
+  };
+
+  return {
+    todoList,
+    addTodo,
+    deleteTodo,
+    modifyTodo,
+    handleCompleteTodo,
+    changeTodoOrder,
+  };
 };
 
 export default useTodoContext;
