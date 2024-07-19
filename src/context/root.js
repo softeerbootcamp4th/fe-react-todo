@@ -1,6 +1,5 @@
 import React from "react";
 
-const todoListContext = React.createContext();
+export const todoListContext = React.createContext();
 
-
-export default todoListContext;
+export const logContext = React.createContext();

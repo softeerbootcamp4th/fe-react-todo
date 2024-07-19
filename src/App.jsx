@@ -1,12 +1,14 @@
 import styles from './styles/App.module.css'
 import Header from './components/Header'
 import TodoMain from './components/TodoMain';
-import todoListContext from './context/root';
+import { todoListContext, logContext } from './context/root';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import LogList from './components/LogList';
 
 function App() {
   const [todoListArr, setTodoListArr] = useState([]);
+  const [logArr, setLogArr] = useState([]);
   useEffect(() => {
     const getTodos = async () => {
       try {
@@ -16,6 +18,7 @@ function App() {
         console.log("데이터가 제대로 안받아짐", error);
       }
     };
+
     getTodos();
   }, []);
 
@@ -27,6 +30,9 @@ function App() {
         <todoListContext.Provider value={[todoListArr, setTodoListArr]}>
           <TodoMain />
         </todoListContext.Provider>
+        <logContext.Provider value={[logArr, setLogArr]}>
+          <LogList />
+        </logContext.Provider>
       </div>
     </div>
   );
