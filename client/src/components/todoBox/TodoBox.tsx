@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TodoItem from '../todoItem/TodoItem';
 import Button from '../button/Button';
-import { todoStyle } from './style';
+import { logToggleButtonStyle, todoStyle } from './style';
 import { Space } from '../../style/style';
 import {
   createTodoItem,
@@ -12,8 +12,9 @@ import {
 } from '../../apis/todo';
 import { ITodoBoxProps } from './type';
 import { ButtonSize, ButtonType } from '../button/type';
+import { RiArrowRightDoubleFill, RiArrowLeftDoubleFill } from 'react-icons/ri';
 
-const TodoBox: React.FC<ITodoBoxProps> = ({ todoItemDatas, setTodoItemDatas }) => {
+const TodoBox: React.FC<ITodoBoxProps> = ({ todoItemDatas, setTodoItemDatas, isLogShow, setIsLogShow }) => {
   const [content, setContent] = useState('');
   const [draggedIndex, setdraggedIndex] = useState<number | null>(null);
   const [recentSearchItems, setRecentSearchItems] = useState<string[]>([]);
@@ -78,6 +79,23 @@ const TodoBox: React.FC<ITodoBoxProps> = ({ todoItemDatas, setTodoItemDatas }) =
     <div css={todoStyle}>
       <div className="flex-center">
         <h1 className="title">My Todo App</h1>
+        {isLogShow ? (
+          <RiArrowLeftDoubleFill
+            size={32}
+            css={logToggleButtonStyle}
+            onClick={() => {
+              setIsLogShow(!isLogShow);
+            }}
+          />
+        ) : (
+          <RiArrowRightDoubleFill
+            size={32}
+            css={logToggleButtonStyle}
+            onClick={() => {
+              setIsLogShow(!isLogShow);
+            }}
+          />
+        )}
       </div>
 
       <Space size={36} />
@@ -93,8 +111,8 @@ const TodoBox: React.FC<ITodoBoxProps> = ({ todoItemDatas, setTodoItemDatas }) =
             list="recent-search-items"
           />
           <datalist id="recent-search-items">
-            {recentSearchItems.map(recentSearchItem => (
-              <option value={recentSearchItem} />
+            {recentSearchItems.map((recentSearchItem, index) => (
+              <option key={index} value={recentSearchItem} />
             ))}
           </datalist>
           <Button size={ButtonSize.LARGE} type={ButtonType.ADD} onClick={handleAddTodo}>

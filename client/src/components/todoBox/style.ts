@@ -11,9 +11,17 @@ export const todoStyle = css`
   box-shadow: 0 0 20px 10px gainsboro;
   z-index: 999;
   padding: 60px 80px;
-
+  position: relative;
   .title {
     font-size: 2.4rem;
     font-weight: 900;
   }
+`;
+
+export const logToggleButtonStyle = css`
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+  color: #aaa;
 `;

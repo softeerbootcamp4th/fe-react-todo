@@ -1,6 +1,6 @@
-import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
-export const logStyle = css`
+export const LogBoxStyle = styled.div<{ isLogShow: boolean }>`
   position: relative;
   width: 25%;
   min-width: 350px;
@@ -9,10 +9,13 @@ export const logStyle = css`
   border: 1px solid gainsboro;
   border-radius: 10px;
   box-shadow: 0 0 20px 10px gainsboro;
-  left: -30px;
-
+  left: ${({ isLogShow }) => (isLogShow ? '-30px' : '-20%')};
+  opacity: ${({ isLogShow }) => (isLogShow ? '1' : '1')};
   padding: 60px 40px;
   padding-left: 70px;
+
+  transition: all 0.8s ease-in-out;
+
   .title {
     font-size: 2.4rem;
     font-weight: 900;

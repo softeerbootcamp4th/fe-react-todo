@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Todo from '../components/todoBox/TodoBox';
-import Log from '../components/logBox/LogBox';
+import TodoBox from '../components/todoBox/TodoBox';
+import LogBox from '../components/logBox/LogBox';
 import { css } from '@emotion/react';
 import { ITodoItem } from '../apis/todo';
 
@@ -14,10 +14,17 @@ const containerStyle = css`
 
 const Home: React.FC = () => {
   const [todoItemDatas, setTodoItemDatas] = useState<ITodoItem[]>([]);
+  const [isLogShow, setIsLogShow] = useState<boolean>(false);
 
   return (
     <div css={containerStyle}>
-      <Todo todoItemDatas={todoItemDatas} setTodoItemDatas={setTodoItemDatas} /> <Log todoItemDatas={todoItemDatas} />
+      <TodoBox
+        todoItemDatas={todoItemDatas}
+        setTodoItemDatas={setTodoItemDatas}
+        isLogShow={isLogShow}
+        setIsLogShow={setIsLogShow}
+      />
+      <LogBox isLogShow={isLogShow} todoItemDatas={todoItemDatas} />
     </div>
   );
 };
