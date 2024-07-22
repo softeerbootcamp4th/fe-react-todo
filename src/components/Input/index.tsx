@@ -8,7 +8,7 @@ function Input() {
     const [inputValue, setInputValue] = useState("");
     const [recentSearches, setRecentSearches] = useState<string[]>([]);
     const [showRecentSearches, setShowRecentSearches] = useState<boolean>(false);
-    const { getTodoList, setLogListItem, getLogList } = useTodoList();
+    const { getTodoList, setLogListItem, getLogList, setIsSubmitted } = useTodoList();
 
     useEffect(() => {
         const storedSearches = localStorage.getItem("recentSearches");
@@ -34,6 +34,7 @@ function Input() {
             localStorage.setItem("recentSearches", JSON.stringify(limitedSearches));
             setRecentSearches(limitedSearches);
             setInputValue("");
+            setIsSubmitted(true);
         } catch (error) {
             console.error(error);
         }

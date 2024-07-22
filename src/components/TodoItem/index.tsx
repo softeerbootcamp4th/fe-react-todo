@@ -5,7 +5,7 @@ import { useTodoList } from "../../hooks/useTodoList";
 import { LOG_STATUS } from "../../constants/log";
 import { DeleteLog, EditLog } from "../../types/log";
 
-function TodoItem({ todo }: TodoItemProps) {
+function TodoItem({ todo, handleDragStart, handleDragOver, handleDrop }: TodoItemProps) {
     const { getTodoList, setLogListItem, getLogList } = useTodoList();
 
     const [isChecked, setIsChecked] = useState<boolean>(todo.isChecked);
@@ -13,7 +13,7 @@ function TodoItem({ todo }: TodoItemProps) {
 
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const timeoutRef = useRef<number | null>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
         if (isEditing && inputRef.current) {
@@ -79,7 +79,19 @@ function TodoItem({ todo }: TodoItemProps) {
     };
 
     return (
-        <li className="w-full border-b border-gray-300 py-4 text-xl flex items-center gap-3">
+        <li
+            className="w-full border-b border-gray-300 py-4 text-xl flex items-center gap-3"
+            draggable
+            onDragStart={() => handleDragStart(todo.id)}
+            onDragOver={handleDragOver}
+            onDrop={e => handleDrop(e, todo.id)}
+        >
+            <img
+                src="/drag.svg"
+                alt="drag"
+                className="dragHandle w-3.5 h-3.5 block fill-inherit shrink-0 cursor-pointer"
+                draggable={false}
+            />
             <input
                 id={`${todo.id}-checkbox`}
                 type="checkbox"
