@@ -1,17 +1,23 @@
 import { Dispatch } from 'react';
 
-export type TodoStatus = '수정' | '삭제' | '등록';
+export type TodoStatus = 'register' | 'delete' | 'update';
 
 export interface TodoItem {
+  todoId: number;
   title: string;
   registerDate: Date;
+}
+
+export interface TodoHistory extends TodoItem {
   status: TodoStatus;
 }
+
+export type RecentTodo = Pick<TodoItem, 'title'>;
 
 export interface TodoState {
   recentTodoList: TodoItem[];
   todoList: TodoItem[];
-  todoHistory: TodoItem[];
+  todoHistory: TodoHistory[];
 }
 
 export const enum TODO_ACTION {

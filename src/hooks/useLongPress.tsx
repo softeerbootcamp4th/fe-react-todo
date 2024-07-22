@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import TIME from 'src/constants/time';
 
-export default function useLongPress(onLongPress: () => void, ms = TIME.SECOND) {
+export default function useLongPress(onLongPress: () => void, ms = 2 * TIME.SECOND) {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const ref = useRef<HTMLDivElement | null>(null);
 
