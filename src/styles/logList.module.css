@@ -1,0 +1,52 @@
+.logButton {
+    position: fixed;
+    top: 90%;
+    left: 90%;
+    width: 100px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: orange;
+}
+
+.logButton:hover {
+    box-shadow: 2px 2px 2px darkgray;
+}
+
+
+.container {
+    position: fixed;
+    width: 30%;
+    height: 100%;
+    z-index: 4;
+    top: 0%;
+    right: 0%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    background-color: rgb(218, 211, 198);
+    overflow: scroll;
+}
+
+
+.leftWindow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 3;
+
+}
+
+
+.logListElement {
+    width: 300px;
+    min-height: 80px;
+    padding: 3%;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}

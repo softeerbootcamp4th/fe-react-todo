@@ -3,7 +3,7 @@ import styles from "../styles/header.module.css"
 
 function Header() {
     return (
-        <header className={styles.header}>My Todo App</header>
+        <header className={styles.header}><span className={styles.title}>My Todo App</span></header>
     );
 }
 
