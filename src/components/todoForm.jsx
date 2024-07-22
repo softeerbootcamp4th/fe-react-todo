@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { pushData } from "../utils/db";
+import { pushData, pushHistory } from "../utils/db";
 import { getRecentTodo, pushRecentTodo } from "../utils/local";
 
-export default function TodoForm({ todoList, setTodoList }) {
+export default function TodoForm({ todoList, setTodoList, historyList, setHistoryList }) {
   const [formString, setFormString] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [recentTodoList, setRecentTodoList] = useState([]);
@@ -22,17 +22,21 @@ export default function TodoForm({ todoList, setTodoList }) {
       pushData({ title: formString, completed: false }).then((newId) => {
         setTodoList([...todoList, { id: newId, title: formString, completed: false }]);
       });
+      const newHistory = { date: new Date(), before: "", after: formString };
+      pushRecentTodo(formString);
+      setRecentTodoList(getRecentTodo());
+      pushHistory(newHistory);
+      setHistoryList([newHistory, ...historyList]);
+      setFormString("");
     }
-    setFormString("");
-    pushRecentTodo(formString);
-    setRecentTodoList(getRecentTodo());
   };
 
   return (
     <form
+      // onSubmit={''}
       className="mb-4 flex">
       <div
-        className="relative w-80 mr-5">
+        className="relative w-full mr-5">
         <input
           value={formString}
           placeholder="할일을 입력하세요"
@@ -52,7 +56,7 @@ export default function TodoForm({ todoList, setTodoList }) {
           {recentTodoList.map((todo, index) =>
             <li
               key={index}
-              onMouseOver={() => setFormString(todo)}
+              onMouseDown={() => setFormString(todo)}
               className="list-none w-full hover:bg-sky-100 transition duration-300 ease-out rounded px-2">
               {todo}
             </li>
@@ -62,7 +66,7 @@ export default function TodoForm({ todoList, setTodoList }) {
 
       <button
         onClick={onClickPush}
-        className="bg-green-700 text-white px-3 py-1 rounded-xl hover:bg-green-900 transition">
+        className="bg-green-700 shrink-0 w-14 text-white px-3 py-1 rounded-xl hover:bg-green-900 transition">
         등록
       </button>
     </form>
