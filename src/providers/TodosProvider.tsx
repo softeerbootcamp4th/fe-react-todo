@@ -13,7 +13,7 @@ export const TodosProvider = ({ children }: PropsWithChildren) => {
   }, []);
   useEffect(() => {
     readTodos();
-  }, [readTodos]);
+  }, []);
 
   const addTodo = useCallback(async (title: string) => {
     const newTodo = await todoRemotes.createTodo(title);
@@ -29,6 +29,22 @@ export const TodosProvider = ({ children }: PropsWithChildren) => {
       prev.map((prevTodo) => (prevTodo.id === todo.id ? todo : prevTodo)),
     );
   }, []);
+
+  const updateTodoPosition = useCallback(
+    async (todo: Todo, position: number) => {
+      setTodos((prev) => {
+        const newTodos = [...prev];
+        const currentIndex = newTodos.findIndex((t) => t.id === todo.id);
+        newTodos.splice(currentIndex, 1);
+        newTodos.splice(position, 0, todo);
+        return newTodos;
+      });
+      const updatedTodos = await todoRemotes.updateTodoPosition(todo, position);
+      if (!updatedTodos) return;
+      setTodos(updatedTodos);
+    },
+    [],
+  );
   const setEditingTodoId = useCallback((id: number | null) => {
     setCurrentEditingId(id);
   }, []);
@@ -48,6 +64,7 @@ export const TodosProvider = ({ children }: PropsWithChildren) => {
         addTodo,
         removeTodo,
         updateTodoStatus,
+        updateTodoPosition,
         setEditingTodoId,
         editTodo,
         currentEditingId,

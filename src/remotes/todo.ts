@@ -30,4 +30,13 @@ export const todoRemotes = {
       method: "DELETE",
     }).then((res) => res.json());
   },
+  updateTodoPosition: async (todo: Todo, index: number) => {
+    return fetch(`${TODO_API}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ index: index, todo: todo }),
+    }).then((res) => res.json());
+  },
 };

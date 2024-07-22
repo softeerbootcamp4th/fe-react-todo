@@ -11,6 +11,7 @@ interface TodosContextValue {
 
   editTodo: (todo: Todo) => void;
   updateTodoStatus: (todo: Todo) => void;
+  updateTodoPosition: (Todo: Todo, position: number) => void;
   currentEditingId: number | null;
 }
 

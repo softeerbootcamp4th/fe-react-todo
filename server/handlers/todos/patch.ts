@@ -1,24 +1,28 @@
-import { HttpResponse, PathParams, StrictRequest } from "msw";
-import { db } from "../../db";
+import { HttpResponse, StrictRequest } from "msw";
 import { Todo } from "../../../src/models/Todo";
+import { db } from "../../db";
 
-export const patchTodo = async ({
+export const changeTodoPosition = async ({
   request,
 }: {
-  request: StrictRequest<Todo>;
-  params: PathParams<"id">;
+  request: StrictRequest<{ todo: Todo; index: number }>;
 }) => {
-  const { id, title, status } = await request.json();
+  const { todo, index } = await request.json();
 
-  const todo = db.updateTodo({
-    id,
-    title,
-    status,
+  const todos = await db.updateTodoPosition({
+    id: todo.id,
+    position: index,
   });
 
-  if (!todo) {
+  db.insertLog({
+    id: Date.now(),
+    createdAt: new Date().toISOString(),
+    type: "UPDATE",
+    message: `Changed position of todo with id ${todo.id}`,
+  });
+  if (!todos) {
     return HttpResponse.json({ message: "Todo not found" }, { status: 404 });
   }
 
-  return HttpResponse.json(todo);
+  return HttpResponse.json(todos);
 };
