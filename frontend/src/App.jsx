@@ -1,38 +1,19 @@
-import { useEffect, useState } from "react";
-import "./App.css";
 import styled from "styled-components";
 import ToDoListContainer from "./components/ToDoListContainer";
 import ActivityLog from "./components/ActivityLog";
-import Input from "./components/Input";
-import TodoList from "./components/TodoList";
-import { TodoStore } from "./Provider/todoContext";
-import { getTodoList } from "./api/todo";
-import { LogStore } from "./Provider/logContext";
+import { TodoProvider } from "./Provider/todoProvider";
+import { LogProvider } from "./Provider/logProvider";
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
-  const [logList, setLogList] = useState([]);
-
-  useEffect(() => {
-    const fetchTodos = async () => {
-      const todos = await getTodoList();
-      setTodoList(todos);
-    };
-    fetchTodos();
-  }, []);
-
   return (
     <>
       <Title>to do app</Title>
-      <LogStore.Provider value={{}}>
-        <ToDoListContainer>
-          <TodoStore.Provider value={{ todoList, setTodoList }}>
-            <Input />
-            <TodoList />
-          </TodoStore.Provider>
-        </ToDoListContainer>
-        <ActivityLog></ActivityLog>
-      </LogStore.Provider>
+      <LogProvider>
+        <TodoProvider>
+          <ToDoListContainer />
+        </TodoProvider>
+        <ActivityLog />
+      </LogProvider>
     </>
   );
 }

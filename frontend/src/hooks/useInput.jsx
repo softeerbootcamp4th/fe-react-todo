@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const useInput = () => {
   const [content, setContent] = useState("");
@@ -7,11 +7,11 @@ const useInput = () => {
     setContent(event.currentTarget.value);
   };
 
-  const reset = () => {
+  const resetContent = () => {
     setContent("");
   };
 
-  return { content, onChange, reset, setContent };
+  return { content, onChange, resetContent, setContent };
 };
 
 export default useInput;

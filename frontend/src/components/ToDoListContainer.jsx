@@ -1,8 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import Input from "./Input";
+import TodoList from "./TodoList";
 
-const ToDoListContainer = ({ children }) => {
-  return <Container>{children}</Container>;
+const ToDoListContainer = () => {
+  return (
+    <Container>
+      <Input />
+      <TodoList />
+    </Container>
+  );
 };
 
 const Container = styled.div`
